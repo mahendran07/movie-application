@@ -35,3 +35,14 @@ create sequence seq_movietheater_id
 start with 1
 increment by 1;
 
+create table register
+(id int,
+name VARCHAR2(30) NOT NULL,
+email VARCHAR2(35) NOT NULL,
+phonenumber NUMBER(10),
+password VARCHAR2(30), constraint pk_register_id PRIMARY KEY(id));
+
+create sequence seq_register_id
+start with 1
+increment by 1;
+
