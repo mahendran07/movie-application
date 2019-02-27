@@ -10,9 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.chainsys.movieapplication.dao.MovieDAO;
 import com.chainsys.movieapplication.dao.TheaterDAO;
-import com.chainsys.movieapplication.model.Movie;
 import com.chainsys.movieapplication.model.Theater;
 
 /**

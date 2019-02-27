@@ -1,29 +1,28 @@
 package com.chainsys.movieapplication.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.io.PrintWriter;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.chainsys.movieapplication.dao.TheaterDAO;
-import com.chainsys.movieapplication.model.Theater;
+import com.chainsys.movieapplication.dao.MovieTheaterDAO;
+import com.chainsys.movieapplication.model.MovieInTheater;
 
 /**
- * Servlet implementation class HomeServlettheater
+ * Servlet implementation class AddMovieTheaterServlet
  */
-@WebServlet("/HomeServlettheater")
-public class HomeServlettheater extends HttpServlet {
+@WebServlet("/AddMovieTheaterServlet")
+public class AddMovieTheaterServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public HomeServlettheater() {
+    public AddMovieTheaterServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -39,20 +38,12 @@ public class HomeServlettheater extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Theater theater = new Theater();
-		TheaterDAO theaterDAO = new TheaterDAO();
-		try {
-			theaterDAO.addTheater(theater);
-			ArrayList<Theater> theaterList = new ArrayList<>();
-			theaterList.addAll(theaterDAO.findAll());
-			request.setAttribute("THEATER", theaterList);
-			RequestDispatcher req = request.getRequestDispatcher("Theater.jsp");
-			req.forward(request, response);
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-		}
+		String theaterid=request.getParameter("theatername");
+		String movieid=request.getParameter("moviename");
+		String show=request.getParameter("show");
+		String date=request.getParameter("date");
+		int total=Integer.parseInt(request.getParameter("total"));
+		MovieInTheater movieintheater=new MovieInTheater();
 	}
 
 }

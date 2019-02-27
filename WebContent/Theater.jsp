@@ -57,22 +57,15 @@
 							<tr>
 								<td>Name</td>
 								<td><select name="theatername">
-										<c:forEach var="theatername" items="${THEATERNAME}">
-											<option value="${THEATERNAME.name}">${THEATERNAME.name}</option>
+										<option value="-1">---Choose---</option>
+										<c:forEach var="theatername" items="${THEATER}">
+											<option value="${theatername.name}">${theatername.name}-${theatername.place}</option>
 										</c:forEach>
 								</select></td>
 							</tr>
 							<tr>
 								<td></td>
 								<td></td>
-							</tr>
-							<tr>
-								<td>Place</td>
-								<td><select name="place">
-										<c:forEach var="place" items="${PLACE}">
-											<option value="${PLACE.place}">${PLACE.place}</option>
-										</c:forEach>
-								</select></td>
 							</tr>
 							<tr>
 								<td></td>
@@ -111,11 +104,13 @@
 						<tr>
 							<td>Name</td>
 								<td><select name="theatername">
-										<c:forEach var="theatername" items="${THEATERNAME}">
-											<option value="${THEATERNAME.name}">${THEATERNAME.name}</option>
+										<option value="-1">---Choose---</option>
+										<c:forEach var="theatername" items="${THEATER}">
+											<option value="${theatername.name}">${theatername.name}-${theatername.place}</option>
 										</c:forEach>
 								</select></td>
 							</tr>
+							<tr> <td> &nbsp; </td> </tr>
 							<tr>
 								<td></td>
 								<td></td>
@@ -132,5 +127,9 @@
 
 				</div>
 			</table>
+			<br/>
+			<br/>
+				<a href="Home.jsp" style="text-decoration:none; padding-left:80px; font-size:19px">Back</a>
+			<br/>
 </body>
 </html>

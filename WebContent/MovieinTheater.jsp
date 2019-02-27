@@ -12,29 +12,33 @@
 		<tr>
 			<td>
 				<div align="center" style="width: 600px">
-					<form method="post" action="AddMovieServlet">
+					<form method="post" action="AddMovieTheaterServlet">
 						<h2>Add Movie in Theater</h2>
 						<table>
 							<tr>
-								<td>Name</td>
+								<td>Theater Name</td>
 								<td><select name="theatername">
-										<c:forEach var="theatername" items="${THEATERNAME}">
-											<option value="${THEATERNAME.id}">${THEATERNAME.name}</option>
+										<option value="-1">---Choose---</option>
+										<c:forEach var="theatername" items="${THEATER}">
+											<option value="${theatername.id}">${theatername.name}-${theatername.place}</option>
 										</c:forEach>
 								</select></td>
 							</tr>
+							<tr> <td> &nbsp; </td> </tr>
 							<tr>
 								<td></td>
 								<td></td>
 							</tr>
 							<tr>
-								<td>Name</td>
+								<td>Movie Name</td>
 								<td><select name="moviename">
-										<c:forEach var="moviename" items="${MOVIENAME}">
-											<option value="${MOVIENAME.id}">${MOVIENAME.name}</option>
+										<option value="-1">---Choose---</option>
+										<c:forEach var="moviename" items="${MOVIE}">
+											<option value="${moviename.id}">${moviename.name}</option>
 										</c:forEach>
 								</select></td>
 							</tr>
+							<tr> <td> &nbsp; </td> </tr>
 							<tr>
 								<td></td>
 								<td></td>
@@ -49,6 +53,8 @@
 										<option value="Night">Night</option>
 								</select></td>
 							</tr>
+							<tr> <td> &nbsp; </td> </tr>
+			
 							<tr>
 								<td></td>
 								<td></td>
@@ -57,6 +63,7 @@
 								<td>Date </td>
 								<td><input type="date" name="date"></td>
 							</tr>
+							<tr> <td> &nbsp; </td> </tr>
 							<tr>
 								<td></td>
 								<td></td>
@@ -85,8 +92,40 @@
 						<h2>Update Movie in Theater</h2>
 						<table>
 							<tr>
-								
+								<td>Theater Name</td>
+								<td><select name="theatername">
+										<option value="-1">---Choose---</option>
+										<c:forEach var="theatername" items="${THEATER}">
+											<option value="${theatername.id}">${theatername.name}-${theatername.place}</option>
+										</c:forEach>
+								</select></td>
 							</tr>
+							<tr> <td> &nbsp; </td> </tr>
+							<tr>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>Movie Name</td>
+								<td><select name="moviename">
+										<option value="-1">---Choose---</option>
+										<c:forEach var="moviename" items="${MOVIE}">
+											<option value="${moviename.id}">${moviename.name}</option>
+										</c:forEach>
+								</select></td>
+							</tr>
+							<tr> <td> &nbsp; </td> </tr>
+							<tr>
+								<td>Show </td>
+								<td><select name="show">
+										<option value="-1">---Choose---</option>
+										<option value="Morning">Morning</option>
+										<option value="Afternoon">Afternoon</option>
+										<option value="Evening">Evening</option>
+										<option value="Night">Night</option>
+								</select></td>
+							</tr>
+							<tr> <td> &nbsp; </td> </tr>
 							<tr>
 								<td></td>
 								<td>
@@ -110,9 +149,40 @@
 						<h2>Delete Movie in Theater</h2>
 						<table>
 							<tr>
-								
+								<td>Theater Name</td>
+								<td><select name="theatername">
+										<option value="-1">---Choose---</option>
+										<c:forEach var="theatername" items="${THEATER}">
+											<option value="${theatername.id}">${theatername.name}-${theatername.place}</option>
+										</c:forEach>
+								</select></td>
 							</tr>
-
+							<tr> <td> &nbsp; </td> </tr>
+							<tr>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>Movie Name</td>
+								<td><select name="moviename">
+										<option value="-1">---Choose---</option>
+										<c:forEach var="moviename" items="${MOVIE}">
+											<option value="${moviename.id}">${moviename.name}</option>
+										</c:forEach>
+								</select></td>
+							</tr>
+							<tr> <td> &nbsp; </td> </tr>
+							<tr>
+								<td>Show </td>
+								<td><select name="show">
+										<option value="-1">---Choose---</option>
+										<option value="Morning">Morning</option>
+										<option value="Afternoon">Afternoon</option>
+										<option value="Evening">Evening</option>
+										<option value="Night">Night</option>
+								</select></td>
+							</tr>
+							<tr> <td> &nbsp; </td> </tr>
 							<tr>
 								<td></td>
 								<td></td>
@@ -129,5 +199,9 @@
 
 				</div>
 			</table>
+			<br/>
+			<br/>
+				<a href="Home.jsp" style="text-decoration:none; padding-left:80px; font-size:19px">Back</a>
+			<br/>
 </body>
 </html>

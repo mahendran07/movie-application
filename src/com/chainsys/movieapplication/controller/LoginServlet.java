@@ -52,15 +52,23 @@ public class LoginServlet extends HttpServlet {
 		RegisterDAO registerDAO = new RegisterDAO();
 		MovieDAO movieDAO = new MovieDAO();
 		try {
-			movieDAO.addMovie(movie);
+			//movieDAO.addMovie(movie);
 			ArrayList<Movie> movielist = new ArrayList<>();
 			movielist.addAll(movieDAO.findAll());
 			LoginValidation validator = new LoginValidation();
-			validator.loginValidator(register);
-			registerDAO.checkLogin(register);
-			request.setAttribute("MOVIE", movielist);
-			RequestDispatcher req = request.getRequestDispatcher("Home.jsp");
-			req.forward(request, response);
+			//validator.loginValidator(register);
+			register=registerDAO.checkLogin(register);
+			if(register.getStatus()==0)
+			{
+				RequestDispatcher req = request.getRequestDispatcher("Login.html");
+				req.forward(request, response);
+			}
+			else
+			{
+				request.setAttribute("MOVIE", movielist);
+				RequestDispatcher req = request.getRequestDispatcher("Home.jsp");
+				req.forward(request, response);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			RequestDispatcher req = request.getRequestDispatcher("Login.html");

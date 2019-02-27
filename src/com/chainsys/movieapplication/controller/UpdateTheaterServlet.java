@@ -14,16 +14,16 @@ import com.chainsys.movieapplication.dao.TheaterDAO;
 import com.chainsys.movieapplication.model.Theater;
 
 /**
- * Servlet implementation class HomeServlettheater
+ * Servlet implementation class UpdateTheaterServlet
  */
-@WebServlet("/HomeServlettheater")
-public class HomeServlettheater extends HttpServlet {
+@WebServlet("/UpdateTheaterServlet")
+public class UpdateTheaterServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public HomeServlettheater() {
+    public UpdateTheaterServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -39,20 +39,25 @@ public class HomeServlettheater extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String theatername = request.getParameter("theatername");
+		String place=request.getParameter("place");
+		int amount=Integer.parseInt(request.getParameter("amount"));
 		Theater theater = new Theater();
+		theater.setAmount(amount);
+		theater.setName(theatername);
+		theater.setPlace(place);
 		TheaterDAO theaterDAO = new TheaterDAO();
 		try {
-			theaterDAO.addTheater(theater);
+			theaterDAO.updateTheater(theater);
 			ArrayList<Theater> theaterList = new ArrayList<>();
 			theaterList.addAll(theaterDAO.findAll());
 			request.setAttribute("THEATER", theaterList);
-			RequestDispatcher req = request.getRequestDispatcher("Theater.jsp");
-			req.forward(request, response);
-		}
-		catch(Exception e)
-		{
+			RequestDispatcher rd = request.getRequestDispatcher("viewTheater.jsp");
+			rd.forward(request, response);
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
+
 	}
 
 }

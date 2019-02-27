@@ -11,13 +11,14 @@ public class RegisterDAO {
 	public void addUser(Register register) throws Exception {
 		try {
 			Connection connection = ConnectionUtil.getConnection();
-			String sql = "Insert into register(id,name,email,phonenumber,password) values(registeration_id_seq.NEXTVAL,?,?,?,?)";
+			String sql = "Insert into register(id,name,email,phonenumber,password,status) values(seq_register_id.NEXTVAL,?,?,?,?,?)";
 			PreparedStatement preparedstatement = connection
 					.prepareStatement(sql);
 			preparedstatement.setString(1, register.getName());
 			preparedstatement.setString(2, register.getEmail());
 			preparedstatement.setLong(3, register.getPhonenumber());
 			preparedstatement.setString(4, register.getPassword());
+			preparedstatement.setInt(5, register.getStatus());
 			preparedstatement.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -45,7 +46,7 @@ public class RegisterDAO {
 		Register registration = null;
 		try {
 			Connection connection = ConnectionUtil.getConnection();
-			String sql = "select email,password from register where email=? and password=?";
+			String sql = "select status from register where email=? and password=?";
 			PreparedStatement preparedstatement = connection
 					.prepareStatement(sql);
 			preparedstatement.setString(1, register.getEmail());

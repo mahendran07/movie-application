@@ -1,10 +1,11 @@
 package com.chainsys.movieapplication.model;
 
 public class Register {
-	String name;
-	String email;
-	Long phonenumber;
-	String password;
+	private String name;
+	private String email;
+	private Long phonenumber;
+	private String password;
+	private int status;
 	public String getName() {
 		return name;
 	}
@@ -28,5 +29,11 @@ public class Register {
 	}
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	public int getStatus() {
+		return status;
+	}
+	public void setStatus(int status) {
+		this.status = status;
 	}
 }

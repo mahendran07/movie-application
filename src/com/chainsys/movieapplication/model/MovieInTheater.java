@@ -3,21 +3,21 @@ package com.chainsys.movieapplication.model;
 import java.time.LocalDate;
 
 public class MovieInTheater {
-	private Movie movieid;
-	private Theater theaterid;
+	private Movie movie;
+	private Theater theater;
 	private String show;
 	private LocalDate date;
-	public Movie getMovieid() {
-		return movieid;
+	public Movie getMovie() {
+		return movie;
 	}
-	public void setMovieid(Movie movieid) {
-		this.movieid = movieid;
+	public void setMovie(Movie movie) {
+		this.movie = movie;
 	}
-	public Theater getTheaterid() {
-		return theaterid;
+	public Theater getTheater() {
+		return theater;
 	}
-	public void setTheaterid(Theater theaterid) {
-		this.theaterid = theaterid;
+	public void setTheater(Theater theater) {
+		this.theater = theater;
 	}
 	public String getShow() {
 		return show;

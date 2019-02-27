@@ -10,20 +10,24 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.chainsys.movieapplication.dao.MovieDAO;
+import com.chainsys.movieapplication.dao.MovieTheaterDAO;
 import com.chainsys.movieapplication.dao.TheaterDAO;
+import com.chainsys.movieapplication.model.Movie;
+import com.chainsys.movieapplication.model.MovieInTheater;
 import com.chainsys.movieapplication.model.Theater;
 
 /**
- * Servlet implementation class HomeServlettheater
+ * Servlet implementation class HomeServletmovietheater
  */
-@WebServlet("/HomeServlettheater")
-public class HomeServlettheater extends HttpServlet {
+@WebServlet("/HomeServletmovietheater")
+public class HomeServletmovietheater extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public HomeServlettheater() {
+    public HomeServletmovietheater() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -39,14 +43,23 @@ public class HomeServlettheater extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		Movie movie=new Movie();
 		Theater theater = new Theater();
-		TheaterDAO theaterDAO = new TheaterDAO();
+		MovieTheaterDAO movietheaterDAO = new MovieTheaterDAO();
+		MovieDAO movieDAO=new MovieDAO();
+		TheaterDAO theaterDAO=new TheaterDAO();
 		try {
-			theaterDAO.addTheater(theater);
+			//movietheaterDAO.addMovieTheater(theater);
 			ArrayList<Theater> theaterList = new ArrayList<>();
 			theaterList.addAll(theaterDAO.findAll());
 			request.setAttribute("THEATER", theaterList);
-			RequestDispatcher req = request.getRequestDispatcher("Theater.jsp");
+			ArrayList<Movie> movieList = new ArrayList<>();
+			movieList.addAll(movieDAO.findAll());
+			request.setAttribute("MOVIE", movieList);
+//			ArrayList<MovieInTheater> movietheaterList = new ArrayList<>();
+//			movietheaterList.addAll(movietheaterDAO.findAll());
+//			request.setAttribute("MOVIEINTHEATER", movietheaterList);
+			RequestDispatcher req = request.getRequestDispatcher("MovieinTheater.jsp");
 			req.forward(request, response);
 		}
 		catch(Exception e)
