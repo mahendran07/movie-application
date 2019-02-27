@@ -46,3 +46,4 @@ create sequence seq_register_id
 start with 1
 increment by 1;
 
+ALTER TABLE movieintheater ADD total_ticket NUMBER(10);

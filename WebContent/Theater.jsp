@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -12,11 +13,31 @@
 			<td>
 				<div align="center" style="width: 600px">
 					<form method="post" action="AddMovieServlet">
-						<h2>Add Movie</h2>
+						<h2>Add Theater</h2>
 						<table>
 							<tr>
-								<td>Name :</td>
-								<td><input type="text" name="moviename"></td>
+								<td>Name </td>
+								<td><input type="text" name="theatername"></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>Place </td>
+								<td><input type="text" name="place"></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>Amount </td>
+								<td><input type="number" name="amount"></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td></td>
 							</tr>
 							<tr>
 								<td></td>
@@ -35,15 +56,39 @@
 			<td>
 				<div align="center" style="width: 600px">
 					<form method="post" action="UpdateMovieServlet">
-						<h2>Update Movie name</h2>
+						<h2>Update Theater </h2>
 						<table>
 							<tr>
 								<td>Name</td>
-								<td><select name="moviename">
-										<c:forEach var="moviename" items="${MOVIENAME}">
-											<option value="${MOVIENAME.id}">${MOVIENAME.name}</option>
+								<td><select name="theatername">
+										<c:forEach var="theatername" items="${THEATERNAME}">
+											<option value="${THEATERNAME.name}">${THEATERNAME.name}</option>
 										</c:forEach>
 								</select></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>Place</td>
+								<td><select name="place">
+										<c:forEach var="place" items="${PLACE}">
+											<option value="${PLACE.place}">${PLACE.place}</option>
+										</c:forEach>
+								</select></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>Amount </td>
+								<td><input type="number" name="amount"></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td></td>
 							</tr>
 							<tr>
 								<td></td>
@@ -65,13 +110,16 @@
 				<div align="center" style="width: 600px">
 					<form method="post" action="DeleteMovieServlet">
 
-						<h2>Delete Movie</h2>
+						<h2>Delete Theater</h2>
 						<table>
-							<tr>
-								<td>Name :</td>
-								<td><input type="text" name="moviename"></td>
+						<tr>
+							<td>Name</td>
+								<td><select name="theatername">
+										<c:forEach var="theatername" items="${THEATERNAME}">
+											<option value="${THEATERNAME.name}">${THEATERNAME.name}</option>
+										</c:forEach>
+								</select></td>
 							</tr>
-
 							<tr>
 								<td></td>
 								<td></td>
