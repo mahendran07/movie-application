@@ -11,23 +11,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.chainsys.movieapplication.dao.MovieDAO;
-import com.chainsys.movieapplication.dao.RegisterDAO;
 import com.chainsys.movieapplication.model.Movie;
-import com.chainsys.movieapplication.model.Register;
-import com.chainsys.movieapplication.validation.LoginValidation;
-
 
 /**
- * Servlet implementation class LoginServlet
+ * Servlet implementation class UpdateMovieServlet
  */
-@WebServlet("/LoginServlet")
-public class LoginServlet extends HttpServlet {
+@WebServlet("/UpdateMovieServlet")
+public class UpdateMovieServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoginServlet() {
+    public UpdateMovieServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -43,29 +39,22 @@ public class LoginServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String moviename = request.getParameter("moviename");
+		String newmoviename=request.getParameter("movienamenew");
 		Movie movie = new Movie();
-		String email = request.getParameter("email");
-		String password = request.getParameter("password");
-		Register register = new Register();
-		register.setEmail(email);
-		register.setPassword(password);
-		RegisterDAO registerDAO = new RegisterDAO();
+		movie.setName(moviename);
+		movie.setName(newmoviename);
 		MovieDAO movieDAO = new MovieDAO();
 		try {
-			movieDAO.addMovie(movie);
+			movieDAO.updateMovie(movie);
 			ArrayList<Movie> movielist = new ArrayList<>();
 			movielist.addAll(movieDAO.findAll());
-			LoginValidation validator = new LoginValidation();
-			validator.loginValidator(register);
-			registerDAO.checkLogin(register);
 			request.setAttribute("MOVIE", movielist);
-			RequestDispatcher req = request.getRequestDispatcher("Home.jsp");
-			req.forward(request, response);
+			RequestDispatcher rd = request.getRequestDispatcher("ViewMovie.jsp");
+			rd.forward(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();
-			RequestDispatcher req = request.getRequestDispatcher("Login.html");
-			req.forward(request, response);
-
 		}
 	}
+
 }

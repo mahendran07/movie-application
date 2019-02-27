@@ -41,11 +41,17 @@
 							<tr>
 								<td>Name</td>
 								<td><select name="moviename">
-										<c:forEach var="moviename" items="${MOVIENAME}">
-											<option value="${MOVIENAME.id}">${MOVIENAME.name}</option>
+										<c:forEach var="moviename" items="${MOVIE}">
+											<option value="${moviename.name}">${moviename.name}</option>
 										</c:forEach>
 								</select></td>
 							</tr>
+							<tr> <td> &nbsp; </td> </tr>
+							<tr>
+								<td>New Name</td>
+								<td> <input type="text" name="movienamenew"></td>
+							</tr>
+							<tr> <td> &nbsp; </td> </tr>
 							<tr>
 								<td></td>
 								<td>

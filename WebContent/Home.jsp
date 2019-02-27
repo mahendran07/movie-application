@@ -30,8 +30,20 @@ div,a
 	<h3> Choose Menu </h3>
 	<br/>
 	<br/>
-	<a href="Movie.jsp">Movie</a> <br/> <br/> 
-	<a href="Theater.jsp">Theater</a> <br/> <br/>
-	<a href="MovieinTheater.jsp">Movie in Theater </a>
+	<form method="post" action="HomeServletmovie">
+		<button type="submit" name="Movie">Movie</button>
+	</form>
+	<br/>
+	<br/>
+	<br/>
+	<form method="post" action="HomeServlettheater">
+		<button type="submit" name="Theater">Theater</button>
+	</form>
+	<br/>
+	<br/>
+	<br/>
+	<form method="post" action="HomeServletmovietheater">
+		<button type="submit" name="MovieinTheater">Movie in Theater</button>
+	</form>
 </body>
 </html>

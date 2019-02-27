@@ -11,61 +11,41 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.chainsys.movieapplication.dao.MovieDAO;
-import com.chainsys.movieapplication.dao.RegisterDAO;
 import com.chainsys.movieapplication.model.Movie;
-import com.chainsys.movieapplication.model.Register;
-import com.chainsys.movieapplication.validation.LoginValidation;
-
 
 /**
- * Servlet implementation class LoginServlet
+ * Servlet implementation class AddMovieServlet
  */
-@WebServlet("/LoginServlet")
-public class LoginServlet extends HttpServlet {
+@WebServlet("/AddMovieServlet")
+public class AddMovieServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoginServlet() {
+    public AddMovieServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-	}
-
-	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String moviename = request.getParameter("moviename");
 		Movie movie = new Movie();
-		String email = request.getParameter("email");
-		String password = request.getParameter("password");
-		Register register = new Register();
-		register.setEmail(email);
-		register.setPassword(password);
-		RegisterDAO registerDAO = new RegisterDAO();
+		movie.setName(moviename);
 		MovieDAO movieDAO = new MovieDAO();
 		try {
 			movieDAO.addMovie(movie);
 			ArrayList<Movie> movielist = new ArrayList<>();
 			movielist.addAll(movieDAO.findAll());
-			LoginValidation validator = new LoginValidation();
-			validator.loginValidator(register);
-			registerDAO.checkLogin(register);
 			request.setAttribute("MOVIE", movielist);
-			RequestDispatcher req = request.getRequestDispatcher("Home.jsp");
-			req.forward(request, response);
+			RequestDispatcher rd = request.getRequestDispatcher("ViewMovie.jsp");
+			rd.forward(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();
-			RequestDispatcher req = request.getRequestDispatcher("Login.html");
-			req.forward(request, response);
-
 		}
+
 	}
 }

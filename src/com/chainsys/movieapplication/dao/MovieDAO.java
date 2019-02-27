@@ -1,7 +1,6 @@
 package com.chainsys.movieapplication.dao;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -56,10 +55,10 @@ public class MovieDAO {
 
 	public void updateMovie(Movie movie) throws SQLException {
 		Connection connection = ConnectionUtil.getConnection();
-		String sql = "UPDATE moviedetail set name=? where id=?";
+		String sql = "UPDATE moviedetail set name=? where name=?";
 		PreparedStatement preparedstatement = connection.prepareStatement(sql);
 		preparedstatement.setString(1, movie.getName());
-		preparedstatement.setInt(2, movie.getId());
+		preparedstatement.setString(2, movie.getName());
 		int row = preparedstatement.executeUpdate();
 		System.out.println("Update :" + row);
 		ConnectionUtil.close(connection, preparedstatement, null);
