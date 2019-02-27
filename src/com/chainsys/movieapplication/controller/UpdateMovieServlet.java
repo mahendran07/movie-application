@@ -42,11 +42,12 @@ public class UpdateMovieServlet extends HttpServlet {
 		String moviename = request.getParameter("moviename");
 		String newmoviename=request.getParameter("movienamenew");
 		Movie movie = new Movie();
+		Movie movienew=new Movie();
 		movie.setName(moviename);
-		movie.setName(newmoviename);
+		movienew.setName(newmoviename);
 		MovieDAO movieDAO = new MovieDAO();
 		try {
-			movieDAO.updateMovie(movie);
+			movieDAO.updateMovie(movie,movienew);
 			ArrayList<Movie> movielist = new ArrayList<>();
 			movielist.addAll(movieDAO.findAll());
 			request.setAttribute("MOVIE", movielist);

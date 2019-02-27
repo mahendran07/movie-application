@@ -12,7 +12,7 @@
 		<tr>
 			<td>
 				<div align="center" style="width: 600px">
-					<form method="post" action="AddMovieServlet">
+					<form method="post" action="AddTheaterServlet">
 						<h2>Add Theater</h2>
 						<table>
 							<tr>
@@ -41,10 +41,6 @@
 							</tr>
 							<tr>
 								<td></td>
-								<td></td>
-							</tr>
-							<tr>
-								<td></td>
 								<td>
 									<button style="width: 100px;" type="submit">Add</button>
 								</td>
@@ -55,7 +51,7 @@
 			</td>
 			<td>
 				<div align="center" style="width: 600px">
-					<form method="post" action="UpdateMovieServlet">
+					<form method="post" action="UpdateTheaterServlet">
 						<h2>Update Theater </h2>
 						<table>
 							<tr>
@@ -108,7 +104,7 @@
 		<tr>
 			<td>
 				<div align="center" style="width: 600px">
-					<form method="post" action="DeleteMovieServlet">
+					<form method="post" action="DeleteTheaterServlet">
 
 						<h2>Delete Theater</h2>
 						<table>

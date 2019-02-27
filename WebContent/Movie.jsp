@@ -41,6 +41,7 @@
 							<tr>
 								<td>Name</td>
 								<td><select name="moviename">
+										<option value="-1">---Choose---</option>
 										<c:forEach var="moviename" items="${MOVIE}">
 											<option value="${moviename.name}">${moviename.name}</option>
 										</c:forEach>
@@ -75,10 +76,15 @@
 						<h2>Delete Movie</h2>
 						<table>
 							<tr>
-								<td>Name :</td>
-								<td><input type="text" name="moviename"></td>
+								<td>Name</td>
+								<td><select name="deletename">
+										<option value="-1">---Choose---</option>
+										<c:forEach var="deletename" items="${MOVIE}">
+											<option value="${deletename.name}">${deletename.name}</option>
+										</c:forEach>
+								</select></td>
 							</tr>
-
+							<tr> <td> &nbsp; </td> </tr>
 							<tr>
 								<td></td>
 								<td></td>
@@ -95,5 +101,9 @@
 
 				</div>
 			</table>
+			<br/>
+			<br/>
+				<a href="Home.jsp" style="text-decoration:none; padding-left:80px; font-size:19px">Back</a>
+			<br/>
 </body>
 </html>
