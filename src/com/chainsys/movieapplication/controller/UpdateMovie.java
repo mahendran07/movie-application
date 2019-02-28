@@ -11,32 +11,22 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.chainsys.movieapplication.dao.MovieDAO;
-import com.chainsys.movieapplication.dao.RegisterDAO;
 import com.chainsys.movieapplication.model.Movie;
-import com.chainsys.movieapplication.model.Register;
-import com.chainsys.movieapplication.validation.LoginValidation;
 
 /**
- * Servlet implementation class HomeServlet
+ * Servlet implementation class UpdateMovie
  */
-@WebServlet("/HomeServletmovie")
-public class HomeServletmovie extends HttpServlet {
+@WebServlet("/UpdateMovie")
+public class UpdateMovie extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public HomeServletmovie() {
+    public UpdateMovie() {
         super();
         // TODO Auto-generated constructor stub
     }
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
@@ -49,7 +39,7 @@ public class HomeServletmovie extends HttpServlet {
 			ArrayList<Movie> movielist = new ArrayList<>();
 			movielist.addAll(movieDAO.findAll());
 			request.setAttribute("MOVIE", movielist);
-			RequestDispatcher req = request.getRequestDispatcher("MovieHome.jsp");
+			RequestDispatcher req = request.getRequestDispatcher("UpdateMovie.jsp");
 			req.forward(request, response);
 		}
 		catch(Exception e)
