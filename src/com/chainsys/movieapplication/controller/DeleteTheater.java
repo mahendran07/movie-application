@@ -14,26 +14,19 @@ import com.chainsys.movieapplication.dao.TheaterDAO;
 import com.chainsys.movieapplication.model.Theater;
 
 /**
- * Servlet implementation class HomeServlettheater
+ * Servlet implementation class DeleteServlet
  */
-@WebServlet("/HomeServlettheater")
-public class HomeServlettheater extends HttpServlet {
+@WebServlet("/DeleteTheater")
+public class DeleteTheater extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public HomeServlettheater() {
+    public DeleteTheater() {
         super();
         // TODO Auto-generated constructor stub
     }
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
@@ -46,7 +39,7 @@ public class HomeServlettheater extends HttpServlet {
 			ArrayList<Theater> theaterList = new ArrayList<>();
 			theaterList.addAll(theaterDAO.findAll());
 			request.setAttribute("THEATER", theaterList);
-			RequestDispatcher req = request.getRequestDispatcher("TheaterHome.jsp");
+			RequestDispatcher req = request.getRequestDispatcher("DeleteTheater.jsp");
 			req.forward(request, response);
 		}
 		catch(Exception e)
