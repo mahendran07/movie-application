@@ -36,4 +36,11 @@ public class Register {
 	public void setStatus(int status) {
 		this.status = status;
 	}
+	@Override
+	public String toString() {
+		return "Register [name=" + name + ", email=" + email + ", phonenumber="
+				+ phonenumber + ", password=" + password + ", status=" + status
+				+ "]";
+	}
+	
 }

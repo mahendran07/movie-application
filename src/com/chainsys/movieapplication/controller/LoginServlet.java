@@ -52,13 +52,13 @@ public class LoginServlet extends HttpServlet {
 		RegisterDAO registerDAO = new RegisterDAO();
 		MovieDAO movieDAO = new MovieDAO();
 		try {
-			//movieDAO.addMovie(movie);
 			ArrayList<Movie> movielist = new ArrayList<>();
 			movielist.addAll(movieDAO.findAll());
-			LoginValidation validator = new LoginValidation();
+			//LoginValidation validator = new LoginValidation();
 			//validator.loginValidator(register);
-			register=registerDAO.checkLogin(register);
-			if(register.getStatus()==0)
+			Register register2=new Register();
+			register2=registerDAO.checkLogin(register);
+			if(register2.getStatus()==0)
 			{
 				RequestDispatcher req = request.getRequestDispatcher("Login.html");
 				req.forward(request, response);

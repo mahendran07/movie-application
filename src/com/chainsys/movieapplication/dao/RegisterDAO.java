@@ -2,6 +2,7 @@ package com.chainsys.movieapplication.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.chainsys.movieapplication.model.Register;
@@ -43,15 +44,21 @@ public class RegisterDAO {
 	}
 
 	public Register checkLogin(Register register) {
-		Register registration = null;
+		//int status=0;
+		Register registration = new Register();
 		try {
 			Connection connection = ConnectionUtil.getConnection();
-			String sql = "select status from register where email=? and password=?";
+			String sql = "select id,name,email,phonenumber,password,status from register where email=? and password=?";
 			PreparedStatement preparedstatement = connection
 					.prepareStatement(sql);
 			preparedstatement.setString(1, register.getEmail());
 			preparedstatement.setString(2, register.getPassword());
-			preparedstatement.executeUpdate();
+			ResultSet resultSet=preparedstatement.executeQuery();
+			if(resultSet.next())
+			{
+				registration=new Register();
+				registration.setStatus(resultSet.getInt("status"));
+			}
 			ConnectionUtil.close(connection, preparedstatement, null);
 		} catch (SQLException e) {
 			e.printStackTrace();

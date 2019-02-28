@@ -68,7 +68,7 @@ public class MovieDAO {
 	public Movie findById(int id) throws SQLException {
 		Movie movie = null;
 		Connection connection = ConnectionUtil.getConnection();
-		String sql = "SELECT id,name FROM movie where id=?";
+		String sql = "SELECT id,name FROM moviedetail where id=?";
 		PreparedStatement preparedStatement = connection.prepareStatement(sql);
 		preparedStatement.setInt(1, id);
 		ResultSet resultset = preparedStatement.executeQuery();
