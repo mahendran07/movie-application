@@ -27,17 +27,17 @@ public class RegisterDAO {
 		}
 	}
 	
-	public void changePassword(Register register, String newpassword)
+	public void changePassword(Register register)
 			throws Exception {
 		try {
 			Connection connection = ConnectionUtil.getConnection();
-			String sql = "UPDATE register SET password=? WHERE email=? and password=?";
+			String sql = "UPDATE register SET password=? WHERE email=?";
 			PreparedStatement preparedstatement = connection
 					.prepareStatement(sql);
-			preparedstatement.setString(1, newpassword);
+			preparedstatement.setString(1, register.getPassword());
 			preparedstatement.setString(2, register.getEmail());
-			preparedstatement.setString(3, register.getPassword());
-			preparedstatement.executeUpdate();
+			int rows=preparedstatement.executeUpdate();
+			System.out.println(rows);
 			ConnectionUtil.close(connection, preparedstatement, null);
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -59,7 +59,15 @@ public class RegisterDAO {
 			{
 				registration=new Register();
 				registration.setName(resultSet.getString("name"));
+				registration.setEmail(resultSet.getString("email"));
+				registration.setPhonenumber(resultSet.getLong("phonenumber"));
+				registration.setPassword(resultSet.getString("password"));
 				registration.setStatus(resultSet.getInt("status"));
+			}
+			if(resultSet.getRow()==0)
+			{
+				registration=new Register();
+				registration.setStatus(2);
 			}
 			ConnectionUtil.close(connection, preparedstatement, null);
 		} catch (SQLException e) {

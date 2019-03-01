@@ -24,7 +24,7 @@
 <body>
 	<br/>
 	<br/>
-	<h3> Welcome ${NAME.name}</h3>
+	<h3> Welcome ${NAME.name} to World Best Movie Application</h3>
 	<br/>
 	<br/>
 	<br/>
@@ -44,13 +44,22 @@
 					<button type="submit">Search by Date and Theater</button>
 				</form>
 			</td>
+			<td>
+				<div class="space">
+				</div>
+			</td>
+			<td>
+				<form method="post" action="UserServlet">
+					<button type="submit">Change Password</button>
+				</form>
+			</td>
 		</tr>
 	</table>
 	<br/>
 	<br/>
 	<br/>
 	<div align="left" style="width: 600px; color: white;">
-		<a href="Login.html" style="text-decoration:none; font-size:19px;">Logout</a>
+		<a href="Login.jsp" style="text-decoration:none; font-size:19px;">Logout</a>
 	</div>
 </body>
 </html>

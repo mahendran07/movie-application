@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.chainsys.movieapplication.dao.MovieDAO;
 import com.chainsys.movieapplication.dao.RegisterDAO;
@@ -52,27 +53,36 @@ public class LoginServlet extends HttpServlet {
 		RegisterDAO registerDAO = new RegisterDAO();
 		MovieDAO movieDAO = new MovieDAO();
 		try {
-			ArrayList<Movie> movielist = new ArrayList<>();
-			movielist.addAll(movieDAO.findAll());
+//			ArrayList<Movie> movielist = new ArrayList<>();
+//			movielist.addAll(movieDAO.findAll());
 			//LoginValidation validator = new LoginValidation();
 			//validator.loginValidator(register);
 			Register register2=new Register();
 			register2=registerDAO.checkLogin(register);
 			if(register2.getStatus()==0)
 			{
-				request.setAttribute("NAME", register2);
+				HttpSession session=request.getSession();
+				session.setAttribute("NAME", register2);
 				RequestDispatcher req = request.getRequestDispatcher("UserHome.jsp");
 				req.forward(request, response);
 			}
-			else
+			if(register2.getStatus()==1)
 			{
-				request.setAttribute("MOVIE", movielist);
+				HttpSession session=request.getSession();
+				session.setAttribute("NAME", register2);
 				RequestDispatcher req = request.getRequestDispatcher("Home.jsp");
+				req.forward(request, response);
+			}
+			if(register2.getStatus()!=1 || register2.getStatus()!=0)
+			{
+				String message="You must Register First";
+				request.setAttribute("MESSGAE", message);
+				RequestDispatcher req = request.getRequestDispatcher("Login.jsp");
 				req.forward(request, response);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			RequestDispatcher req = request.getRequestDispatcher("Login.html");
+			RequestDispatcher req = request.getRequestDispatcher("Login.jsp");
 			req.forward(request, response);
 
 		}

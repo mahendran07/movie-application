@@ -43,11 +43,11 @@ public class ForgetPasswordServlet extends HttpServlet {
 		Boolean isActive=registerDAO.checkForgetPassword(register);
 		if(isActive)
 		{
-			//System.out.println("Inside");
 			try {
 				Register register2=new Register();
 				register2=registerDAO.findByEmail(email);
-				request.setAttribute("USERS", register2);
+				String password="Your Password is "+register2.getPassword();
+				request.setAttribute("USERS", password);
 				RequestDispatcher rd=request.getRequestDispatcher("ForgetPassword.jsp");
 				rd.forward(request, response);
 			} catch (SQLException e) {

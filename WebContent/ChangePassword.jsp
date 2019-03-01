@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Change Password</title>
 <style type="text/css">
 body {
 	text-align: center;
@@ -18,11 +18,11 @@ form {
 </style>
 </head>
 <body>
-	<form method="post" action="ForgetPasswordServlet">
+	<form method="post" action="ChangePasswordServlet">
 		<table>
 			<tbody>
 				<tr align="center">
-					<td style="color: black" colspan="2" style="padding-top:50px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Forget 
+					<td style="color: black" colspan="2" style="padding-top:50px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Change 
 					Password
 					</td>
 				</tr>
@@ -32,8 +32,8 @@ form {
 				<td> &nbsp; </td> 
 				</tr> 
 				<tr>
-					<td>Name </td>
-					<td><input type="text" name="username" required autocomplete="off"></td>
+					<td>Old Password </td>
+					<td><input type="password" name="oldpassword" required autocomplete="off"></td>
 				</tr>
 				<tr>
 				<td> &nbsp; </td> 
@@ -41,8 +41,8 @@ form {
 				<td> &nbsp; </td> 
 				</tr> 
 				<tr>
-					<td style="color: black">Email</td>
-					<td><input type="text" name="email" required autocomplete="off"></td>
+					<td>New Password</td>
+					<td><input type="password" name="newpassword" required autocomplete="off"></td>
 
 				</tr>
 				<tr>
@@ -51,8 +51,8 @@ form {
 				<td> &nbsp; </td> 
 				</tr> 
 				<tr>
-					<td>Phone number </td>
-					<td><input type="number" name="phonenumber" required autocomplete="off"></td>
+					<td>Confirm Password </td>
+					<td><input type="password" name="confirmnewpassword" required autocomplete="off"></td>
 				</tr>
 				<tr>
 				<td> &nbsp; </td> 
@@ -60,8 +60,8 @@ form {
 				<td> &nbsp; </td> 
 				</tr> 
 				<tr>
-					<td><a href="Login.html">Back</a></td>
-					<td><button type="submit" style="width: 100px">Check</button>
+					<td><a href="UserHome.jsp">Back</a></td>
+					<td><button type="submit" style="width: 100px">Update</button>
 						</td>
 				</tr>
 				<tr>
@@ -70,7 +70,7 @@ form {
 				<td> &nbsp; </td> 
 				</tr>
 				<tr>
-					<td> ${USERS}</td>
+					<td> ${MESSAGE}</td>
 				</tr> 
 				</tbody>
 				</table>

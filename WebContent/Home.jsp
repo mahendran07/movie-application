@@ -24,7 +24,7 @@ div,a
 </head>
 <body>
 	<div align="left" style="width: 600px; color: white;">
-		<a href="Login.html">Logout</a>
+		<a href="Login.jsp">Logout</a>
 	</div>
 	<br/>
 	<h3> Choose Menu </h3>
