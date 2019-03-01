@@ -41,10 +41,12 @@ form {
 				</tr>
 				<tr> <td> &nbsp; </td> </tr>
 				<tr>
-					<td><a href="ForgetPassword.jsp">Forget Password?</a></td>
-					<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<td>&nbsp;&nbsp;&nbsp;
 						<a href="Register.html">New User</a>
 					</td>
+					<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="ForgetPassword.jsp">Forget Password?</a></td>
+					
 				</tr>
 				<tr>
 					<td>&nbsp;</td>
@@ -63,7 +65,7 @@ form {
 				</tr>
 				<tr>
 					<td> ${MESSAGE}</td>
-				</tr> 
+				</tr>
 			</tbody>
 		</table>
 	</form>

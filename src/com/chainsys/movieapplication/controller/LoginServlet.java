@@ -1,7 +1,6 @@
 package com.chainsys.movieapplication.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,12 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.chainsys.movieapplication.dao.MovieDAO;
 import com.chainsys.movieapplication.dao.RegisterDAO;
-import com.chainsys.movieapplication.model.Movie;
 import com.chainsys.movieapplication.model.Register;
-import com.chainsys.movieapplication.validation.LoginValidation;
-
 
 /**
  * Servlet implementation class LoginServlet
@@ -24,60 +19,74 @@ import com.chainsys.movieapplication.validation.LoginValidation;
 @WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public LoginServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public LoginServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Movie movie = new Movie();
+	protected void doPost(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
 		Register register = new Register();
 		register.setEmail(email);
 		register.setPassword(password);
 		RegisterDAO registerDAO = new RegisterDAO();
-		MovieDAO movieDAO = new MovieDAO();
 		try {
-//			ArrayList<Movie> movielist = new ArrayList<>();
-//			movielist.addAll(movieDAO.findAll());
-			//LoginValidation validator = new LoginValidation();
-			//validator.loginValidator(register);
-			Register register2=new Register();
-			register2=registerDAO.checkLogin(register);
-			if(register2.getStatus()==0)
+			// LoginValidation validator = new LoginValidation();
+			// validator.loginValidator(register);
+			Register register2 = new Register();
+			Boolean isActive = registerDAO.checkByEmailPassword(
+					register.getEmail(), register.getPassword());
+			Boolean isActiveEmailPassword = registerDAO.checkByEmailorPassword(
+					register.getEmail(), register.getPassword());
+			if (isActive) {
+				register2 = registerDAO.checkLogin(register);
+				if (register2.getStatus() == 0) {
+					HttpSession session = request.getSession();
+					session.setAttribute("NAME", register2);
+					RequestDispatcher req = request
+							.getRequestDispatcher("UserHome.jsp");
+					req.forward(request, response);
+				}
+				else if (register2.getStatus() == 1) {
+					HttpSession session = request.getSession();
+					session.setAttribute("NAME", register2);
+					RequestDispatcher req = request
+							.getRequestDispatcher("Home.jsp");
+					req.forward(request, response);
+				}
+			}
+			else if(isActiveEmailPassword)
 			{
-				HttpSession session=request.getSession();
-				session.setAttribute("NAME", register2);
-				RequestDispatcher req = request.getRequestDispatcher("UserHome.jsp");
+				String msg = "Wrong Email or Password ";
+				request.setAttribute("MESSAGE", msg);
+				RequestDispatcher req = request
+						.getRequestDispatcher("Login.jsp");
 				req.forward(request, response);
 			}
-			if(register2.getStatus()==1)
-			{
-				HttpSession session=request.getSession();
-				session.setAttribute("NAME", register2);
-				RequestDispatcher req = request.getRequestDispatcher("Home.jsp");
-				req.forward(request, response);
-			}
-			if(register2.getStatus()!=1 || register2.getStatus()!=0)
-			{
-				String message="You must Register First";
-				request.setAttribute("MESSGAE", message);
-				RequestDispatcher req = request.getRequestDispatcher("Login.jsp");
+			else {
+				 String msg = "You must Register";
+				 request.setAttribute("MESSAGE", msg);
+				 RequestDispatcher req = request
+						.getRequestDispatcher("Login.jsp");
 				req.forward(request, response);
 			}
 		} catch (Exception e) {

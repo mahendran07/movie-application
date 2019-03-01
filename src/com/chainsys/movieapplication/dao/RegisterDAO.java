@@ -64,11 +64,6 @@ public class RegisterDAO {
 				registration.setPassword(resultSet.getString("password"));
 				registration.setStatus(resultSet.getInt("status"));
 			}
-			if(resultSet.getRow()==0)
-			{
-				registration=new Register();
-				registration.setStatus(2);
-			}
 			ConnectionUtil.close(connection, preparedstatement, null);
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -93,6 +88,38 @@ public class RegisterDAO {
 			register.setPhonenumber(resultSet.getLong("phonenumber"));
 		}
 		return register;
+	}
+	
+	public Boolean checkByEmailorPassword(String Email,String password) throws SQLException
+	{
+		Boolean isActive=false;
+		Connection connection=ConnectionUtil.getConnection();
+		String sql="select password from register where email=? or password=?";
+		PreparedStatement preparedStatement=connection.prepareStatement(sql);
+		preparedStatement.setString(1, Email);
+		preparedStatement.setString(2, password);
+		ResultSet resultSet=preparedStatement.executeQuery();
+		if(resultSet.next())
+		{
+			isActive=true;
+		}
+		return isActive;
+	}
+	
+	public Boolean checkByEmailPassword(String Email,String password) throws SQLException
+	{
+		Boolean isActive=false;
+		Connection connection=ConnectionUtil.getConnection();
+		String sql="select id,name,email,password,phonenumber from register where email=? and password=?";
+		PreparedStatement preparedStatement=connection.prepareStatement(sql);
+		preparedStatement.setString(1, Email);
+		preparedStatement.setString(2, password);
+		ResultSet resultSet=preparedStatement.executeQuery();
+		if(resultSet.next())
+		{
+			isActive=true;
+		}
+		return isActive;
 	}
 	
 	public Boolean checkForgetPassword(Register register)
