@@ -57,6 +57,7 @@ public class RegisterDAO {
 			if(resultSet.next())
 			{
 				registration=new Register();
+				registration.setName(resultSet.getString("name"));
 				registration.setStatus(resultSet.getInt("status"));
 			}
 			ConnectionUtil.close(connection, preparedstatement, null);
@@ -65,5 +66,27 @@ public class RegisterDAO {
 		}
 		return registration;
 	}
-
+	
+	public Boolean checkForgetPassword(Register register)
+	{
+		Boolean isActive=false;
+		try {
+			Connection connection=ConnectionUtil.getConnection();
+			String sql="select name,email,phonenumber from register where name=? and email=? and password=?";
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setString(1, register.getName());
+			preparedStatement.setString(2, register.getEmail());
+			preparedStatement.setLong(3, register.getPhonenumber());
+			ResultSet resultSet=preparedStatement.executeQuery();
+			if(resultSet.next())
+			{
+				isActive=true;
+			}
+			ConnectionUtil.close(connection, preparedStatement, resultSet);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return isActive;
+	}
 }

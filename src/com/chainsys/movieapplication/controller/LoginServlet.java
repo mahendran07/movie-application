@@ -60,7 +60,8 @@ public class LoginServlet extends HttpServlet {
 			register2=registerDAO.checkLogin(register);
 			if(register2.getStatus()==0)
 			{
-				RequestDispatcher req = request.getRequestDispatcher("Login.html");
+				request.setAttribute("NAME", register2);
+				RequestDispatcher req = request.getRequestDispatcher("UserHome.jsp");
 				req.forward(request, response);
 			}
 			else
