@@ -14,30 +14,22 @@ import com.chainsys.movieapplication.dao.MovieDAO;
 import com.chainsys.movieapplication.dao.MovieTheaterDAO;
 import com.chainsys.movieapplication.dao.TheaterDAO;
 import com.chainsys.movieapplication.model.Movie;
-import com.chainsys.movieapplication.model.MovieInTheater;
 import com.chainsys.movieapplication.model.Theater;
 
 /**
- * Servlet implementation class HomeServletmovietheater
+ * Servlet implementation class UpdateMovieinTheater
  */
-@WebServlet("/HomeServletmovietheater")
-public class HomeServletmovietheater extends HttpServlet {
+@WebServlet("/UpdateMovieinTheater")
+public class UpdateMovieinTheater extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public HomeServletmovietheater() {
+    public UpdateMovieinTheater() {
         super();
         // TODO Auto-generated constructor stub
     }
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
@@ -59,7 +51,7 @@ public class HomeServletmovietheater extends HttpServlet {
 //			ArrayList<MovieInTheater> movietheaterList = new ArrayList<>();
 //			movietheaterList.addAll(movietheaterDAO.findAll());
 //			request.setAttribute("MOVIEINTHEATER", movietheaterList);
-			RequestDispatcher req = request.getRequestDispatcher("MovieinTheaterHome.jsp");
+			RequestDispatcher req = request.getRequestDispatcher("UpdateMovieinTheater.jsp");
 			req.forward(request, response);
 		}
 		catch(Exception e)

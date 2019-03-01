@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Theater Home Page</title>
+<title>Insert title here</title>
 <style>
 body {
 	text-align: center;
@@ -26,20 +26,20 @@ div,a
 	<br/>
 	<br/>
 	<br/>
-	<form method="post" action="AddTheater.jsp">
-		<button type="submit">Add Theater</button>
+	<form method="post" action="AddMovieinTheater">
+		<button type="submit">Add Movie in Theater</button>
 	</form>
 	<br/>
 	<br/>
 	<br/>
-	<form method="post" action="UpdateTheater">
-		<button type="submit">Update Theater</button>
+	<form method="post" action="UpdateMovieinTheater">
+		<button type="submit">Update Movie in Theater</button>
 	</form>
 	<br/>
 	<br/>
 	<br/>
-	<form method="post" action="DeleteTheater">
-		<button type="submit">Delete Theater</button>
+	<form method="post" action="DeleteMovieinTheater">
+		<button type="submit">Delete Movie in Theater</button>
 	</form>
 	<br/>
 	<br/>
