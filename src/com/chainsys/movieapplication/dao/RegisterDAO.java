@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import com.chainsys.movieapplication.model.Register;
 import com.chainsys.movieapplication.util.ConnectionUtil;
@@ -67,12 +68,31 @@ public class RegisterDAO {
 		return registration;
 	}
 	
+	public Register findByEmail(String Email) throws SQLException
+	{
+		Register register=new Register();
+		Connection connection=ConnectionUtil.getConnection();
+		String sql="select id,name,email,password,phonenumber from register where email=?";
+		PreparedStatement preparedStatement=connection.prepareStatement(sql);
+		preparedStatement.setString(1, Email);
+		ResultSet resultSet=preparedStatement.executeQuery();
+		if(resultSet.next())
+		{
+			register=new Register();
+			register.setName(resultSet.getString("name"));
+			register.setEmail(resultSet.getString("email"));
+			register.setPassword(resultSet.getString("password"));
+			register.setPhonenumber(resultSet.getLong("phonenumber"));
+		}
+		return register;
+	}
+	
 	public Boolean checkForgetPassword(Register register)
 	{
 		Boolean isActive=false;
 		try {
 			Connection connection=ConnectionUtil.getConnection();
-			String sql="select name,email,phonenumber from register where name=? and email=? and password=?";
+			String sql="select name,email,phonenumber from register where name=? and email=? and phonenumber=?";
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setString(1, register.getName());
 			preparedStatement.setString(2, register.getEmail());
