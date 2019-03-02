@@ -60,7 +60,7 @@ form {
 				<td> &nbsp; </td> 
 				</tr> 
 				<tr>
-					<td><a href="Login.html">Back</a></td>
+					<td><a href="Login.jsp">Back</a></td>
 					<td><button type="submit" style="width: 100px">Check</button>
 						</td>
 				</tr>
