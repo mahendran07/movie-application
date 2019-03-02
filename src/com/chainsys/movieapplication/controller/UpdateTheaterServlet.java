@@ -41,9 +41,9 @@ public class UpdateTheaterServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String theatername = request.getParameter("theatername");
 		String place=request.getParameter("place");
-		int amount=Integer.parseInt(request.getParameter("amount"));
+		String ownername=request.getParameter("ownername");
 		Theater theater = new Theater();
-		theater.setAmount(amount);
+		theater.setOwnername(ownername);
 		theater.setName(theatername);
 		theater.setPlace(place);
 		TheaterDAO theaterDAO = new TheaterDAO();

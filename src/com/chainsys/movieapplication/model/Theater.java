@@ -4,7 +4,7 @@ public class Theater {
 	private int id;
 	private String name;
 	private String place;
-	private int amount;
+	private String ownername;
 	public int getId() {
 		return id;
 	}
@@ -23,10 +23,10 @@ public class Theater {
 	public void setPlace(String place) {
 		this.place = place;
 	}
-	public int getAmount() {
-		return amount;
+	public String getOwnername() {
+		return ownername;
 	}
-	public void setAmount(int amount) {
-		this.amount = amount;
+	public void setOwnername(String ownername) {
+		this.ownername = ownername;
 	}
 }

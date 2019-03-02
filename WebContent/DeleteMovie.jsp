@@ -44,7 +44,7 @@
 			</table>
 			<br/>
 			<br/>
-				<a href="MovieHome.jsp" style="text-decoration:none; padding-left:80px; font-size:19px">Back</a>
+				<a href="Home.jsp" style="text-decoration:none; padding-left:80px; font-size:19px">Back</a>
 			<br/>
 </body>
 </html>

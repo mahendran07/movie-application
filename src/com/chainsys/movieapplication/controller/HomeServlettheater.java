@@ -42,7 +42,7 @@ public class HomeServlettheater extends HttpServlet {
 		Theater theater = new Theater();
 		TheaterDAO theaterDAO = new TheaterDAO();
 		try {
-			theaterDAO.addTheater(theater);
+			//theaterDAO.addTheater(theater);
 			ArrayList<Theater> theaterList = new ArrayList<>();
 			theaterList.addAll(theaterDAO.findAll());
 			request.setAttribute("THEATER", theaterList);

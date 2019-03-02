@@ -31,8 +31,8 @@
 	<table align="center">
 		<tr>
 			<td>
-				<form method="post" action="SearchbyDate.jsp">
-					<button type="submit">Search By Date</button>
+				<form method="post" action="FindbyTheaterServlet">
+					<button type="submit">Find By Theater</button>
 				</form>
 			</td>
 			<td>
@@ -40,8 +40,8 @@
 				</div>
 			</td>
 			<td>
-				<form method="post" action="SearchbyDateTheater.jsp">
-					<button type="submit">Search by Date and Theater</button>
+				<form method="post" action="FindbyMovieServlet">
+					<button type="submit">Find By Movie</button>
 				</form>
 			</td>
 			<td>

@@ -7,6 +7,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import oracle.net.aso.p;
+
 import com.chainsys.movieapplication.model.Movie;
 import com.chainsys.movieapplication.model.MovieInTheater;
 import com.chainsys.movieapplication.model.Theater;
@@ -54,4 +56,27 @@ public class MovieTheaterDAO {
 		}
 		return movietheaterlist;
 	}
+	
+	public ArrayList<MovieInTheater> findbyTheater(int id) throws SQLException
+	{
+		ArrayList<MovieInTheater> movietheaterlist=new ArrayList<MovieInTheater>();
+		Connection connection=ConnectionUtil.getConnection();
+		String sql="select id,theaterid,show,showdate,total_ticket from movieintheater where movieid=?";
+		PreparedStatement preparedStatement=connection.prepareStatement(sql);
+		preparedStatement.setInt(1, id);
+		ResultSet resultSet=preparedStatement.executeQuery();
+		while(resultSet.next())
+		{
+			MovieInTheater movieintheater=new MovieInTheater();
+			TheaterDAO theaterDAO=new TheaterDAO();
+			Theater theater=theaterDAO.findById(resultSet.getInt("theaterid"));
+			movieintheater.setTheater(theater);
+			movieintheater.setShow(resultSet.getString("show"));
+			movieintheater.setDate(resultSet.getDate("showdate").toLocalDate());
+			movieintheater.setTotal(resultSet.getInt("total_ticket"));
+			movietheaterlist.add(movieintheater);
+		}
+		return movietheaterlist;
+	}
+	
 }

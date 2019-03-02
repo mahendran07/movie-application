@@ -37,7 +37,7 @@ input[type="text"], input[type="password"] {
   border-bottom: 1px solid rgba(255,255,255,0.04);
   outline: none;
   font-size:15px;
-  color: #b5cd60;
+  color: #46485c;
 }
 button[type="submit"] {
   background: #b5cd60;

@@ -16,7 +16,7 @@
 						<table>
 							<tr>
 								<td>Name </td>
-								<td><input type="text" name="theatername"></td>
+								<td><input type="text" name="theatername" required autocomplete="off"></td>
 							</tr>
 							<tr>
 								<td></td>
@@ -24,15 +24,15 @@
 							</tr>
 							<tr>
 								<td>Place </td>
-								<td><input type="text" name="place"></td>
+								<td><input type="text" name="place" required autocomplete="off"></td>
 							</tr>
 							<tr>
 								<td></td>
 								<td></td>
 							</tr>
 							<tr>
-								<td>Amount </td>
-								<td><input type="number" name="amount"></td>
+								<td>Owner name </td>
+								<td><input type="text" name="ownername" required autocomplete="off"></td>
 							</tr>
 							<tr>
 								<td></td>
@@ -52,7 +52,7 @@
 	</table>
 	<br/>
 	<br/>
-		<a href="TheaterHome.jsp" style="text-decoration:none; padding-left:80px; font-size:19px">Back</a>
+		<a href="Home.jsp" style="text-decoration:none; padding-left:80px; font-size:19px">Back</a>
 	<br/>
 </body>
 </html>

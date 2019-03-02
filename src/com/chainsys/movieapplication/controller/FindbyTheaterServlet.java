@@ -10,20 +10,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.chainsys.movieapplication.dao.TheaterDAO;
-import com.chainsys.movieapplication.model.Theater;
+import com.chainsys.movieapplication.dao.MovieDAO;
+import com.chainsys.movieapplication.model.Movie;
 
 /**
- * Servlet implementation class DeleteServlet
+ * Servlet implementation class FindbyTheaterServlet
  */
-@WebServlet("/DeleteTheater")
-public class DeleteTheater extends HttpServlet {
+@WebServlet("/FindbyTheaterServlet")
+public class FindbyTheaterServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DeleteTheater() {
+    public FindbyTheaterServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,18 +32,14 @@ public class DeleteTheater extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Theater theater = new Theater();
-		TheaterDAO theaterDAO = new TheaterDAO();
+		MovieDAO movieDAO = new MovieDAO();
 		try {
-			//theaterDAO.addTheater(theater);
-			ArrayList<Theater> theaterList = new ArrayList<>();
-			theaterList.addAll(theaterDAO.findAll());
-			request.setAttribute("THEATER", theaterList);
-			RequestDispatcher req = request.getRequestDispatcher("DeleteTheater.jsp");
-			req.forward(request, response);
-		}
-		catch(Exception e)
-		{
+			ArrayList<Movie> movielist = new ArrayList<>();
+			movielist.addAll(movieDAO.findAll());
+			request.setAttribute("MOVIE", movielist);
+			RequestDispatcher rd = request.getRequestDispatcher("FindbyTheater.jsp");
+			rd.forward(request, response);
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}

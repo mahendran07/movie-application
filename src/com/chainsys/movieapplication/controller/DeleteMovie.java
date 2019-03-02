@@ -35,7 +35,7 @@ public class DeleteMovie extends HttpServlet {
 		Movie movie = new Movie();
 		MovieDAO movieDAO = new MovieDAO();
 		try {
-			movieDAO.addMovie(movie);
+			//movieDAO.addMovie(movie);
 			ArrayList<Movie> movielist = new ArrayList<>();
 			movielist.addAll(movieDAO.findAll());
 			request.setAttribute("MOVIE", movielist);

@@ -11,7 +11,6 @@
 	<h3> <center> Movies in Theater </center> </h3>
 	<br/>
 	<table align="center" border="1" width="500px" height="200px">
-		<tbody>
 			<thead>
 				<tr>	
 					<th> Theater Name & Place </th>
@@ -22,14 +21,16 @@
 					<th> Tickets </th>
 				</tr>
 			</thead>
-		</tbody>
+		<tbody>
 			<c:forEach var="movie" items="${MOVIEINTHEATER}">
+				<tr>
 					<td> ${movie.theater.name}-${movie.theater.place}</td>
 					<td> ${movie.movie.name}</td>
 					<td> ${movie.show}</td>
 					<td> ${movie.date}</td>
 					<td> ${movie.theater.amount} </td>
 					<td> ${movie.total}</td>
+				</tr>
 		</c:forEach>
 	</table>
 	<br/>

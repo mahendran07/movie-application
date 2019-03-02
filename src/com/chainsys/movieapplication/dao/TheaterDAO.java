@@ -13,12 +13,12 @@ public class TheaterDAO {
 	public void addTheater(Theater theater) throws Exception {
 		try {
 			Connection connection = ConnectionUtil.getConnection();
-			String sql = "Insert into theaterdetail(id,name,place,amount)values(seq_theater_id.NEXTVAL,?,?,?)";
+			String sql = "Insert into theaterdetail(id,name,place,ownername)values(seq_theater_id.NEXTVAL,?,?,?)";
 			PreparedStatement preparedStatement = connection
 					.prepareStatement(sql);
 			preparedStatement.setString(1, theater.getName());
 			preparedStatement.setString(2, theater.getPlace());
-			preparedStatement.setInt(3, theater.getAmount());
+			preparedStatement.setString(3, theater.getOwnername());
 			preparedStatement.executeUpdate();
 			ConnectionUtil.close(connection, preparedStatement, null);
 		} catch (SQLException e) {
@@ -30,7 +30,7 @@ public class TheaterDAO {
 		ArrayList<Theater> theaterList = new ArrayList<>();
 
 		Connection connection = ConnectionUtil.getConnection();
-		String sql = "SELECT id,name,place,amount FROM theaterdetail";
+		String sql = "SELECT id,name,place,ownername FROM theaterdetail";
 		PreparedStatement preparedStatement = connection.prepareStatement(sql);
 		ResultSet resultset = preparedStatement.executeQuery();
 		theaterList = new ArrayList<>();
@@ -39,7 +39,7 @@ public class TheaterDAO {
 			theater.setId(resultset.getInt("id"));
 			theater.setName(resultset.getString("name"));
 			theater.setPlace(resultset.getString("place"));
-			theater.setAmount(resultset.getInt("amount"));
+			theater.setOwnername(resultset.getString("ownername"));
 			theaterList.add(theater);
 		}
 		ConnectionUtil.close(connection, preparedStatement, null);
@@ -60,9 +60,9 @@ public class TheaterDAO {
 
 	public void updateTheater(Theater theater) throws SQLException {
 		Connection connection = ConnectionUtil.getConnection();
-		String sql = "UPDATE theaterdetail set amount=? where name=? and place=?";
+		String sql = "UPDATE theaterdetail set name=? where name=? and place=?";
 		PreparedStatement preparedstatement = connection.prepareStatement(sql);
-		preparedstatement.setInt(1, theater.getAmount());
+		preparedstatement.setString(1, theater.getName());
 		preparedstatement.setString(2, theater.getName());
 		preparedstatement.setString(3, theater.getPlace());
 		int row = preparedstatement.executeUpdate();
@@ -74,7 +74,7 @@ public class TheaterDAO {
 	public Theater findById(int id) throws SQLException {
 		Theater theater = null;
 		Connection connection = ConnectionUtil.getConnection();
-		String sql = "SELECT id,name,place,amount FROM theaterdetail where id=?";
+		String sql = "SELECT id,name,place,ownername FROM theaterdetail where id=?";
 		PreparedStatement preparedStatement = connection.prepareStatement(sql);
 		preparedStatement.setInt(1, id);
 		ResultSet resultset = preparedStatement.executeQuery();
@@ -83,7 +83,7 @@ public class TheaterDAO {
 			theater.setId(resultset.getInt("id"));
 			theater.setName(resultset.getString("name"));
 			theater.setPlace(resultset.getString("place"));
-			theater.setAmount(Integer.parseInt(resultset.getString("amount")));
+			theater.setOwnername(resultset.getString("ownername"));
 		}
 		ConnectionUtil.close(connection, preparedStatement, null);
 		return theater;

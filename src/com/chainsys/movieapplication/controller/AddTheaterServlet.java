@@ -41,11 +41,11 @@ public class AddTheaterServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String theatername = request.getParameter("theatername");
 		String place=request.getParameter("place");
-		int amount=Integer.parseInt(request.getParameter("amount"));
+		String ownername=request.getParameter("ownername");
 		Theater theater = new Theater();
 		theater.setName(theatername);
 		theater.setPlace(place);
-		theater.setAmount(amount);
+		theater.setOwnername(ownername);
 		TheaterDAO theaterDAO = new TheaterDAO();
 		try {
 			theaterDAO.addTheater(theater);
