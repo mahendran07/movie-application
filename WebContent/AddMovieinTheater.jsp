@@ -167,8 +167,16 @@
 								<td></td>
 							</tr>
 							<tr>
-								<td>Total no.of Tickets </td>
-								<td><input type="number" name="total"></td>
+								<td> Screen </td>
+								<td><input type="text" name="screen"></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td> Amount </td>
+								<td><input type="number" name="amount"></td>
 							</tr>
 							<tr>
 								<td></td>
