@@ -42,10 +42,24 @@ increment by 1;
 
 ALTER TABLE movieintheater ADD total_ticket NUMBER(10);
 
+commit;
+
 ALTER TABLE register ADD status int DEFAULT 0;
 
-//admin register only status set 1
+delete from movieintheater;
+commit;
+
 insert into register(id,name,email,phonenumber,password,status)VALUES(seq_register_id.NEXTVAL,'Mahendran','mahesh22696@gmail.com',8098355378,'Mahe$22',1);
+
+select * from register;
+
+select status from register where email='mahesh22696@gmail.com' and password='Mahe$22';
+
+select name,email,phonenumber from register where name='mahesh' and email='mahesh@gmail.com' and phonenumber=9943029823;
+
+delete from register where id=3;
+
+select theaterid,show,showdate,total_ticket from movieintheater where movieid=2;
 
 commit;
 
@@ -60,6 +74,10 @@ screen int,
 totalseats int,
 availabledate Date,constraint pk_theaterscreen_id PRIMARY KEY(id),
 constraint fk_theaterscreen_id FOREIGN KEY (theaterid) REFERENCES theaterdetail(id));
+
+select * from theaterdetail;
+
+commit;
 
 ALTER TABLE theaterdetail DROP COLUMN amount;
 
@@ -82,3 +100,18 @@ ALTER TABLE theaterscreen DROP COLUMN availabledate;
 create sequence seq_theaterscreen_id
 start with 1
 increment by 1;
+
+commit;
+delete from theaterscreen;
+
+select * from theaterscreen;
+
+desc movieintheater;
+
+desc theaterscreen;
+
+ALTER TABLE theaterscreen MODIFY screen VARCHAR2(20) UNIQUE;
+
+ALTER TABLE movieintheater ADD FOREIGN KEY(screen_no) REFERENCES theaterscreen(screen);
+
+desc movieintheater;

@@ -85,4 +85,28 @@ public class MovieTheaterDAO {
 		return movietheaterlist;
 	}
 	
+	public ArrayList<MovieInTheater> findbyMovie(int id) throws SQLException
+	{
+		ArrayList<MovieInTheater> movietheaterlist=new ArrayList<MovieInTheater>();
+		Connection connection=ConnectionUtil.getConnection();
+		String sql="select id,movieid,show,showdate,screen_no,amount from movieintheater where theaterid=?";
+		PreparedStatement preparedStatement=connection.prepareStatement(sql);
+		preparedStatement.setInt(1, id);
+		ResultSet resultSet=preparedStatement.executeQuery();
+		while(resultSet.next())
+		{
+			MovieInTheater movieintheater=new MovieInTheater();
+			MovieDAO movieDAO=new MovieDAO();
+			TheaterScreen theaterScreen=new TheaterScreen();
+			Movie movie=movieDAO.findById(resultSet.getInt("movieid"));
+			movieintheater.setMovie(movie);
+			movieintheater.setShow(resultSet.getString("show"));
+			movieintheater.setDate(resultSet.getDate("showdate").toLocalDate());
+			theaterScreen.setScreen(resultSet.getString("screen_no"));
+			movieintheater.setTheaterscreen(theaterScreen);
+			movieintheater.setAmount(resultSet.getInt("amount"));
+			movietheaterlist.add(movieintheater);
+		}
+		return movietheaterlist;
+	}
 }

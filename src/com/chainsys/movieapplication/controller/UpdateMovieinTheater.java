@@ -13,8 +13,10 @@ import javax.servlet.http.HttpServletResponse;
 import com.chainsys.movieapplication.dao.MovieDAO;
 import com.chainsys.movieapplication.dao.MovieTheaterDAO;
 import com.chainsys.movieapplication.dao.TheaterDAO;
+import com.chainsys.movieapplication.dao.TheaterScreenDAO;
 import com.chainsys.movieapplication.model.Movie;
 import com.chainsys.movieapplication.model.Theater;
+import com.chainsys.movieapplication.model.TheaterScreen;
 
 /**
  * Servlet implementation class UpdateMovieinTheater
@@ -35,9 +37,7 @@ public class UpdateMovieinTheater extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Movie movie=new Movie();
-		Theater theater = new Theater();
-		MovieTheaterDAO movietheaterDAO = new MovieTheaterDAO();
+		TheaterScreenDAO theaterScreenDAO=new TheaterScreenDAO();
 		MovieDAO movieDAO=new MovieDAO();
 		TheaterDAO theaterDAO=new TheaterDAO();
 		try {
@@ -48,10 +48,10 @@ public class UpdateMovieinTheater extends HttpServlet {
 			ArrayList<Movie> movieList = new ArrayList<>();
 			movieList.addAll(movieDAO.findAll());
 			request.setAttribute("MOVIE", movieList);
-//			ArrayList<MovieInTheater> movietheaterList = new ArrayList<>();
-//			movietheaterList.addAll(movietheaterDAO.findAll());
-//			request.setAttribute("MOVIEINTHEATER", movietheaterList);
-			RequestDispatcher req = request.getRequestDispatcher("UpdateMovieinTheater.jsp");
+			ArrayList<TheaterScreen> theaterscreenList = new ArrayList<>();
+			theaterscreenList.addAll(theaterScreenDAO.findAll());
+			request.setAttribute("SCREEN", theaterscreenList);
+			RequestDispatcher req = request.getRequestDispatcher("UpdateMovieTheater.jsp");
 			req.forward(request, response);
 		}
 		catch(Exception e)

@@ -9,16 +9,98 @@
 <style type="text/css">
 body {
 	text-align: center;
-	padding-top: 150px;
+	font-size:20px;
 }
 
 form {
 	display: inline-block;
 }
+	h3
+	{
+		padding-left:100px;
+		color:pink;
+	}
+	a
+	{
+		padding-left:30	px;
+	}
+	.space
+	{
+		padding-left:100px;
+	}
+	button[type="submit"] {
+  background: #b5cd60;
+  border: 0;
+  width: 170px;
+  height: 40px;
+  border-radius: 3px;
+  color: white;
+  cursor: pointer;
+  transition: background 0.3s ease-in-out;
+}
+button[type="submit"]:hover {
+  background: #16aa56;
+}
+
 </style>
 </head>
-<body>
+<body bgcolor="grey">
+	<br/>
+	<br/>
+	<br/>
+	<br/>
+	<table align="center">
+		<tr>
+			<td>
+				<form method="post" action="UserHome.jsp">
+					<button type="submit">Home</button>
+				</form>
+			</td>
+			<td>
+				<div class="space">
+				</div>
+			</td>
+			<td>
+				<form method="post" action="FindbyTheaterServlet">
+					<button type="submit">Find By Theater</button>
+				</form>
+			</td>
+			<td>
+				<div class="space">
+				</div>
+			</td>
+			<td>
+				<form method="post" action="FindbyMovieServlet">
+					<button type="submit">Find By Movie</button>
+				</form>
+			</td>
+			<td>
+				<div class="space">
+				</div>
+			</td>
+			<td>
+				<form method="post" action="UserServlet">
+					<button type="submit">Change Password</button>
+				</form>
+			</td>
+			<td>
+				<div class="space">
+				</div>
+			</td>
+			<td>
+				<form method="post" action="Login.jsp">
+					<button type="submit">Logout</button>
+				</form>
+			</td>
+		</tr>
+	</table>
+	<br/>
+	<br/>
+	<br/>
+	<br/>
+	<br/>
 	<form method="post" action="ChangePasswordServlet">
+	
 		<table>
 			<tbody>
 				<tr align="center">
@@ -58,9 +140,10 @@ form {
 				<td> &nbsp; </td> 
 				<td> &nbsp; </td>
 				<td> &nbsp; </td> 
-				</tr> 
+				</tr>
+				</table>
+				<table align="center"> 
 				<tr>
-					<td><a href="UserHome.jsp">Back</a></td>
 					<td><button type="submit" style="width: 100px">Update</button>
 						</td>
 				</tr>

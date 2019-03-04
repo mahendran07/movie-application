@@ -14,7 +14,7 @@ body {
 }
 a
 {
-	color: #46485c;
+	color: white;
   	text-decoration: none;
 }
 .login {
@@ -37,7 +37,7 @@ input[type="text"], input[type="password"] {
   border-bottom: 1px solid rgba(255,255,255,0.04);
   outline: none;
   font-size:15px;
-  color: #46485c;
+  color: white;
 }
 button[type="submit"] {
   background: #b5cd60;
@@ -53,7 +53,7 @@ button[type="submit"]:hover {
   background: #16aa56;
 }
 h2 {
-  color: #46485c;
+  color: white;
   font-size: 17px;
   font-weight: 600;
   text-align: center;

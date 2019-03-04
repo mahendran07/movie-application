@@ -10,14 +10,33 @@
 body {
 	text-align: center;
 	padding-top: 150px;
+	font-size:20px;
 }
 
 form {
 	display: inline-block;
 }
+button[type="submit"] {
+  background: pink;
+  border: 0;
+  width: 250px;
+  height: 40px;
+  border-radius: 3px;
+  color: black;
+  cursor: pointer;
+  transition: background 0.3s ease-in-out;
+}
+button[type="submit"]:hover {
+  background: #16aa56;
+}
+a
+{
+	color:white;
+	text-decoration:none;
+}
 </style>
 </head>
-<body>
+<body bgcolor="grey">
 	<form method="post" action="ForgetPasswordServlet">
 		<table>
 			<tbody>

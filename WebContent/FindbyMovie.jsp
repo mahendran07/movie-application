@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+    pageEncoding="ISO-8859-1"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Find By Theater</title>
+<title>Find by Movie</title>
 <style type="text/css">
 body {
 	text-align: center;
@@ -91,16 +91,16 @@ button[type="submit"]:hover {
 	<br/>
 	<br/>
 	<br/>
-	<form method="post" action="ChooseMovieServlet">
-		<h3> Choose Movie Name </h3>
+	<form method="post" action="ChooseTheaterServlet">
+		<h3> Choose Theater Name </h3>
 		<table align="center">
 			<tr> <td> &nbsp; </td> </tr>
 			<tr>
-				<td>Movie Name</td>
-				<td><select name="moviename">
+				<td>Theater Name</td>
+				<td><select name="theatername">
 						<option value="-1">---Choose---</option>
-						<c:forEach var="moviename" items="${MOVIE}">
-							<option value="${moviename.id}">${moviename.name}</option>
+						<c:forEach var="theatername" items="${THEATER}">
+							<option value="${theatername.id}.${theatername.name}-${theatername.place}">${theatername.name}-${theatername.place}</option>
 						</c:forEach>
 				</select></td>
 			</tr>
@@ -118,19 +118,19 @@ button[type="submit"]:hover {
 		<br/>
 		<table align="center" border="1" width="700px" height="100px">
 			<tr>
-				<th> Theater Name and Place </th>
+				<th> Movie Name </th>
 				<th> Show </th>
 				<th> Show Date </th>
 				<th> Total Ticket </th>
 				<th> Amount </th>
 			</tr>
-			<c:forEach var="theater" items="${THEATERLIST}">
+			<c:forEach var="movie" items="${THEATERLIST}">
 				<tr>
-					<td>${theater.theater.name}-${theater.theater.place}</td>
-					<td>${theater.show}</td>
-					<td>${theater.date}</td>
-					<td>${theater.total}</td>
-					<td>${theater.theater.amount}</td>
+					<td>${movie.movie.name}</td>
+					<td>${movie.show}</td>
+					<td>${movie.date}</td>
+					<td>${movie.theaterscreen.screen}</td>
+					<td>${movie.amount}</td>
 				</tr>
 			</c:forEach>
 		</table>

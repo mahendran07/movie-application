@@ -110,7 +110,7 @@
 		<tr>
 			<td>
 				<div align="center" style="width: 600px">
-					<form method="post" action="DeleteMovieServlet">
+					<form method="post" action="DeleteMovieTheaterServlet">
 
 						<h2>Delete Movie in Theater</h2>
 						<table>
@@ -147,6 +147,15 @@
 										<option value="Evening">Evening</option>
 										<option value="Night">Night</option>
 								</select></td>
+							</tr>
+							<tr> <td> &nbsp; </td> </tr>
+							<tr>
+								<td>Date </td>
+								<td><input type="date" name="date"></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td></td>
 							</tr>
 							<tr> <td> &nbsp; </td> </tr>
 							<tr>

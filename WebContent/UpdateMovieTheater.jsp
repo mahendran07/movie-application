@@ -110,7 +110,7 @@
 		<tr>
 			<td>
 				<div align="center" style="width: 600px">
-					<form method="post" action="UpdateMovieServlet">
+					<form method="post" action="UpdateMovieinServlet">
 						<h2>Update Movie in Theater</h2>
 						<table>
 							<tr>
@@ -135,6 +135,19 @@
 											<option value="${moviename.id}">${moviename.name}</option>
 										</c:forEach>
 								</select></td>
+							</tr>
+							<tr> <td> &nbsp; </td> </tr>
+							<tr>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>Date </td>
+								<td><input type="date" name="date"></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td></td>
 							</tr>
 							<tr> <td> &nbsp; </td> </tr>
 							<tr>

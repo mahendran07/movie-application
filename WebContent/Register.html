@@ -6,15 +6,29 @@
 <style type="text/css">
 body {
 	text-align: center;
-	padding-top: 130px;
+	padding-top: 120px;
+	font-size:18px;
 }
 
 form {
 	display: inline-block;
 }
+button[type="submit"] {
+  background: black;
+  border: 0;
+  width: 250px;
+  height: 40px;
+  border-radius: 3px;
+  color: white;
+  cursor: pointer;
+  transition: background 0.3s ease-in-out;
+}
+button[type="submit"]:hover {
+  background: #16aa56;
+}
 </style>
 </head>
-<body>
+<body bgcolor="pink">
 	<form method="post" action="RegisterServlet">
 		<table>
 			<tbody>
@@ -44,7 +58,7 @@ form {
 				</tr>
 				<tr align="left">
 					<td>Phone number </td>
-					<td><input type="number" name="phonenumber" pattern="/(6|7|8|9)\d{9}/" required></td>
+					<td><input type="number" name="phonenumber" pattern="/(7|8|9)\d{9}/" required></td>
 				</tr>
 				<tr>
 					<td>&nbsp;</td>
