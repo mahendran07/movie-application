@@ -17,6 +17,7 @@
 					<th> Movie Name </th>
 					<th> Show </th>
 					<th> Date </th>
+					<th> Screen </th>
 					<th> Amount(one) </th>
 					<th> Tickets </th>
 				</tr>
@@ -28,15 +29,16 @@
 					<td> ${movie.movie.name}</td>
 					<td> ${movie.show}</td>
 					<td> ${movie.date}</td>
+					<td> ${movie.theaterscreen.screen} </td>
 					<td> ${movie.theater.amount} </td>
-					<td> ${movie.total}</td>
+					<td> ${movie.theaterscreen.totalTicket}</td>
 				</tr>
 		</c:forEach>
 	</table>
 	<br/>
 	<br/>
 	<br/>
-	<form method="post" action="HomeServletmovietheater">
+	<form method="post" action="Home.jsp">
 		<button type="submit" name="back">Back</button>
 	</form>
 </body>

@@ -39,8 +39,11 @@ public class DeleteTheaterServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String theatername = request.getParameter("theatername");
-		String place=request.getParameter("place");
+		String theaterplace=request.getParameter("theatername");
+		int length=theaterplace.length();
+		int pos=theaterplace.indexOf('-');
+		String theatername = theaterplace.substring(0, pos);
+		String place=theaterplace.substring(pos+1,length);
 		TheaterDAO theaterDAO = new TheaterDAO();
 		try {
 			theaterDAO.deleteTheater(theatername,place);

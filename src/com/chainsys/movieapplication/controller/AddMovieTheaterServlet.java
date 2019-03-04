@@ -18,6 +18,7 @@ import com.chainsys.movieapplication.dao.TheaterDAO;
 import com.chainsys.movieapplication.model.Movie;
 import com.chainsys.movieapplication.model.MovieInTheater;
 import com.chainsys.movieapplication.model.Theater;
+import com.chainsys.movieapplication.model.TheaterScreen;
 
 /**
  * Servlet implementation class AddMovieTheaterServlet
@@ -48,16 +49,20 @@ public class AddMovieTheaterServlet extends HttpServlet {
 		MovieInTheater movieintheater=new MovieInTheater();
 		Theater theater=new Theater();
 		Movie movie=new Movie();
+		TheaterScreen theaterScreen=new TheaterScreen();
 		String theaterid=request.getParameter("theatername");
-		theater.setId(Integer.parseInt(request.getParameter("theatername")));
+		theater.setId(Integer.parseInt(theaterid));
 		String movieid=request.getParameter("moviename");
-		movie.setId(Integer.parseInt(request.getParameter("moviename")));
+		movie.setId(Integer.parseInt(movieid));
 		movieintheater.setTheater(theater);
 		movieintheater.setMovie(movie);
 		movieintheater.setShow(request.getParameter("show"));
 		LocalDate date=LocalDate.parse(request.getParameter("date"));
 		movieintheater.setDate(date);
-		movieintheater.setTotal(Integer.parseInt(request.getParameter("total")));
+		String screen=request.getParameter("screen");
+		theaterScreen.setScreen(screen);
+		movieintheater.setTheaterscreen(theaterScreen);
+		movieintheater.setAmount(Integer.parseInt(request.getParameter("amount")));
 		MovieTheaterDAO movieTheaterDAO=new MovieTheaterDAO();
 		try
 		{

@@ -58,7 +58,7 @@
 						</form>
 						<ul>
 						 <li>
-							<form method="post" action="AddScreen.jsp">
+							<form method="post" action="ScreenServlet">
 								<button type="submit"><a>Add</a></button>
 							</form>
 						</li>

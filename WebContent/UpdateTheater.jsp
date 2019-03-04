@@ -59,7 +59,7 @@
 						</form>
 						<ul>
 						 <li>
-							<form method="post" action="AddScreen.jsp">
+							<form method="post" action="ScreenServlet">
 								<button type="submit"><a>Add</a></button>
 							</form>
 						</li>
@@ -127,12 +127,21 @@
 								<td></td>
 							</tr>
 							<tr>
+								<td>Old Owner Name</td>
+								<td><select name="oldownerrname">
+										<option value="-1">---Choose---</option>
+										<c:forEach var="theatername" items="${THEATER}">
+											<option value="${theatername.ownername}">${theatername.ownername}</option>
+										</c:forEach>
+								</select></td>
+							</tr>
+							<tr>
 								<td></td>
 								<td></td>
 							</tr>
 							<tr>
-								<td>Amount </td>
-								<td><input type="number" name="amount"></td>
+								<td>New Owner name </td>
+								<td><input type="text" name="newownername"></td>
 							</tr>
 							<tr>
 								<td></td>

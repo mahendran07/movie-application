@@ -11,21 +11,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.chainsys.movieapplication.dao.TheaterScreenDAO;
-import com.chainsys.movieapplication.model.MovieInTheater;
 import com.chainsys.movieapplication.model.Theater;
 import com.chainsys.movieapplication.model.TheaterScreen;
 
 /**
- * Servlet implementation class AddTheaterScreen
+ * Servlet implementation class UpdateTheaterScreen
  */
-@WebServlet("/AddTheaterScreen")
-public class AddTheaterScreen extends HttpServlet {
+@WebServlet("/UpdateTheaterScreen")
+public class UpdateTheaterScreen extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AddTheaterScreen() {
+    public UpdateTheaterScreen() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -37,18 +36,17 @@ public class AddTheaterScreen extends HttpServlet {
 		Theater theater=new Theater();
 		String theaterid=request.getParameter("theatername");
 		String screen=request.getParameter("screen");
-		int seats=Integer.parseInt(request.getParameter("total"));
+		int total=Integer.parseInt(request.getParameter("total"));
 		theater.setId(Integer.parseInt(theaterid));
 		TheaterScreen theaterScreen=new TheaterScreen();
 		theaterScreen.setTheater(theater);
 		theaterScreen.setScreen(screen);
-		theaterScreen.setTotalTicket(seats);
+		theaterScreen.setTotalTicket(total);
 		TheaterScreenDAO theaterScreenDAO=new TheaterScreenDAO();
 		try {
-			theaterScreenDAO.addScreen(theaterScreen);
+			theaterScreenDAO.updateTheaterScreen(theaterScreen);
 			ArrayList<TheaterScreen> theaterscreenlist=new ArrayList<TheaterScreen>();
 			theaterscreenlist.addAll(theaterScreenDAO.findAll());
-			//System.out.println(movietheaterlist.size());
 			request.setAttribute("THEATERSCREEN", theaterscreenlist);
 			RequestDispatcher rd=request.getRequestDispatcher("viewTheaterScreen.jsp");
 			rd.forward(request, response);

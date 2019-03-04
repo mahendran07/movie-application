@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Add Theater</title>
+<title>Insert title here</title>
 <link rel="stylesheet" href="Style.css">
 </head>
 <body bgcolor="#c4dbe7">
@@ -105,32 +106,37 @@
 	<br/>
 	<br/>
 	<br/>
+	<br/>
+	<br/>
+	<br/>
 	<table>
 		<tr>
 			<td>
 				<div align="center" style="width: 600px">
-					<form method="post" action="AddTheaterServlet">
-						<h2>Add Theater</h2>
+					<form method="post" action="DeleteTheaterScreen">
+						<h2>Delete Screen</h2>
 						<table>
 							<tr>
 								<td>Name </td>
-								<td><input type="text" name="theatername" required autocomplete="off"></td>
+								<td><select name="theatername">
+										<option value="-1">---Choose---</option>
+										<c:forEach var="theatername" items="${THEATER}">
+											<option value="${theatername.id}">${theatername.name}-${theatername.place}</option>
+										</c:forEach>
+								</select></td>
 							</tr>
 							<tr>
 								<td></td>
 								<td></td>
 							</tr>
 							<tr>
-								<td>Place </td>
-								<td><input type="text" name="place" required autocomplete="off"></td>
-							</tr>
-							<tr>
-								<td></td>
-								<td></td>
-							</tr>
-							<tr>
-								<td>Owner name </td>
-								<td><input type="text" name="ownername" required autocomplete="off"></td>
+								<td>Screen </td>
+								<td><select name="screen">
+										<option value="-1">---Choose---</option>
+										<c:forEach var="screen" items="${SCREEN}">
+											<option value="${screen.screen}">${screen.screen}</option>
+										</c:forEach>
+								</select></td>
 							</tr>
 							<tr>
 								<td></td>
@@ -139,7 +145,7 @@
 							<tr>
 								<td></td>
 								<td>
-									<button style="width: 100px;" type="submit">Add</button>
+									<button style="width: 100px;" type="submit">Delete</button>
 								</td>
 							</tr>
 						</table>

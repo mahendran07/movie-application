@@ -59,7 +59,7 @@
 						</form>
 						<ul>
 						 <li>
-							<form method="post" action="AddScreen.jsp">
+							<form method="post" action="ScreenServlet">
 								<button type="submit"><a>Add</a></button>
 							</form>
 						</li>
@@ -119,7 +119,7 @@
 								<td><select name="theatername">
 										<option value="-1">---Choose---</option>
 										<c:forEach var="theatername" items="${THEATER}">
-											<option value="${theatername.name}">${theatername.name}-${theatername.place}</option>
+											<option value="${theatername.name}-${theatername.place}">${theatername.name}-${theatername.place}</option>
 										</c:forEach>
 								</select></td>
 							</tr>

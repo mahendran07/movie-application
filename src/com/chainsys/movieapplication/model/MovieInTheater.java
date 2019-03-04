@@ -7,7 +7,10 @@ public class MovieInTheater {
 	private Theater theater;
 	private String show;
 	private LocalDate date;
-	private int total;
+	private TheaterScreen theaterscreen;
+	
+	private int amount;
+	
 	public Movie getMovie() {
 		return movie;
 	}
@@ -32,10 +35,16 @@ public class MovieInTheater {
 	public void setDate(LocalDate date) {
 		this.date = date;
 	}
-	public int getTotal() {
-		return total;
+	public TheaterScreen getTheaterscreen() {
+		return theaterscreen;
 	}
-	public void setTotal(int total) {
-		this.total = total;
+	public void setTheaterscreen(TheaterScreen theaterscreen) {
+		this.theaterscreen = theaterscreen;
+	}
+	public int getAmount() {
+		return amount;
+	}
+	public void setAmount(int amount) {
+		this.amount = amount;
 	}
 }

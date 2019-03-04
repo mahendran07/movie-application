@@ -5,28 +5,28 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>View Theater</title>
+<title>Insert title here</title>
 </head>
 <body>
-	<h3> <center> List of Theaters </center> </h3>
+	<h3> <center> Theater SCreen </center> </h3>
 	<br/>
 	<table align="center" border="1" width="300px" height="100px">
 		<tbody>
 			<thead>
 				<tr>	
-					<th> Theater Id </th>
+					<th> Theater Screen id </th>
 					<th> Theater Name </th>
 					<th> Place </th>
 					<th> Owner Name </th> 
 				</tr>
 			</thead>
 		</tbody>
-		<c:forEach var="theater" items="${THEATER}">
+		<c:forEach var="theaterscreen" items="${THEATERSCREEN}">
 		<tr>
-			<td> ${theater.id} </td>
-			<td> ${theater.name} </td>
-			<td> ${theater.place} </td>
-			<td> ${theater.ownername} </td>
+			<td> ${theaterscreen.id}</td>
+			<td> ${theaterscreen.theater.name} </td>
+			<td> ${theaterscreen.screen} </td>
+			<td> ${theaterscreen.totalTicket} </td>
 		</tr>
 		</c:forEach>
 	</table>

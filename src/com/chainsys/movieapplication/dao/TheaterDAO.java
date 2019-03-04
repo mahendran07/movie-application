@@ -60,11 +60,11 @@ public class TheaterDAO {
 
 	public void updateTheater(Theater theater) throws SQLException {
 		Connection connection = ConnectionUtil.getConnection();
-		String sql = "UPDATE theaterdetail set name=? where name=? and place=?";
+		String sql = "UPDATE theaterdetail set ownername=? where name=? and ownername=?";
 		PreparedStatement preparedstatement = connection.prepareStatement(sql);
-		preparedstatement.setString(1, theater.getName());
+		preparedstatement.setString(1, theater.getOwnername());
 		preparedstatement.setString(2, theater.getName());
-		preparedstatement.setString(3, theater.getPlace());
+		preparedstatement.setString(3, theater.getOwnername());
 		int row = preparedstatement.executeUpdate();
 		System.out.println("Update :" + row);
 		ConnectionUtil.close(connection, preparedstatement, null);

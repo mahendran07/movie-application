@@ -10,22 +10,22 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.chainsys.movieapplication.dao.TheaterDAO;
 import com.chainsys.movieapplication.dao.TheaterScreenDAO;
-import com.chainsys.movieapplication.model.MovieInTheater;
 import com.chainsys.movieapplication.model.Theater;
 import com.chainsys.movieapplication.model.TheaterScreen;
 
 /**
- * Servlet implementation class AddTheaterScreen
+ * Servlet implementation class DeleteScreen
  */
-@WebServlet("/AddTheaterScreen")
-public class AddTheaterScreen extends HttpServlet {
+@WebServlet("/DeleteScreen")
+public class DeleteScreen extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AddTheaterScreen() {
+    public DeleteScreen() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,25 +34,20 @@ public class AddTheaterScreen extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Theater theater=new Theater();
-		String theaterid=request.getParameter("theatername");
-		String screen=request.getParameter("screen");
-		int seats=Integer.parseInt(request.getParameter("total"));
-		theater.setId(Integer.parseInt(theaterid));
-		TheaterScreen theaterScreen=new TheaterScreen();
-		theaterScreen.setTheater(theater);
-		theaterScreen.setScreen(screen);
-		theaterScreen.setTotalTicket(seats);
+		TheaterDAO theaterDAO=new TheaterDAO();
 		TheaterScreenDAO theaterScreenDAO=new TheaterScreenDAO();
 		try {
-			theaterScreenDAO.addScreen(theaterScreen);
+			ArrayList<Theater> theaterlist = new ArrayList<>();
 			ArrayList<TheaterScreen> theaterscreenlist=new ArrayList<TheaterScreen>();
+			theaterlist.addAll(theaterDAO.findAll());
 			theaterscreenlist.addAll(theaterScreenDAO.findAll());
-			//System.out.println(movietheaterlist.size());
-			request.setAttribute("THEATERSCREEN", theaterscreenlist);
-			RequestDispatcher rd=request.getRequestDispatcher("viewTheaterScreen.jsp");
-			rd.forward(request, response);
-		} catch (Exception e) {
+			request.setAttribute("THEATER", theaterlist);
+			request.setAttribute("SCREEN", theaterscreenlist);
+			RequestDispatcher req = request.getRequestDispatcher("DeleteScreen.jsp");
+			req.forward(request, response);
+		}
+		catch(Exception e)
+		{
 			e.printStackTrace();
 		}
 	}
