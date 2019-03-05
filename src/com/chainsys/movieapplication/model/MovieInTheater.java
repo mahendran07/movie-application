@@ -8,7 +8,6 @@ public class MovieInTheater {
 	private String show;
 	private LocalDate date;
 	private TheaterScreen theaterscreen;
-	
 	private int amount;
 	
 	public Movie getMovie() {

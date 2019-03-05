@@ -30,7 +30,7 @@
 					<td> ${movie.show}</td>
 					<td> ${movie.date}</td>
 					<td> ${movie.theaterscreen.screen} </td>
-					<td> ${movie.theater.amount} </td>
+					<td> ${movie.amount} </td>
 					<td> ${movie.theaterscreen.totalTicket}</td>
 				</tr>
 		</c:forEach>

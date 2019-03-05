@@ -11,10 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.chainsys.movieapplication.dao.MovieDAO;
 import com.chainsys.movieapplication.dao.MovieTheaterDAO;
 import com.chainsys.movieapplication.dao.TheaterDAO;
-import com.chainsys.movieapplication.model.Movie;
 import com.chainsys.movieapplication.model.MovieInTheater;
 import com.chainsys.movieapplication.model.Theater;
 
@@ -48,7 +46,7 @@ public class ChooseTheaterServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 		String name=request.getParameter("theatername");
-		System.out.println(name);
+		//System.out.println(name);
 		int length=name.length();
 		int pos=name.indexOf('.');
 		int poss=name.indexOf('-');
@@ -58,7 +56,7 @@ public class ChooseTheaterServlet extends HttpServlet {
 		MovieTheaterDAO movieTheaterDAO=new MovieTheaterDAO();
 		ArrayList<MovieInTheater> listtheater=new ArrayList<MovieInTheater>();
 		try {
-			listtheater.addAll(movieTheaterDAO.findbyTheater(Integer.parseInt(theaterid)));
+			listtheater.addAll(movieTheaterDAO.findbyMovie(Integer.parseInt(theaterid)));
 			request.setAttribute("THEATERLIST", listtheater);
 			RequestDispatcher rd=request.getRequestDispatcher("FindbyMovie.jsp");
 			rd.forward(request, response);

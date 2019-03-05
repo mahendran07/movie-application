@@ -42,9 +42,19 @@ increment by 1;
 
 ALTER TABLE movieintheater ADD total_ticket NUMBER(10);
 
-commit;
-
 ALTER TABLE register ADD status int DEFAULT 0;
+
+desc register;
+
+select * from register;
+
+desc register;
+
+delete from register;
+
+select * from movieintheater;
+
+desc movieintheater;
 
 delete from movieintheater;
 commit;
@@ -58,6 +68,16 @@ select status from register where email='mahesh22696@gmail.com' and password='Ma
 select name,email,phonenumber from register where name='mahesh' and email='mahesh@gmail.com' and phonenumber=9943029823;
 
 delete from register where id=3;
+
+desc register;
+
+delete from theaterdetail;
+
+select * from moviedetail;
+
+select * from theaterdetail;
+
+select * from movieintheater;
 
 select theaterid,show,showdate,total_ticket from movieintheater where movieid=2;
 
@@ -75,6 +95,18 @@ totalseats int,
 availabledate Date,constraint pk_theaterscreen_id PRIMARY KEY(id),
 constraint fk_theaterscreen_id FOREIGN KEY (theaterid) REFERENCES theaterdetail(id));
 
+desc theaterscreen;
+
+desc register;
+
+desc moviedetail;
+
+desc theaterdetail;
+
+desc movieintheater;
+
+desc theaterscreen;
+
 select * from theaterdetail;
 
 commit;
@@ -83,11 +115,29 @@ ALTER TABLE theaterdetail DROP COLUMN amount;
 
 ALTER TABLE theaterdetail ADD ownername VARCHAR2(40) NOT NULL;
 
+desc register;
+
+desc moviedetail;
+
+desc theaterdetail;
+
+desc movieintheater;
+
 ALTER TABLE movieintheater DROP COLUMN total_ticket;
 
 ALTER TABLE movieintheater ADD screen_no VARCHAR2(30) NOT NULL;
 
 ALTER TABLE movieintheater ADD amount NUMBER(10) NOT NULL;
+
+desc register;
+
+desc moviedetail;
+
+desc theaterdetail;
+
+desc movieintheater;
+
+desc theaterscreen;
 
 ALTER TABLE theaterscreen MODIFY totalseats VARCHAR2(20);
 
@@ -115,3 +165,9 @@ ALTER TABLE theaterscreen MODIFY screen VARCHAR2(20) UNIQUE;
 ALTER TABLE movieintheater ADD FOREIGN KEY(screen_no) REFERENCES theaterscreen(screen);
 
 desc movieintheater;
+
+select * from movieintheater;
+
+select * from moviedetail;
+
+select * from theaterdetail;

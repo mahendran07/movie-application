@@ -68,16 +68,19 @@ public class MovieTheaterDAO {
 		PreparedStatement preparedStatement=connection.prepareStatement(sql);
 		preparedStatement.setInt(1, id);
 		ResultSet resultSet=preparedStatement.executeQuery();
+		Theater theater=new Theater();
 		while(resultSet.next())
 		{
 			MovieInTheater movieintheater=new MovieInTheater();
 			TheaterDAO theaterDAO=new TheaterDAO();
 			TheaterScreen theaterScreen=new TheaterScreen();
-			Theater theater=theaterDAO.findById(resultSet.getInt("theaterid"));
+			TheaterScreenDAO theaterScreenDAO=new TheaterScreenDAO();
+			theater=theaterDAO.findById(resultSet.getInt("theaterid"));
 			movieintheater.setTheater(theater);
 			movieintheater.setShow(resultSet.getString("show"));
 			movieintheater.setDate(resultSet.getDate("showdate").toLocalDate());
 			theaterScreen.setScreen(resultSet.getString("screen_no"));
+			theaterScreen=theaterScreenDAO.findById(resultSet.getInt("theaterid"));
 			movieintheater.setTheaterscreen(theaterScreen);
 			movieintheater.setAmount(resultSet.getInt("amount"));
 			movietheaterlist.add(movieintheater);
@@ -103,6 +106,8 @@ public class MovieTheaterDAO {
 			movieintheater.setShow(resultSet.getString("show"));
 			movieintheater.setDate(resultSet.getDate("showdate").toLocalDate());
 			theaterScreen.setScreen(resultSet.getString("screen_no"));
+			TheaterScreenDAO theaterScreenDAO=new TheaterScreenDAO();
+			theaterScreen=theaterScreenDAO.findById(id);
 			movieintheater.setTheaterscreen(theaterScreen);
 			movieintheater.setAmount(resultSet.getInt("amount"));
 			movietheaterlist.add(movieintheater);

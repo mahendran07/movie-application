@@ -93,5 +93,28 @@ public class TheaterScreenDAO {
 		ConnectionUtil.close(connection, preparedStatement, null);
 		return theaterScreen;
 	}
+	
+	public ArrayList<TheaterScreen> findByIdList(int id) throws SQLException {
+		ArrayList<TheaterScreen> list=new ArrayList<TheaterScreen>();
+		TheaterScreen theaterScreen=null;
+		Connection connection = ConnectionUtil.getConnection();
+		String sql = "SELECT id,theaterid,screen,totalseats FROM theaterscreen where theaterid=?";
+		PreparedStatement preparedStatement = connection.prepareStatement(sql);
+		preparedStatement.setInt(1, id);
+		ResultSet resultset = preparedStatement.executeQuery();
+		if (resultset.next()) {
+			Theater theater=new Theater();
+			TheaterDAO theaterDAO=new TheaterDAO();
+			theaterScreen=new TheaterScreen();
+			theater=theaterDAO.findById(resultset.getInt("theaterid"));
+			theaterScreen.setId(resultset.getInt("id"));
+			theaterScreen.setTheater(theater);
+			theaterScreen.setScreen(resultset.getString("screen"));
+			theaterScreen.setTotalTicket(resultset.getInt("totalseats"));
+			list.add(theaterScreen);
+		}
+		ConnectionUtil.close(connection, preparedStatement, null);
+		return list;
+	}
 
 }

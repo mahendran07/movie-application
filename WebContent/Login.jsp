@@ -106,7 +106,7 @@ h2 {
 				<td> &nbsp; </td>
 				<td> &nbsp; </td> 
 				</tr>
-				<tr>
+				<tr style="color:red;">
 					<td> ${MESSAGE}</td>
 				</tr>
 			</tbody>
