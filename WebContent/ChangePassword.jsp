@@ -31,7 +31,7 @@ form {
 	button[type="submit"] {
   background: #b5cd60;
   border: 0;
-  width: 170px;
+  width: 110px;
   height: 40px;
   border-radius: 3px;
   color: white;
@@ -72,6 +72,15 @@ button[type="submit"]:hover {
 			<td>
 				<form method="post" action="FindbyMovieServlet">
 					<button type="submit">Find By Movie</button>
+				</form>
+			</td>
+			<td>
+				<div class="space">
+				</div>
+			</td>
+			<td>
+				<form method="post" action="BookMovie">
+					<button type="submit">Book Movie</button>
 				</form>
 			</td>
 			<td>

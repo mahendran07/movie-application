@@ -1,22 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+    pageEncoding="ISO-8859-1"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Find By Theater</title>
+<title>Booking Movie</title>
 <style type="text/css">
-body {
-	text-align: center;
-	font-size:20px;
-}
-
-h3
-{
-	text-align:center;
-}
-.space
+	h3
+	{
+		padding-left:100px;
+		color:pink;
+	}
+	a
+	{
+		padding-left:30px;
+	}
+	.space
 	{
 		padding-left:100px;
 	}
@@ -33,8 +33,31 @@ h3
 button[type="submit"]:hover {
   background: #16aa56;
 }
-
 </style>
+<script src="https://code.jquery.com/jquery-1.10.2.js"
+	type="text/javascript"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('#movie').change(function() {
+			$.ajax({
+				url : 'GetUserBookServlet',
+				data : {
+					theater : $('#movie').val()
+				},
+				success : function(responseText) {
+					var value=responseText.trim().split(':');
+					var value1=responseText;
+					for(var item in value)
+						{
+							$('#theater').append("<option value="+value[item]+">"+value[item]);
+							
+						}
+					$('#show').append("<option value="+value[item]+">"+value[item]);
+				}
+			});
+		});
+	});
+</script>
 </head>
 <body bgcolor="grey">
 	<br/>
@@ -79,6 +102,7 @@ button[type="submit"]:hover {
 				<div class="space">
 				</div>
 			</td>
+			
 			<td>
 				<form method="post" action="UserServlet">
 					<button type="submit">Change Password</button>
@@ -100,13 +124,12 @@ button[type="submit"]:hover {
 	<br/>
 	<br/>
 	<br/>
-	<form method="post" action="ChooseMovieServlet">
-		<h3> Choose Movie Name </h3>
+	<form method="post" action="BookMovieServlet">
 		<table align="center">
 			<tr> <td> &nbsp; </td> </tr>
 			<tr>
 				<td>Movie Name</td>
-				<td><select name="moviename">
+				<td><select name="moviename" id="movie">
 						<option value="-1">---Choose---</option>
 						<c:forEach var="moviename" items="${MOVIE}">
 							<option value="${moviename.id}">${moviename.name}</option>
@@ -114,39 +137,36 @@ button[type="submit"]:hover {
 				</select></td>
 			</tr>
 			<tr> <td> &nbsp; </td> </tr>
+			<tr>
+				<td>Theater Name</td>
+				<td><select name="theatername" id="theater">
+						<option value="-1">---Choose---</option>
+				</select></td>
+			</tr>
+			<tr> <td> &nbsp; </td> </tr>
+			<tr>
+				<td>show</td>
+				<td><select name="show" id="show">
+						<option value="-1">---Choose---</option>
+				</select></td>
+			</tr>
+			<tr> <td> &nbsp; </td> </tr>
+			<tr>
+				<td>Date</td>
+				<td><input type="date" name="date"></td>
+			</tr>
+			<tr> <td> &nbsp; </td> </tr><tr>
+				<td>No.of Ticket</td>
+				<td><input type="number" name="noofticket"></td>
+			</tr>
+			<tr> <td> &nbsp; </td> </tr>
 		</table>
 		<br/>
 		<table align="center">
 			<tr>
-				<td> <button type="submit">Choose</button>
+				<td> <button type="submit">Book</button>
 			</tr>
-		</table>
-	
-		<br/>
-		<br/>
-		<br/>
-		<table align="center" border="1" width="750px" height="100px">
-			<tr>
-				<th> Theater Name and Place </th>
-				<th> Show </th>
-				<th> Show Date </th>
-				<th> Screen </th>
-				<th> Total Ticket </th>
-				<th> Amount </th>
-			</tr>
-			<c:forEach var="theater" items="${THEATERLIST}">
-				<tr>
-					<td>${theater.theater.name}-${theater.theater.place}</td>
-					<td>${theater.show}</td>
-					<td>${theater.date}</td>
-					<td>${theater.theaterscreen.screen}</td>
-					<td>${theater.theaterscreen.totalTicket}</td>
-					<td>${theater.amount}</td>
-				</tr>
-			</c:forEach>
 		</table>
 	</form>
-	<br/>
-	<br/>
 </body>
 </html>
