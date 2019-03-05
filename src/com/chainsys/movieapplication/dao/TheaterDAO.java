@@ -88,4 +88,24 @@ public class TheaterDAO {
 		ConnectionUtil.close(connection, preparedStatement, null);
 		return theater;
 	}
+	
+	public ArrayList<Theater> findByIdList(int id) throws SQLException {
+		ArrayList<Theater> list=new ArrayList<Theater>();
+		Theater theater = null;
+		Connection connection = ConnectionUtil.getConnection();
+		String sql = "SELECT id,name,place,ownername FROM theaterdetail where id=?";
+		PreparedStatement preparedStatement = connection.prepareStatement(sql);
+		preparedStatement.setInt(1, id);
+		ResultSet resultset = preparedStatement.executeQuery();
+		if (resultset.next()) {
+			theater = new Theater();
+			theater.setId(resultset.getInt("id"));
+			theater.setName(resultset.getString("name"));
+			theater.setPlace(resultset.getString("place"));
+			theater.setOwnername(resultset.getString("ownername"));
+			list.add(theater);
+		}
+		ConnectionUtil.close(connection, preparedStatement, null);
+		return list;
+	}
 }

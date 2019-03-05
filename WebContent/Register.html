@@ -44,7 +44,7 @@ button[type="submit"]:hover {
 				</tr>
 				<tr align="left">
 					<td>Name </td>
-					<td><input type="text" name="username" required></td>
+					<td><input type="text" name="username" required pattern="[A-za-z]{}" title="Only Type Name"></td>
 				</tr>
 				<tr>
 					<td>&nbsp;</td>
@@ -58,7 +58,7 @@ button[type="submit"]:hover {
 				</tr>
 				<tr align="left">
 					<td>Phone number </td>
-					<td><input type="number" name="phonenumber" pattern="/(7|8|9)\d{9}/" required></td>
+					<td><input type="tel" name="phonenumber" pattern="[6-9]{1}[0-9]{9}" title="only start with 6,7,8,9 with 10 digit" required></td>
 				</tr>
 				<tr>
 					<td>&nbsp;</td>

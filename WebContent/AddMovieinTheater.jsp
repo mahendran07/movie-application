@@ -18,7 +18,7 @@
 					theater : $('#theater').val()
 				},
 				success : function(responseText) {
-					var value=responseText.split(',');
+					var value=responseText.trim().split(',');
 					for(var item in value)
 						{
 							$('#screen').append("<option value="+value[item]+">"+value[item]);

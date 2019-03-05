@@ -7,6 +7,27 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
 <link rel="stylesheet" href="Style.css">
+<script src="https://code.jquery.com/jquery-1.10.2.js"
+	type="text/javascript"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('#theater').change(function() {
+			$.ajax({
+				url : 'GetUserServlet',
+				data : {
+					theater : $('#theater').val()
+				},
+				success : function(responseText) {
+					var value=responseText.trim().split(',');
+					for(var item in value)
+						{
+							$('#screen').append("<option value="+value[item]+">"+value[item]);
+						}
+				}
+			});
+		});
+	});
+</script>
 </head>
 <body bgcolor="#c4dbe7">
 	<nav id="nav">
@@ -118,7 +139,7 @@
 						<table>
 							<tr>
 								<td>Name </td>
-								<td><select name="theatername">
+								<td><select name="theatername" id="theater">
 										<option value="-1">---Choose---</option>
 										<c:forEach var="theatername" items="${THEATER}">
 											<option value="${theatername.id}">${theatername.name}-${theatername.place}</option>
@@ -131,11 +152,8 @@
 							</tr>
 							<tr>
 								<td>Screen </td>
-								<td><select name="screen">
+								<td><select name="screen" id="screen">
 										<option value="-1">---Choose---</option>
-										<c:forEach var="screen" items="${SCREEN}">
-											<option value="${screen.screen}">${screen.screen}</option>
-										</c:forEach>
 								</select></td>
 							</tr>
 							<tr>

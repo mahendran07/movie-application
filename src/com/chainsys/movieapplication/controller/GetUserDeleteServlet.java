@@ -10,23 +10,23 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.jasper.tagplugins.jstl.core.ForEach;
-
+import com.chainsys.movieapplication.dao.MovieTheaterDAO;
 import com.chainsys.movieapplication.dao.TheaterScreenDAO;
+import com.chainsys.movieapplication.model.MovieInTheater;
 import com.chainsys.movieapplication.model.Theater;
 import com.chainsys.movieapplication.model.TheaterScreen;
 
 /**
- * Servlet implementation class GetUserServlet
+ * Servlet implementation class GetUserDeleteServlet
  */
-@WebServlet("/GetUserServlet")
-public class GetUserServlet extends HttpServlet {
+@WebServlet("/GetUserDeleteServlet")
+public class GetUserDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GetUserServlet() {
+    public GetUserDeleteServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -38,18 +38,18 @@ public class GetUserServlet extends HttpServlet {
 		String theaterName = request.getParameter("theater");
 		System.out.println(theaterName);
 		Theater theater=new Theater();
-		TheaterScreen theaterScreen=new TheaterScreen();
-		TheaterScreenDAO theaterScreenDAO=new TheaterScreenDAO();
+		MovieInTheater movieInTheater=new MovieInTheater();
+		MovieTheaterDAO movieTheaterDAO=new MovieTheaterDAO();
 		theater.setId(Integer.parseInt(theaterName));
-		theaterScreen.setTheater(theater);
+		movieInTheater.setTheater(theater);
 		StringBuilder stringBuilder=new StringBuilder();
 		
 		try {
-			ArrayList<TheaterScreen> list=theaterScreenDAO.findByIdList(theaterScreen.getTheater().getId());
+			ArrayList<MovieInTheater> list=movieTheaterDAO.findbyMovie(movieInTheater.getTheater().getId());
 			for(int i=0;i<list.size();i++)
 			{
-				for (TheaterScreen theaterScreen2 : list) {
-					stringBuilder.append(theaterScreen2.getScreen());
+				for (MovieInTheater movieInTheater2 : list) {
+					stringBuilder.append(movieInTheater2.getMovie().getName());
 					if(i>list.size())
 					{
 						stringBuilder.append(',');
