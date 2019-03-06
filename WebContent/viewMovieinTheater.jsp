@@ -6,11 +6,19 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>View Movies in Theater</title>
+<style>
+table#t01 tr:nth-child(even) {
+  background-color: #eee;
+}
+table#t01 tr:nth-child(odd) {
+ background-color: #fff;
+}
+</style>
 </head>
-<body>
+<body bgcolor="#16aa56">
 	<h3> <center> Movies in Theater </center> </h3>
 	<br/>
-	<table align="center" border="1" width="500px" height="200px">
+	<table align="center" width="800px" height="200px" id="t01">
 			<thead>
 				<tr>	
 					<th> Theater Name & Place </th>

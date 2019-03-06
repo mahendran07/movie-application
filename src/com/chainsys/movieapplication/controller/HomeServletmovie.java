@@ -49,7 +49,7 @@ public class HomeServletmovie extends HttpServlet {
 			ArrayList<Movie> movielist = new ArrayList<>();
 			movielist.addAll(movieDAO.findAll());
 			request.setAttribute("MOVIE", movielist);
-			RequestDispatcher req = request.getRequestDispatcher("MovieHome.jsp");
+			RequestDispatcher req = request.getRequestDispatcher("AddMovie.jsp");
 			req.forward(request, response);
 		}
 		catch(Exception e)

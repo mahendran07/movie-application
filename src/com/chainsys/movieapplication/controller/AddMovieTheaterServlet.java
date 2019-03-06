@@ -48,44 +48,73 @@ public class AddMovieTheaterServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+//		MovieInTheater movieintheater=new MovieInTheater();
+//		Theater theater=new Theater();
+//		Movie movie=new Movie();
+//		TheaterScreen theaterScreen=new TheaterScreen();
+//		String theaterid=request.getParameter("theatername");
+//		theater.setId(Integer.parseInt(theaterid));
+//		String movieid=request.getParameter("moviename");
+//		movie.setId(Integer.parseInt(movieid));
+//		movieintheater.setTheater(theater);
+//		movieintheater.setMovie(movie);
+//		movieintheater.setShow(request.getParameter("show"));
+//		LocalDate date=LocalDate.parse(request.getParameter("date"));
+//		movieintheater.setDate(date);
+//		TheaterScreenDAO theaterScreenDAO=new TheaterScreenDAO();
+//		try {
+//			theaterScreen=theaterScreenDAO.findById(Integer.parseInt(theaterid));
+//		} catch (NumberFormatException e1) {
+//			// TODO Auto-generated catch block
+//			e1.printStackTrace();
+//		} catch (SQLException e1) {
+//			// TODO Auto-generated catch block
+//			e1.printStackTrace();
+//		}
+//		theaterScreen.setScreen(request.getParameter("screen"));
+//		System.out.println(request.getParameter("screen"));
+//		movieintheater.setTheaterscreen(theaterScreen);
+//		System.out.println(theaterScreen.getTotalTicket());
+//		movieintheater.setAmount(Integer.parseInt(request.getParameter("amount")));
+//		MovieTheaterDAO movieTheaterDAO=new MovieTheaterDAO();
+//		try
+//		{
+//			movieTheaterDAO.addMovieTheater(movieintheater);
+//			ArrayList<MovieInTheater> movietheaterlist=new ArrayList<MovieInTheater>();
+//			movietheaterlist.addAll(movieTheaterDAO.findAll());
+//			//System.out.println(movietheaterlist.size());
+//			request.setAttribute("MOVIEINTHEATER", movietheaterlist);
+//			RequestDispatcher rd=request.getRequestDispatcher("viewMovieinTheater.jsp");
+//			rd.forward(request, response);
+//		}
+//		catch(Exception e)
+//		{
+//			e.printStackTrace();
+//		}
 		MovieInTheater movieintheater=new MovieInTheater();
 		Theater theater=new Theater();
 		Movie movie=new Movie();
 		TheaterScreen theaterScreen=new TheaterScreen();
-		String theaterid=request.getParameter("theatername");
-		//theater.setId(Integer.parseInt(theaterid));
-		String movieid=request.getParameter("moviename");
-		movie.setId(Integer.parseInt(movieid));
+		int theaterid=Integer.parseInt(request.getParameter("theatername"));
+		theater.setId(theaterid);
+		int movieid=Integer.parseInt(request.getParameter("moviename"));
+		movie.setId(movieid);
 		movieintheater.setTheater(theater);
 		movieintheater.setMovie(movie);
 		movieintheater.setShow(request.getParameter("show"));
 		LocalDate date=LocalDate.parse(request.getParameter("date"));
 		movieintheater.setDate(date);
-		TheaterScreenDAO theaterScreenDAO=new TheaterScreenDAO();
-		try {
-			theaterScreen=theaterScreenDAO.findById(Integer.parseInt(theaterid));
-		} catch (NumberFormatException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		} catch (SQLException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
 		theaterScreen.setScreen(request.getParameter("screen"));
-		System.out.println(request.getParameter("screen"));
 		movieintheater.setTheaterscreen(theaterScreen);
-		System.out.println(theaterScreen.getTotalTicket());
 		movieintheater.setAmount(Integer.parseInt(request.getParameter("amount")));
 		MovieTheaterDAO movieTheaterDAO=new MovieTheaterDAO();
-		try
-		{
-			movieTheaterDAO.addMovieTheater(movieintheater);
-			ArrayList<MovieInTheater> movietheaterlist=new ArrayList<MovieInTheater>();
-			movietheaterlist.addAll(movieTheaterDAO.findAll());
-			//System.out.println(movietheaterlist.size());
-			request.setAttribute("MOVIEINTHEATER", movietheaterlist);
-			RequestDispatcher rd=request.getRequestDispatcher("viewMovieinTheater.jsp");
-			rd.forward(request, response);
+		try {
+				movieTheaterDAO.addMovieTheater(movieintheater);
+				ArrayList<MovieInTheater> viewlist=new ArrayList<MovieInTheater>();
+				viewlist.addAll(movieTheaterDAO.joinviewList());
+				request.setAttribute("MOVIEINTHEATER", viewlist);
+				RequestDispatcher rd=request.getRequestDispatcher("viewMovieinTheater.jsp");
+				rd.forward(request, response);
 		}
 		catch(Exception e)
 		{

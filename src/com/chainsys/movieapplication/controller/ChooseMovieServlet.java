@@ -41,16 +41,14 @@ public class ChooseMovieServlet extends HttpServlet {
 			ArrayList<Movie> movielist = new ArrayList<>();
 			movielist.addAll(movieDAO.findAll());
 			request.setAttribute("MOVIE", movielist);
-//			RequestDispatcher rd = request.getRequestDispatcher("FindbyTheater.jsp");
-//			rd.forward(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		String moviename=request.getParameter("moviename");
+		int movieid=Integer.parseInt(request.getParameter("moviename"));
 		MovieTheaterDAO movieTheaterDAO=new MovieTheaterDAO();
 		ArrayList<MovieInTheater> listtheater=new ArrayList<MovieInTheater>();
 		try {
-			listtheater.addAll(movieTheaterDAO.findbyTheater(Integer.parseInt(moviename)));
+			listtheater.addAll(movieTheaterDAO.findbyTheater(movieid));
 			request.setAttribute("THEATERLIST", listtheater);
 			RequestDispatcher rd=request.getRequestDispatcher("FindbyTheater.jsp");
 			rd.forward(request, response);
