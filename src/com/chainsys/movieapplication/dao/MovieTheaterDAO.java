@@ -24,6 +24,7 @@ public class MovieTheaterDAO {
 			preparedStatement.setInt(2, movieintheater.getMovie().getId());
 			preparedStatement.setString(3, movieintheater.getShow());
 			preparedStatement.setDate(4,Date.valueOf(movieintheater.getDate()));
+			System.out.println(movieintheater.getTheaterscreen().getScreen());
 			preparedStatement.setString(5, movieintheater.getTheaterscreen().getScreen());
 			preparedStatement.setInt(6, movieintheater.getAmount());
 			preparedStatement.executeUpdate();
@@ -45,14 +46,19 @@ public class MovieTheaterDAO {
 			MovieInTheater movieintheater=new MovieInTheater();
 			TheaterDAO theaterDAO=new TheaterDAO();
 			MovieDAO movieDAO=new MovieDAO();
+			TheaterScreenDAO theaterScreenDAO=new TheaterScreenDAO();
 			TheaterScreen theaterScreen=new TheaterScreen();
+			System.out.println(resultSet.getInt("theaterid"));
+			theaterScreen=theaterScreenDAO.findById(resultSet.getInt("theaterid"));
+			System.out.println(resultSet.getInt("theaterid"));
 			Theater theater=theaterDAO.findById(resultSet.getInt("theaterid"));
 			movieintheater.setTheater(theater);
 			Movie movie=movieDAO.findById(resultSet.getInt("movieid"));
 			movieintheater.setMovie(movie);
 			movieintheater.setShow(resultSet.getString("show"));
 			movieintheater.setDate(resultSet.getDate("showdate").toLocalDate());
-			theaterScreen.setScreen(resultSet.getString("screen_no"));
+			System.out.println(resultSet.getInt("theaterid"));
+			theaterScreen=theaterScreenDAO.findById(resultSet.getInt("theaterid"));
 			movieintheater.setTheaterscreen(theaterScreen);
 			movieintheater.setAmount(resultSet.getInt("amount"));
 			movietheaterlist.add(movieintheater);

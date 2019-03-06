@@ -63,7 +63,7 @@ public class GetUserBookServlet extends HttpServlet {
 				}
 				stringBuilder3.append(stringBuilder+":"+stringBuilder2);
 			}
-			//System.out.println(stringBuilder.toString());
+			System.out.println(stringBuilder3.toString());
 			
 		} catch (SQLException e) {
 			e.printStackTrace();

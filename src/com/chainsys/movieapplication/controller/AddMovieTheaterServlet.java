@@ -2,6 +2,7 @@ package com.chainsys.movieapplication.controller;
 
 import java.io.IOException;
 import java.sql.Date;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -15,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.chainsys.movieapplication.dao.MovieDAO;
 import com.chainsys.movieapplication.dao.MovieTheaterDAO;
 import com.chainsys.movieapplication.dao.TheaterDAO;
+import com.chainsys.movieapplication.dao.TheaterScreenDAO;
 import com.chainsys.movieapplication.model.Movie;
 import com.chainsys.movieapplication.model.MovieInTheater;
 import com.chainsys.movieapplication.model.Theater;
@@ -51,7 +53,7 @@ public class AddMovieTheaterServlet extends HttpServlet {
 		Movie movie=new Movie();
 		TheaterScreen theaterScreen=new TheaterScreen();
 		String theaterid=request.getParameter("theatername");
-		theater.setId(Integer.parseInt(theaterid));
+		//theater.setId(Integer.parseInt(theaterid));
 		String movieid=request.getParameter("moviename");
 		movie.setId(Integer.parseInt(movieid));
 		movieintheater.setTheater(theater);
@@ -59,9 +61,20 @@ public class AddMovieTheaterServlet extends HttpServlet {
 		movieintheater.setShow(request.getParameter("show"));
 		LocalDate date=LocalDate.parse(request.getParameter("date"));
 		movieintheater.setDate(date);
-		String screen=request.getParameter("screen");
-		theaterScreen.setScreen(screen);
+		TheaterScreenDAO theaterScreenDAO=new TheaterScreenDAO();
+		try {
+			theaterScreen=theaterScreenDAO.findById(Integer.parseInt(theaterid));
+		} catch (NumberFormatException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		theaterScreen.setScreen(request.getParameter("screen"));
+		System.out.println(request.getParameter("screen"));
 		movieintheater.setTheaterscreen(theaterScreen);
+		System.out.println(theaterScreen.getTotalTicket());
 		movieintheater.setAmount(Integer.parseInt(request.getParameter("amount")));
 		MovieTheaterDAO movieTheaterDAO=new MovieTheaterDAO();
 		try

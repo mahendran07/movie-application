@@ -43,10 +43,12 @@ public class TheaterScreenDAO {
 			theaterscreen.setScreen(resultset.getString("screen"));
 			theaterscreen.setTotalTicket(resultset.getInt("totalseats"));
 			theaterscreenList.add(theaterscreen);
+			
 		}
 		ConnectionUtil.close(connection, preparedStatement, null);
 		return theaterscreenList;
 	}
+	
 
 	public void deleteTheaterScreen(int theaterid,String screen) throws SQLException {
 		Connection connection = ConnectionUtil.getConnection();
@@ -74,7 +76,7 @@ public class TheaterScreenDAO {
 	}
 
 	public TheaterScreen findById(int id) throws SQLException {
-		TheaterScreen theaterScreen=null;
+		TheaterScreen theaterScreen=new TheaterScreen();
 		Connection connection = ConnectionUtil.getConnection();
 		String sql = "SELECT id,theaterid,screen,totalseats FROM theaterscreen where theaterid=?";
 		PreparedStatement preparedStatement = connection.prepareStatement(sql);

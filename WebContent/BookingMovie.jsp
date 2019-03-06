@@ -45,14 +45,16 @@ button[type="submit"]:hover {
 					theater : $('#movie').val()
 				},
 				success : function(responseText) {
-					var value=responseText.trim().split(':');
-					var value1=responseText;
-					for(var item in value)
+					var answer=responseText;
+					var value=answer.trim().split(':');
+					console.log(value);
+					var value1=value.split(',');
+					for(var item in value1)
 						{
-							$('#theater').append("<option value="+value[item]+">"+value[item]);
+							$('#theater').append("<option value="+value1[item]+">"+value1[item]);
 							
 						}
-					$('#show').append("<option value="+value[item]+">"+value[item]);
+					//$('#show').append("<option value="+value[item]+">"+value[item]);
 				}
 			});
 		});

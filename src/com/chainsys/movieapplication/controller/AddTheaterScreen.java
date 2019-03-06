@@ -35,10 +35,10 @@ public class AddTheaterScreen extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Theater theater=new Theater();
-		String theaterid=request.getParameter("theatername");
+		int theaterid=Integer.parseInt(request.getParameter("theatername"));
 		String screen=request.getParameter("screen");
 		int seats=Integer.parseInt(request.getParameter("total"));
-		theater.setId(Integer.parseInt(theaterid));
+		theater.setId(theaterid);
 		TheaterScreen theaterScreen=new TheaterScreen();
 		theaterScreen.setTheater(theater);
 		theaterScreen.setScreen(screen);

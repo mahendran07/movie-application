@@ -21,7 +21,7 @@
 					var value=responseText.trim().split(',');
 					for(var item in value)
 						{
-							$('#screen').append("<option value="+value[item]+">"+value[item]);
+							$('#screens').append("<option value="+value[item]+">"+value[item]);
 						}
 				}
 			});
@@ -229,7 +229,7 @@
 							<tr>
 								<td>Screen</td>
 								<td>
-									<select name="screen" id="screen">
+									<select name="screen" id="screens">
 										<option value="-1">-----Choose-----</option>
 									</select>
 								</td>
