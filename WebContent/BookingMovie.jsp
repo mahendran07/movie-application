@@ -38,23 +38,20 @@ button[type="submit"]:hover {
 	type="text/javascript"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
-		$('#movie').change(function() {
+		$('#theater').change(function() {
+			$('#show').empty();
 			$.ajax({
 				url : 'GetUserBookServlet',
 				data : {
-					theater : $('#movie').val()
+					movie : $('#movie').val(),
+					theater : $('#theater').val()
 				},
 				success : function(responseText) {
-					var answer=responseText;
-					var value=answer.trim().split(':');
-					console.log(value);
-					var value1=value.split(',');
-					for(var item in value1)
+					var answer=responseText.trim().split(',');
+					for(var item in answer)
 						{
-							$('#theater').append("<option value="+value1[item]+">"+value1[item]);
-							
+							$('#show').append("<option value="+answer[item]+">"+answer[item]);
 						}
-					//$('#show').append("<option value="+value[item]+">"+value[item]);
 				}
 			});
 		});
@@ -143,12 +140,15 @@ button[type="submit"]:hover {
 				<td>Theater Name</td>
 				<td><select name="theatername" id="theater">
 						<option value="-1">---Choose---</option>
+						<c:forEach var="theatername" items="${THEATER}">
+							<option value="${theatername.id}">${theatername.name}-${theatername.place}</option>
+						</c:forEach>
 				</select></td>
 			</tr>
 			<tr> <td> &nbsp; </td> </tr>
 			<tr>
 				<td>show</td>
-				<td><select name="show" id="show">
+				<td><select name="shows" id="show">
 						<option value="-1">---Choose---</option>
 				</select></td>
 			</tr>
@@ -159,7 +159,7 @@ button[type="submit"]:hover {
 			</tr>
 			<tr> <td> &nbsp; </td> </tr><tr>
 				<td>No.of Ticket</td>
-				<td><input type="number" name="noofticket"></td>
+				<td><input type="number" name="noofticket" min="1" max="5"></td>
 			</tr>
 			<tr> <td> &nbsp; </td> </tr>
 		</table>

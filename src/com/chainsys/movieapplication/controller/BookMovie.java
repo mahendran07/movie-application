@@ -2,6 +2,7 @@ package com.chainsys.movieapplication.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,8 +11,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import jdk.nashorn.internal.runtime.ListAdapter;
+
 import com.chainsys.movieapplication.dao.MovieDAO;
+import com.chainsys.movieapplication.dao.TheaterDAO;
 import com.chainsys.movieapplication.model.Movie;
+import com.chainsys.movieapplication.model.Theater;
 
 /**
  * Servlet implementation class BookMovie
@@ -33,10 +38,14 @@ public class BookMovie extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		MovieDAO movieDAO = new MovieDAO();
+		TheaterDAO theaterDAO=new TheaterDAO();
 		try {
-			ArrayList<Movie> movielist = new ArrayList<>();
+			List<Movie> movielist = new ArrayList<>();
+			List<Theater> theaterlist=new ArrayList<Theater>();
 			movielist.addAll(movieDAO.findAll());
+			theaterlist.addAll(theaterDAO.findAll());
 			request.setAttribute("MOVIE", movielist);
+			request.setAttribute("THEATER", theaterlist);
 			RequestDispatcher rd = request.getRequestDispatcher("BookingMovie.jsp");
 			rd.forward(request, response);
 		} catch (Exception e) {
