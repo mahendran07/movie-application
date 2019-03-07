@@ -158,6 +158,42 @@ public class MovieTheaterDAO {
 		return movietheaterlist;
 	}
 	
+	public ArrayList<MovieInTheater> findbydate(int theaterid,int movieid,String show) throws SQLException {
+		ArrayList<MovieInTheater> movietheaterlist = new ArrayList<MovieInTheater>();
+		Connection connection = ConnectionUtil.getConnection();
+		String sql = "select td.id as id,td.name as theatername,td.place as theaterplace,md.name as moviename,mt.show as shows,mt.showdate as showdate,mt.screen_no as screen_no,ts.totalseats as seats,mt.amount as amount from movieintheater mt"
+				+" join theaterdetail td on td.id=theaterid"
+				+" join moviedetail md on md.id=movieid"
+				+" join theaterscreen ts on ts.theaterid=mt.THEATERID where theaterid=? and movieid=? and show=?";
+		PreparedStatement preparedStatement = connection.prepareStatement(sql);
+		preparedStatement.setInt(1, theaterid);
+		preparedStatement.setInt(2, movieid);
+		preparedStatement.setString(3, show);
+		ResultSet resultSet = preparedStatement.executeQuery();
+		while (resultSet.next()) {
+			Theater theater = new Theater();
+			Movie movie = new Movie();
+			MovieInTheater movieInTheater = new MovieInTheater();
+			theater.setName(resultSet.getString("theatername"));
+			theater.setPlace(resultSet.getString("theaterplace"));
+			movie.setName(resultSet.getString("moviename"));
+			movieInTheater.setTheater(theater);
+			movieInTheater.setMovie(movie);
+			movieInTheater.setShow(resultSet.getString("shows"));
+			movieInTheater.setDate(resultSet.getDate("showdate").toLocalDate());
+			TheaterScreen theaterScreen=new TheaterScreen();
+			theaterScreen.setScreen(resultSet.getString("screen_no"));
+			theaterScreen.setTotalTicket(resultSet.getInt("seats"));
+			movieInTheater.setTheaterscreen(theaterScreen);
+			movieInTheater.setAmount(resultSet.getInt("amount"));
+			movietheaterlist.add(movieInTheater);
+		}
+		return movietheaterlist;
+	}
+	
+	
+	
+	
 	public ArrayList<MovieInTheater> joinviewList() throws SQLException {
 		ArrayList<MovieInTheater> listview = new ArrayList<MovieInTheater>();
 		Connection connection = ConnectionUtil.getConnection();

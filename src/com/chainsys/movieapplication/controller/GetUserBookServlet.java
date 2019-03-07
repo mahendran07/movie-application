@@ -23,14 +23,6 @@ import com.chainsys.movieapplication.model.Theater;
 public class GetUserBookServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public GetUserBookServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
-
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -48,29 +40,20 @@ public class GetUserBookServlet extends HttpServlet {
 		movieInTheater.setTheater(theater);
 		ArrayList<MovieInTheater> list=new ArrayList<MovieInTheater>();
 		StringBuilder stringBuilder=new StringBuilder();
-		StringBuilder stringBuilder2=new StringBuilder();
-		StringBuilder stringBuilder3=new StringBuilder();
 		try {
-			System.out.println(Integer.parseInt(theaterid));
-			System.out.println(Integer.parseInt(movieid));
 			list.addAll(movieTheaterDAO.findbyshow(Integer.parseInt(theaterid),Integer.parseInt(movieid)));
-			System.out.println(list);
 			for (MovieInTheater movieInTheater2 : list) {
 				System.out.println(stringBuilder.append(movieInTheater2.getShow()));
-				System.out.println(stringBuilder2.append(movieInTheater2.getDate()));
 				if(list.size()>1) {
 					stringBuilder.append(',');
-					stringBuilder2.append(',');
 				}
 			}
-			stringBuilder3.append(stringBuilder+":"+stringBuilder2);
-			System.out.println(stringBuilder3.toString());
 		} catch (SQLException e) {
 			//e.printStackTrace();
 			throw new RuntimeException("Unable to choose Movie");
 		}
 		response.setContentType("text/plain");
-		response.getWriter().write(stringBuilder3.toString());
+		response.getWriter().write(stringBuilder.toString());
 	}
 
 }

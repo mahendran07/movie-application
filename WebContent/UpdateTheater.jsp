@@ -12,6 +12,7 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 		$('#theater').change(function() {
+			$('#oldownername').empty();
 			$.ajax({
 				url : 'GetUserTheaterServlet',
 				data : {
@@ -41,13 +42,13 @@
 					</form>
 				</li>
 				<li>
-					<form method="post" action="UpdateMovie">
-						<button type="submit"><a>Update</a></button>
+					<form method="post" action="MovieApplicationServlet">
+						<button type="submit" name="updatemovie" value="updatemovie"><a>Update</a></button>
 					</form>
 				</li>
 				<li>
-					<form method="post" action="DeleteMovie">
-						<button type="submit"><a>Delete</a></button>
+					<form method="post" action="MovieApplicationServlet">
+						<button type="submit" name="deletemovie" value="deletemovie"><a>Delete</a></button>
 					</form>
 				</li>
 			</ul></li>
@@ -64,8 +65,8 @@
 							</form>
 						</li>
 						<li>
-							<form method="post" action="UpdateTheater">
-								<button type="submit"><a>Update</a></button>
+							<form method="post" action="MovieApplicationServlet">
+								<button type="submit" name="updatetheater" value="updatetheater"><a>Update</a></button>
 							</form>
 						</li>
 						<li>
