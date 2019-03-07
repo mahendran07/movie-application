@@ -47,11 +47,19 @@ button[type="submit"]:hover {
 					theater : $('#theater').val()
 				},
 				success : function(responseText) {
-					var answer=responseText.trim().split(',');
-					for(var item in answer)
+					var answer=responseText.length();
+					var answer1=responseText.indexOf(':');
+					var show=substr(0,answer1.split(','));
+					var date=substr(answer1.split(','),answer);
+					for(var item in show)
 						{
-							$('#show').append("<option value="+answer[item]+">"+answer[item]);
+							$('#show').append("<option value="+show[item]+">"+show[item]);
 						}
+					for(var item1 in date)
+						{
+							$('#date').append("<input type="date" name="date">");
+						}
+					
 				}
 			});
 		});
@@ -155,7 +163,9 @@ button[type="submit"]:hover {
 			<tr> <td> &nbsp; </td> </tr>
 			<tr>
 				<td>Date</td>
-				<td><input type="date" name="date"></td>
+				<td><div id="date">
+						
+					</div></td>
 			</tr>
 			<tr> <td> &nbsp; </td> </tr><tr>
 				<td>No.of Ticket</td>

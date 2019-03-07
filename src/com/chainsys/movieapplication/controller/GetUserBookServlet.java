@@ -3,7 +3,6 @@ package com.chainsys.movieapplication.controller;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashSet;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -49,24 +48,29 @@ public class GetUserBookServlet extends HttpServlet {
 		movieInTheater.setTheater(theater);
 		ArrayList<MovieInTheater> list=new ArrayList<MovieInTheater>();
 		StringBuilder stringBuilder=new StringBuilder();
+		StringBuilder stringBuilder2=new StringBuilder();
+		StringBuilder stringBuilder3=new StringBuilder();
 		try {
 			System.out.println(Integer.parseInt(theaterid));
 			System.out.println(Integer.parseInt(movieid));
 			list.addAll(movieTheaterDAO.findbyshow(Integer.parseInt(theaterid),Integer.parseInt(movieid)));
-				for (MovieInTheater movieInTheater2 : list) {
-					stringBuilder.append(movieInTheater2.getShow());
-					if(list.size()>1)
-					{
-							stringBuilder.append(',');
-					}
+			System.out.println(list);
+			for (MovieInTheater movieInTheater2 : list) {
+				System.out.println(stringBuilder.append(movieInTheater2.getShow()));
+				System.out.println(stringBuilder2.append(movieInTheater2.getDate()));
+				if(list.size()>1) {
+					stringBuilder.append(',');
+					stringBuilder2.append(',');
 				}
-				System.out.println(stringBuilder.toString());
+			}
+			stringBuilder3.append(stringBuilder+":"+stringBuilder2);
+			System.out.println(stringBuilder3.toString());
 		} catch (SQLException e) {
 			//e.printStackTrace();
 			throw new RuntimeException("Unable to choose Movie");
 		}
 		response.setContentType("text/plain");
-		response.getWriter().write(stringBuilder.toString());
+		response.getWriter().write(stringBuilder3.toString());
 	}
 
 }
