@@ -70,8 +70,8 @@
 							</form>
 						</li>
 						<li>
-							<form method="post" action="DeleteTheater">
-								<button type="submit"><a>Delete</a></button>
+							<form method="post" action="MovieApplicationServlet">
+								<button type="submit" name="deletetheater" value="deletetheater"><a>Delete</a></button>
 							</form>
 						</li>
 					</ul></li>
@@ -81,18 +81,18 @@
 						</form>
 						<ul>
 						 <li>
-							<form method="post" action="ScreenServlet">
-								<button type="submit"><a>Add</a></button>
+							<form method="post" action="MovieApplicationServlet">
+								<button type="submit" name="addscreen" value="addscreen"><a>Add</a></button>
 							</form>
 						</li>
 						<li>
-							<form method="post" action="UpdateScreen">
-								<button type="submit"><a>Update</a></button>
+							<form method="post" action="MovieApplicationServlet">
+								<button type="submit" name="updatescreen" value="updatescreen"><a>Update</a></button>
 							</form>
 						</li>
 						<li>
-							<form method="post" action="DeleteScreen">
-								<button type="submit"><a>Delete</a></button>
+							<form method="post" action="MovieApplicationServlet">
+								<button type="submit" name="deletescreen" value="deletescreen"><a>Delete</a></button>
 							</form>
 						</li>
 						</ul>
@@ -103,18 +103,18 @@
 						</form>
 						<ul>
 						 <li>
-							<form method="post" action="AddMovieinTheater">
-								<button type="submit"><a>Add</a></button>
+							<form method="post" action="MovieApplicationServlet">
+								<button type="submit" name="addmovieintheater" value="addmovieintheater"><a>Add</a></button>
 							</form>
 						</li>
 						<li>
-							<form method="post" action="UpdateMovieinTheater">
-								<button type="submit"><a>Update</a></button>
+							<form method="post" action="MovieApplicationServlet">
+								<button type="submit" name="updatemovieintheater" value="updatemovieintheater"><a>Update</a></button>
 							</form>
 						</li>
 						<li>
-							<form method="post" action="DeleteMovieinTheater">
-								<button type="submit"><a>Delete</a></button>
+							<form method="post" action="MovieApplicationServlet">
+								<button type="submit" name="deletemovieintheater" value="deletemovieintheater"><a>Delete</a></button>
 							</form>
 						</li>
 						</ul>
