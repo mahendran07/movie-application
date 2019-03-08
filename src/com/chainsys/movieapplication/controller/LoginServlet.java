@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import com.chainsys.movieapplication.dao.RegisterDAO;
 import com.chainsys.movieapplication.model.Register;
+import com.chainsys.movieapplication.validation.LoginValidation;
 
 /**
  * Servlet implementation class LoginServlet
@@ -50,9 +51,9 @@ public class LoginServlet extends HttpServlet {
 		register.setPassword(password);
 		RegisterDAO registerDAO = new RegisterDAO();
 		try {
-			// LoginValidation validator = new LoginValidation();
-			// validator.loginValidator(register);
 			Register register2 = new Register();
+			LoginValidation validator = new LoginValidation();
+			validator.loginValidator(register);
 			Boolean isActive = registerDAO.checkByEmailPassword(
 					register.getEmail(), register.getPassword());
 			Boolean isActiveEmailPassword = registerDAO.checkByEmailorPassword(
@@ -89,8 +90,8 @@ public class LoginServlet extends HttpServlet {
 						.getRequestDispatcher("Login.jsp");
 				req.forward(request, response);
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
+		} catch (Exception ex) {
+			ex.getMessage();
 			RequestDispatcher req = request.getRequestDispatcher("Login.jsp");
 			req.forward(request, response);
 
