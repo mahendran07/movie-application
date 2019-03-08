@@ -3,6 +3,7 @@ package com.chainsys.movieapplication.controller;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.chainsys.movieapplication.dao.MovieDAO;
 import com.chainsys.movieapplication.dao.MovieTheaterDAO;
@@ -62,6 +64,18 @@ public class MovieApplicationServlet extends HttpServlet {
 		}
 		else if(request.getParameter("deletemovieintheater")!=null) {
 			name=request.getParameter("deletemovieintheater");
+		}
+		else if(request.getParameter("findbytheater")!=null) {
+			name=request.getParameter("findbytheater");
+		}
+		else if(request.getParameter("findbymovie")!=null) {
+			name=request.getParameter("findbymovie");
+		}
+		else if(request.getParameter("bookmovie")!=null) {
+			name=request.getParameter("bookmovie");
+		}
+		else if(request.getParameter("changepassword")!=null) {
+			name=request.getParameter("changepassword");
 		}
 		if (name.equals("updatemovie")) {
 			MovieDAO movieDAO = new MovieDAO();
@@ -236,6 +250,53 @@ public class MovieApplicationServlet extends HttpServlet {
 			{
 				e.printStackTrace();
 			}
+		}
+		else if(name.equals("findbytheater"))
+		{
+			MovieDAO movieDAO = new MovieDAO();
+			try {
+				ArrayList<Movie> movielist = new ArrayList<>();
+				movielist.addAll(movieDAO.findAll());
+				request.setAttribute("MOVIE", movielist);
+				RequestDispatcher rd = request.getRequestDispatcher("FindbyTheater.jsp");
+				rd.forward(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		else if(name.equals("findbymovie")) {
+			TheaterDAO theaterDAO = new TheaterDAO();
+			try {
+				ArrayList<Theater> theaterlist = new ArrayList<>();
+				theaterlist.addAll(theaterDAO.findAll());
+				request.setAttribute("THEATER", theaterlist);
+				RequestDispatcher rd = request.getRequestDispatcher("FindbyMovie.jsp");
+				rd.forward(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		else if(name.equals("bookmovie")) {
+			MovieDAO movieDAO = new MovieDAO();
+			TheaterDAO theaterDAO=new TheaterDAO();
+			try {
+				List<Movie> movielist = new ArrayList<>();
+				List<Theater> theaterlist=new ArrayList<Theater>();
+				movielist.addAll(movieDAO.findAll());
+				theaterlist.addAll(theaterDAO.findAll());
+				request.setAttribute("MOVIE", movielist);
+				request.setAttribute("THEATER", theaterlist);
+				RequestDispatcher rd = request.getRequestDispatcher("BookingMovie.jsp");
+				rd.forward(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		else if(name.equals("changepassword")) {
+			HttpSession session=request.getSession(false);
+			session.getAttribute("NAME");
+			RequestDispatcher rd=request.getRequestDispatcher("ChangePassword.jsp");
+			rd.forward(request, response);
 		}
 	}
 }

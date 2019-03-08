@@ -61,8 +61,8 @@ button[type="submit"]:hover {
 				</div>
 			</td>
 			<td>
-				<form method="post" action="FindbyTheaterServlet">
-					<button type="submit">Find By Theater</button>
+				<form method="post" action="MovieApplicationServlet">
+					<button type="submit" name="findbytheater" value="findbytheater">Find By Theater</button>
 				</form>
 			</td>
 			<td>
@@ -70,8 +70,8 @@ button[type="submit"]:hover {
 				</div>
 			</td>
 			<td>
-				<form method="post" action="FindbyMovieServlet">
-					<button type="submit">Find By Movie</button>
+				<form method="post" action="MovieApplicationServlet">
+					<button type="submit" name="findbymovie" value="findbymovie">Find By Movie</button>
 				</form>
 			</td>
 			<td>
@@ -79,8 +79,8 @@ button[type="submit"]:hover {
 				</div>
 			</td>
 			<td>
-				<form method="post" action="BookMovie">
-					<button type="submit">Book Movie</button>
+				<form method="post" action="MovieApplicationServlet">
+					<button type="submit" name="bookmovie" value="bookmovie">Book Movie</button>
 				</form>
 			</td>
 			<td>
@@ -88,10 +88,10 @@ button[type="submit"]:hover {
 				</div>
 			</td>
 			<td>
-				<form method="post" action="UserServlet">
-					<button type="submit">Change Password</button>
+				<form method="post" action="MovieApplicationServlet">
+					<button type="submit" name="changepassword" value="changepassword">Change Password</button>
 				</form>
-			</td>
+			</td>			
 			<td>
 				<div class="space">
 				</div>
