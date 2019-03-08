@@ -126,6 +126,13 @@
 									<button style="width: 100px;" type="submit">Add</button>
 								</td>
 							</tr>
+							<tr>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td> ${MESSAGE} </td>
+							</tr>
 						</table>
 					</form>
 				</div>

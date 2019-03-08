@@ -29,7 +29,7 @@ a
   box-shadow: 0px 1px 0px rgba(0,0,0,0.3),inset 0px 1px 0px rgba(255,255,255,0.07)
 }
 
-input[type="text"], input[type="password"] {
+input[type="email"], input[type="password"] {
   width: 250px;
   padding: 25px 0px;
   background: transparent;
@@ -70,7 +70,7 @@ h2 {
 			<tbody>
 				<tr> <td> &nbsp; </td> </tr>
 				<tr>
-					<td><input type="text" name="email" placeholder="Email" required autocomplete="off"></td>
+					<td><input type="email" name="email" placeholder="Email" required autocomplete="off"></td>
 
 				</tr>
 				<tr>

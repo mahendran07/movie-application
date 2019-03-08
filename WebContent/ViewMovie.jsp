@@ -29,7 +29,7 @@
 	<br/>
 	<br/>
 	<br/>
-	<form method="post" action="HomeServletmovie">
+	<form method="post" action="Home.jsp">
 		<button type="submit" name="back">Back</button>
 	</form>
 </body>

@@ -117,7 +117,7 @@
 							<tr>
 								<td>Name</td>
 								<td><select name="deletename">
-										<option value="-1">---Choose---</option>
+										<option value="Invalid">---Choose---</option>
 										<c:forEach var="deletename" items="${MOVIE}">
 											<option value="${deletename.name}">${deletename.name}</option>
 										</c:forEach>
@@ -135,7 +135,11 @@
 								</td>
 							</tr>
 						</table>
-
+						<table align="center">
+							<tr>
+								<td> ${MESSAGE} </td>
+							</tr>
+						</table>
 					</form>
 
 				</div>

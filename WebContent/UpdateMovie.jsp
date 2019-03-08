@@ -116,7 +116,7 @@
 							<tr>
 								<td>Name</td>
 								<td><select name="moviename">
-										<option value="-1">---Choose---</option>
+										<option value="Invalid">---Choose---</option>
 										<c:forEach var="moviename" items="${MOVIE}">
 											<option value="${moviename.name}">${moviename.name}</option>
 										</c:forEach>
@@ -133,6 +133,12 @@
 								<td>
 									<button style="width: 100px;" type="submit">Update</button>
 								</td>
+							</tr>
+							<tr> <td> &nbsp; </td> </tr>
+						</table>
+						<table align="center">
+							<tr>
+								<td> ${MESSAGE} </td>
 							</tr>
 						</table>
 					</form>

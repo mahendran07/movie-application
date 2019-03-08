@@ -28,7 +28,7 @@ public class MovieDAO {
 		ArrayList<Movie> movieList = new ArrayList<>();
 
 		Connection connection = ConnectionUtil.getConnection();
-		String sql = "SELECT id,name FROM moviedetail";
+		String sql = "SELECT id,name FROM moviedetail order by id";
 		PreparedStatement preparedStatement = connection.prepareStatement(sql);
 		ResultSet resultset = preparedStatement.executeQuery();
 		movieList = new ArrayList<>();
@@ -79,6 +79,20 @@ public class MovieDAO {
 		}
 		ConnectionUtil.close(connection, preparedStatement, null);
 		return movie;
+	}
+	
+	public Boolean findByName(String name) throws SQLException {
+		Boolean isBoolean=false;
+		Connection connection = ConnectionUtil.getConnection();
+		String sql = "SELECT name FROM moviedetail where name=?";
+		PreparedStatement preparedStatement = connection.prepareStatement(sql);
+		preparedStatement.setString(1, name);
+		ResultSet resultset = preparedStatement.executeQuery();
+		if (resultset.next()) {
+			isBoolean=true;
+		}
+		ConnectionUtil.close(connection, preparedStatement, null);
+		return isBoolean;
 	}
 
 }

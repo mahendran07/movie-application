@@ -37,12 +37,22 @@ public class AddMovieServlet extends HttpServlet {
 		movie.setName(moviename);
 		MovieDAO movieDAO = new MovieDAO();
 		try {
-			movieDAO.addMovie(movie);
-			ArrayList<Movie> movielist = new ArrayList<>();
-			movielist.addAll(movieDAO.findAll());
-			request.setAttribute("MOVIE", movielist);
-			RequestDispatcher rd = request.getRequestDispatcher("ViewMovie.jsp");
-			rd.forward(request, response);
+			Boolean isActive=movieDAO.findByName(moviename);
+			if(isActive)
+			{
+					request.setAttribute("MESSAGE", "Already Added this Movie");
+					RequestDispatcher rd = request.getRequestDispatcher("AddMovie.jsp");
+					rd.forward(request, response);
+			}
+			else
+			{
+					movieDAO.addMovie(movie);
+					ArrayList<Movie> movielist = new ArrayList<>();
+					movielist.addAll(movieDAO.findAll());
+					request.setAttribute("MOVIE", movielist);
+					RequestDispatcher rd = request.getRequestDispatcher("ViewMovie.jsp");
+					rd.forward(request, response);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

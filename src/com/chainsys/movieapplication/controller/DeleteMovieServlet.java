@@ -19,35 +19,50 @@ import com.chainsys.movieapplication.model.Movie;
 @WebServlet("/DeleteMovieServlet")
 public class DeleteMovieServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public DeleteMovieServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public DeleteMovieServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
 		String moviename = request.getParameter("deletename");
 		MovieDAO movieDAO = new MovieDAO();
 		try {
-			movieDAO.deleteMovie(moviename);
-			ArrayList<Movie> movielist = new ArrayList<>();
-			movielist.addAll(movieDAO.findAll());
-			request.setAttribute("MOVIE", movielist);
-			RequestDispatcher rd = request.getRequestDispatcher("ViewMovie.jsp");
-			rd.forward(request, response);
+			if (moviename.equals("Invalid")) {
+				ArrayList<Movie> movielist = new ArrayList<>();
+				movielist.addAll(movieDAO.findAll());
+				request.setAttribute("MOVIE", movielist);
+				request.setAttribute("MESSAGE", "Did not choose Movie name");
+				RequestDispatcher rd = request
+						.getRequestDispatcher("DeleteMovie.jsp");
+				rd.forward(request, response);
+			} else {
+				movieDAO.deleteMovie(moviename);
+				ArrayList<Movie> movielist = new ArrayList<>();
+				movielist.addAll(movieDAO.findAll());
+				request.setAttribute("MOVIE", movielist);
+				RequestDispatcher rd = request
+						.getRequestDispatcher("ViewMovie.jsp");
+				rd.forward(request, response);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
