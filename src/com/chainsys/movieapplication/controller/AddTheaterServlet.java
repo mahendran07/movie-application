@@ -48,12 +48,29 @@ public class AddTheaterServlet extends HttpServlet {
 		theater.setOwnername(ownername);
 		TheaterDAO theaterDAO = new TheaterDAO();
 		try {
-			theaterDAO.addTheater(theater);
-			ArrayList<Theater> theaterList = new ArrayList<>();
-			theaterList.addAll(theaterDAO.findAll());
-			request.setAttribute("THEATER", theaterList);
-			RequestDispatcher rd = request.getRequestDispatcher("viewTheater.jsp");
-			rd.forward(request, response);
+			if(theatername.isEmpty()) {
+				request.setAttribute("MESSAGE", "Type Theater name");
+				RequestDispatcher rd = request.getRequestDispatcher("AddTheater.jsp");
+				rd.forward(request, response);
+			}
+			else if(place.isEmpty()) {
+				request.setAttribute("MESSAGE", "Type Place name");
+				RequestDispatcher rd = request.getRequestDispatcher("AddTheater.jsp");
+				rd.forward(request, response);
+			}
+			else if(ownername.isEmpty()) {
+				request.setAttribute("MESSAGE", "Type Owner name");
+				RequestDispatcher rd = request.getRequestDispatcher("AddTheater.jsp");
+				rd.forward(request, response);
+			}
+			else {
+				theaterDAO.addTheater(theater);
+				ArrayList<Theater> theaterList = new ArrayList<>();
+				theaterList.addAll(theaterDAO.findAll());
+				request.setAttribute("THEATER", theaterList);
+				RequestDispatcher rd = request.getRequestDispatcher("viewTheater.jsp");
+				rd.forward(request, response);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

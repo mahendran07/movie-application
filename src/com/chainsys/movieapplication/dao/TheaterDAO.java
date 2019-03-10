@@ -68,7 +68,6 @@ public class TheaterDAO {
 		int row = preparedstatement.executeUpdate();
 		System.out.println("Update :" + row);
 		ConnectionUtil.close(connection, preparedstatement, null);
-
 	}
 
 	public Theater findById(int id) throws SQLException {

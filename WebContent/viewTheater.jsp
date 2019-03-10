@@ -10,7 +10,7 @@
 <body>
 	<h3> <center> List of Theaters </center> </h3>
 	<br/>
-	<table align="center" border="1" width="300px" height="100px">
+	<table align="center" border="1" width="500px" height="100px">
 		<tbody>
 			<thead>
 				<tr>	

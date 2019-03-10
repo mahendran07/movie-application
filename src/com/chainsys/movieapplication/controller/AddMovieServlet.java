@@ -19,39 +19,47 @@ import com.chainsys.movieapplication.model.Movie;
 @WebServlet("/AddMovieServlet")
 public class AddMovieServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public AddMovieServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public AddMovieServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doPost(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
 		String moviename = request.getParameter("moviename");
 		Movie movie = new Movie();
 		movie.setName(moviename);
 		MovieDAO movieDAO = new MovieDAO();
 		try {
-			Boolean isActive=movieDAO.findByName(moviename);
-			if(isActive)
-			{
+			if (moviename.isEmpty()) {
+				request.setAttribute("MESSAGE", "Type Movie Name");
+				RequestDispatcher rd = request
+						.getRequestDispatcher("AddMovie.jsp");
+				rd.forward(request, response);
+			} else {
+				Boolean isActive = movieDAO.findByName(moviename);
+				if (isActive) {
 					request.setAttribute("MESSAGE", "Already Added this Movie");
-					RequestDispatcher rd = request.getRequestDispatcher("AddMovie.jsp");
+					RequestDispatcher rd = request
+							.getRequestDispatcher("AddMovie.jsp");
 					rd.forward(request, response);
-			}
-			else
-			{
+				} else {
 					movieDAO.addMovie(movie);
 					ArrayList<Movie> movielist = new ArrayList<>();
 					movielist.addAll(movieDAO.findAll());
 					request.setAttribute("MOVIE", movielist);
-					RequestDispatcher rd = request.getRequestDispatcher("ViewMovie.jsp");
+					RequestDispatcher rd = request
+							.getRequestDispatcher("ViewMovie.jsp");
 					rd.forward(request, response);
+				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

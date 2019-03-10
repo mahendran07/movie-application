@@ -134,6 +134,9 @@
 									<button style="width: 100px;" type="submit">Delete</button>
 								</td>
 							</tr>
+							<tr>
+								<td> &nbsp; </td>
+							</tr>
 						</table>
 						<table align="center">
 							<tr>

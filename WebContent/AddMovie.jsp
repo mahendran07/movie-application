@@ -129,7 +129,10 @@
 							<tr>
 								<td></td>
 								<td></td>
-							</tr>
+							</tr>				
+						</table>
+						<table>
+							<tr> <td> &nbsp; </td></tr>
 							<tr>
 								<td> ${MESSAGE} </td>
 							</tr>

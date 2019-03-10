@@ -114,7 +114,7 @@
 						<table>
 							<tr>
 								<td>Name </td>
-								<td><input type="text" name="theatername" required autocomplete="off"></td>
+								<td><input type="text" name="theatername" autocomplete="off"></td>
 							</tr>
 							<tr>
 								<td></td>
@@ -122,7 +122,7 @@
 							</tr>
 							<tr>
 								<td>Place </td>
-								<td><input type="text" name="place" required autocomplete="off"></td>
+								<td><input type="text" name="place" autocomplete="off"></td>
 							</tr>
 							<tr>
 								<td></td>
@@ -130,7 +130,7 @@
 							</tr>
 							<tr>
 								<td>Owner name </td>
-								<td><input type="text" name="ownername" required autocomplete="off"></td>
+								<td><input type="text" name="ownername" autocomplete="off"></td>
 							</tr>
 							<tr>
 								<td></td>
@@ -141,6 +141,12 @@
 								<td>
 									<button style="width: 100px;" type="submit">Add</button>
 								</td>
+							</tr>
+						</table>
+						<table>
+							<tr> <td> &nbsp; </td> </tr>
+							<tr>
+								<td> ${MESSAGE} </td>
 							</tr>
 						</table>
 					</form>

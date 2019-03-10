@@ -22,7 +22,7 @@
 					var value=responseText.trim().split(',');
 					for(var item in value)
 						{
-							$('#oldownername').append("<option value="+value[item]+">"+value[item]);
+							$('#oldownername').append("<option value="+value[item]+">"+value[item]+"</option>");
 						}
 				}
 			});
@@ -138,7 +138,7 @@
 							<tr>
 								<td>Name</td>
 								<td><select name="theatername" id="theater">
-										<option value="-1">---Choose---</option>
+										<option value="Invalid">---Choose---</option>
 										<c:forEach var="theatername" items="${THEATER}">
 											<option value="${theatername.id}-${theatername.name}">${theatername.name}-${theatername.place}</option>
 										</c:forEach>
@@ -150,7 +150,7 @@
 							</tr>
 							<tr>
 								<td>Old Owner Name</td>
-								<td><select name="oldownerrname" id="oldownername">
+								<td><select name="oldowner" id="oldownername">
 										<option value="-1">---Choose---</option>
 								</select></td>
 							</tr>
@@ -171,6 +171,12 @@
 								<td>
 									<button style="width: 100px;" type="submit">Update</button>
 								</td>
+							</tr>
+						</table>
+						<table>
+							<tr> <td> &nbsp; </td> </tr>
+							<tr>
+								<td> ${MESSAGE} </td>
 							</tr>
 						</table>
 					</form>
