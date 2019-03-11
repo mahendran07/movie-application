@@ -52,11 +52,21 @@ create sequence seq_register_id
 start with 1
 increment by 1;
 
+drop sequence seq_register_id;
 ALTER TABLE movieintheater ADD total_ticket NUMBER(10);
+
+select * from moviedetail;
+
+commit;
+
+select * from theaterdetail;
+
+delete from theaterdetail;
 
 ALTER TABLE register ADD status int DEFAULT 0;
 
-insert into register(id,name,email,phonenumber,password,status)VALUES(seq_register_id.NEXTVAL,'Mahendran','mahesh22696@gmail.com',8098355378,'Mahe$22',1);
+ALTER TABLE movieintheater MODIFY amount float;
+commit;
 
 ALTER TABLE theaterdetail ADD screen int; 
 
@@ -78,26 +88,12 @@ ALTER TABLE theaterscreen MODIFY screen NUMBER(10);
 
 ALTER TABLE theaterscreen MODIFY totalseats NUMBER(10);
 
-
-desc theaterscreen;
-
-desc register;
-
-desc moviedetail;
-
-desc theaterdetail;
-
-desc movieintheater;
-
-desc theaterscreen;
-
-select * from theaterdetail;
-
 commit;
 
 ALTER TABLE theaterdetail DROP COLUMN amount;
 
 ALTER TABLE theaterdetail ADD ownername VARCHAR2(40) NOT NULL;
+
 
 ALTER TABLE movieintheater DROP COLUMN total_ticket;
 
@@ -117,7 +113,8 @@ create sequence seq_theaterscreen_id
 start with 1
 increment by 1;
 
-ALTER TABLE theaterscreen MODIFY screen VARCHAR2(20) UNIQUE;
+commit;
+
 
 ALTER TABLE movieintheater ADD FOREIGN KEY(screen_no) REFERENCES theaterscreen(screen);
 
@@ -126,6 +123,26 @@ ALTER TABLE register MODIFY password VARCHAR2(30) NOT NULL;
 ALTER TABLE register MODIFY phonenumber NUMBER(10) NOT NULL;
 
 ALTER TABLE register MODIFY status NUMBER(1) DEFAULT 0;
+
+
+insert into register(id,name,email,phonenumber,password,status)VALUES(seq_register_id.NEXTVAL,'Mahendran','mahesh22696@gmail.com',8098355378,'Mahe$22',1);
+
+commit;
+
+create table booking
+(id NUMBER(10),
+register_id NUMBER(10),
+movieintheater_id NUMBER(10),
+seats NUMBER(5) NOT NULL,
+amount float NOT NULL, constraint pk_booking_id PRIMARY KEY(id),
+constraint fk_register_id FOREIGN KEY (register_id) REFERENCES register(id),
+constraint fk_movieintheater_id FOREIGN KEY (movieintheater_id) REFERENCES movieintheater(id),
+CONSTRAINT check_seats_no CHECK (seats BETWEEN 1 and 5));
+
+CREATE SEQUENCE seq_booking_id
+start with 1
+increment by 1;
+
 
 
 
