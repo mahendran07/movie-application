@@ -42,14 +42,15 @@ public class GetUserBookServlet extends HttpServlet {
 		StringBuilder stringBuilder=new StringBuilder();
 		try {
 			list.addAll(movieTheaterDAO.findbyshow(Integer.parseInt(theaterid),Integer.parseInt(movieid)));
-			for (MovieInTheater movieInTheater2 : list) {
-				System.out.println(stringBuilder.append(movieInTheater2.getShow()));
-				if(list.size()>1) {
+			System.out.println(list.size());
+			for(int i=0;i<list.size();i++) {
+				for (MovieInTheater movieInTheater2 : list) {
+					stringBuilder.append(movieInTheater2.getShow());
 					stringBuilder.append(',');
 				}
 			}
+			System.out.println(stringBuilder.toString());
 		} catch (SQLException e) {
-			//e.printStackTrace();
 			throw new RuntimeException("Unable to choose Movie");
 		}
 		response.setContentType("text/plain");

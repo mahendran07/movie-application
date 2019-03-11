@@ -48,11 +48,8 @@ public class GetUserServlet extends HttpServlet {
 			for(int i=1;i<list.size();i++)
 			{
 				for (TheaterScreen theaterScreen2 : list) {
-					stringBuilder.append(theaterScreen2.getScreen());
-					if(i>list.size())
-					{
+						stringBuilder.append(theaterScreen2.getScreen());
 						stringBuilder.append(',');
-					}
 				}
 			}
 			System.out.println(stringBuilder.toString());

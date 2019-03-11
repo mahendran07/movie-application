@@ -40,13 +40,10 @@ public class ChooseTheaterServlet extends HttpServlet {
 			ArrayList<Theater> theaterlist = new ArrayList<>();
 			theaterlist.addAll(theaterDAO.findAll());
 			request.setAttribute("THEATER", theaterlist);
-			//RequestDispatcher rd = request.getRequestDispatcher("FindbyTheater.jsp");
-			//rd.forward(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		String name=request.getParameter("theatername");
-		//System.out.println(name);
 		int length=name.length();
 		int pos=name.indexOf('.');
 		int poss=name.indexOf('-');
