@@ -12,6 +12,7 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 		$('#theater').change(function() {
+			$('#screen').empty();
 			$.ajax({
 				url : 'GetUserServlet',
 				data : {
@@ -21,7 +22,7 @@
 					var value=responseText.trim().split(',');
 					for(var item in value)
 						{
-							$('#screen').append("<option value="+value[item]+">"+value[item]);
+							$('#screen').append("<option value="+value[item]+">"+value[item]);	
 						}
 				}
 			});

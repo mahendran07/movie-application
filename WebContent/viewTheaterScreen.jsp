@@ -10,11 +10,11 @@
 <body>
 	<h3> <center> Theater SCreen </center> </h3>
 	<br/>
-	<table align="center" border="1" width="300px" height="100px">
+	<table align="center" border="1" width="500px" height="100px">
 		<tbody>
 			<thead>
 				<tr>	
-					<th> Theater Screen id </th>
+					<th> Id </th>
 					<th> Theater Name </th>
 					<th> Place </th>
 					<th> Owner Name </th> 

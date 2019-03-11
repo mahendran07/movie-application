@@ -40,18 +40,28 @@ public class DeleteTheaterServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String theaterplace=request.getParameter("theatername");
-		int length=theaterplace.length();
-		int pos=theaterplace.indexOf('-');
-		String theatername = theaterplace.substring(0, pos);
-		String place=theaterplace.substring(pos+1,length);
 		TheaterDAO theaterDAO = new TheaterDAO();
 		try {
-			theaterDAO.deleteTheater(theatername,place);
-			ArrayList<Theater> theaterList = new ArrayList<>();
-			theaterList.addAll(theaterDAO.findAll());
-			request.setAttribute("THEATER", theaterList);
-			RequestDispatcher rd = request.getRequestDispatcher("viewTheater.jsp");
-			rd.forward(request, response);
+			if(theaterplace.equals("Invalid")) {
+				ArrayList<Theater> theaterList = new ArrayList<>();
+				theaterList.addAll(theaterDAO.findAll());
+				request.setAttribute("THEATER", theaterList);
+				request.setAttribute("MESSAGE", "Choose Theater Name");
+				RequestDispatcher rd = request.getRequestDispatcher("DeleteTheater.jsp");
+				rd.forward(request, response);
+			}
+			else {
+				int length=theaterplace.length();
+				int pos=theaterplace.indexOf('-');
+				String theatername = theaterplace.substring(0, pos);
+				String place=theaterplace.substring(pos+1,length);
+				theaterDAO.deleteTheater(theatername,place);
+				ArrayList<Theater> theaterList = new ArrayList<>();
+				theaterList.addAll(theaterDAO.findAll());
+				request.setAttribute("THEATER", theaterList);
+				RequestDispatcher rd = request.getRequestDispatcher("viewTheater.jsp");
+				rd.forward(request, response);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

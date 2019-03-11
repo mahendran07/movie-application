@@ -131,7 +131,7 @@
 							</tr>
 							<tr>
 								<td>Screen </td>
-								<td><input type="text" name="screen" required></td>
+								<td><input type="text" name="screen" required autocomplete="off"></td>
 							</tr>
 							<tr>
 								<td></td>
@@ -139,7 +139,7 @@
 							</tr>
 							<tr>
 								<td>Total Seats </td>
-								<td><input type="number" name="total" min="1" required></td>
+								<td><input type="number" name="total" min="60" required></td>
 							</tr>
 							<tr>
 								<td></td>
@@ -150,6 +150,12 @@
 								<td>
 									<button style="width: 100px;" type="submit">Add</button>
 								</td>
+							</tr>
+						</table>
+						<table>
+							<tr> <td> &nbsp; </td> </tr>
+							<tr>
+								<td> ${MESSAGE} </td>
 							</tr>
 						</table>
 					</form>

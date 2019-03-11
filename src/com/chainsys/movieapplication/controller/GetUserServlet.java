@@ -36,17 +36,16 @@ public class GetUserServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String theaterName = request.getParameter("theater");
-		System.out.println(theaterName);
+		//System.out.println(theaterName);
 		Theater theater=new Theater();
 		TheaterScreen theaterScreen=new TheaterScreen();
 		TheaterScreenDAO theaterScreenDAO=new TheaterScreenDAO();
 		theater.setId(Integer.parseInt(theaterName));
 		theaterScreen.setTheater(theater);
 		StringBuilder stringBuilder=new StringBuilder();
-		
 		try {
 			ArrayList<TheaterScreen> list=theaterScreenDAO.findByIdList(theaterScreen.getTheater().getId());
-			for(int i=0;i<list.size();i++)
+			for(int i=1;i<list.size();i++)
 			{
 				for (TheaterScreen theaterScreen2 : list) {
 					stringBuilder.append(theaterScreen2.getScreen());

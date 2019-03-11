@@ -104,7 +104,7 @@ public class TheaterScreenDAO {
 		PreparedStatement preparedStatement = connection.prepareStatement(sql);
 		preparedStatement.setInt(1, id);
 		ResultSet resultset = preparedStatement.executeQuery();
-		if (resultset.next()) {
+		while (resultset.next()) {
 			Theater theater=new Theater();
 			TheaterDAO theaterDAO=new TheaterDAO();
 			theaterScreen=new TheaterScreen();
@@ -115,6 +115,7 @@ public class TheaterScreenDAO {
 			theaterScreen.setTotalTicket(resultset.getInt("totalseats"));
 			list.add(theaterScreen);
 		}
+		System.out.println(list.size());
 		ConnectionUtil.close(connection, preparedStatement, null);
 		return list;
 	}

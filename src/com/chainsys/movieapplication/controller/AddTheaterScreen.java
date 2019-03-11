@@ -38,20 +38,45 @@ public class AddTheaterScreen extends HttpServlet {
 		int theaterid=Integer.parseInt(request.getParameter("theatername"));
 		String screen=request.getParameter("screen");
 		int seats=Integer.parseInt(request.getParameter("total"));
-		theater.setId(theaterid);
 		TheaterScreen theaterScreen=new TheaterScreen();
+		theater.setId(theaterid);
 		theaterScreen.setTheater(theater);
 		theaterScreen.setScreen(screen);
 		theaterScreen.setTotalTicket(seats);
 		TheaterScreenDAO theaterScreenDAO=new TheaterScreenDAO();
 		try {
-			theaterScreenDAO.addScreen(theaterScreen);
-			ArrayList<TheaterScreen> theaterscreenlist=new ArrayList<TheaterScreen>();
-			theaterscreenlist.addAll(theaterScreenDAO.findAll());
-			//System.out.println(movietheaterlist.size());
-			request.setAttribute("THEATERSCREEN", theaterscreenlist);
-			RequestDispatcher rd=request.getRequestDispatcher("viewTheaterScreen.jsp");
-			rd.forward(request, response);
+			if(theaterid==-1) {
+				ArrayList<TheaterScreen> theaterscreenlist=new ArrayList<TheaterScreen>();
+				theaterscreenlist.addAll(theaterScreenDAO.findAll());
+				request.setAttribute("MESSAGE", "Choose Theater name");
+				request.setAttribute("THEATERSCREEN", theaterscreenlist);
+				RequestDispatcher rd=request.getRequestDispatcher("AddScreen.jsp");
+				rd.forward(request, response);
+			}
+			else if(screen.isEmpty()) {
+				ArrayList<TheaterScreen> theaterscreenlist=new ArrayList<TheaterScreen>();
+				theaterscreenlist.addAll(theaterScreenDAO.findAll());
+				request.setAttribute("MESSAGE", "Type Screen");
+				request.setAttribute("THEATERSCREEN", theaterscreenlist);
+				RequestDispatcher rd=request.getRequestDispatcher("AddScreen.jsp");
+				rd.forward(request, response);
+			}
+			else if(seats<0) {
+				ArrayList<TheaterScreen> theaterscreenlist=new ArrayList<TheaterScreen>();
+				theaterscreenlist.addAll(theaterScreenDAO.findAll());
+				request.setAttribute("MESSAGE", "Negative Not Allowed");
+				request.setAttribute("THEATERSCREEN", theaterscreenlist);
+				RequestDispatcher rd=request.getRequestDispatcher("AddScreen.jsp");
+				rd.forward(request, response);
+			}
+			else {
+				theaterScreenDAO.addScreen(theaterScreen);
+				ArrayList<TheaterScreen> theaterscreenlist=new ArrayList<TheaterScreen>();
+				theaterscreenlist.addAll(theaterScreenDAO.findAll());
+				request.setAttribute("THEATERSCREEN", theaterscreenlist);
+				RequestDispatcher rd=request.getRequestDispatcher("viewTheaterScreen.jsp");
+				rd.forward(request, response);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -117,7 +117,7 @@
 						<tr>
 							<td>Name</td>
 								<td><select name="theatername">
-										<option value="-1">---Choose---</option>
+										<option value="Invalid">---Choose---</option>
 										<c:forEach var="theatername" items="${THEATER}">
 											<option value="${theatername.name}-${theatername.place}">${theatername.name}-${theatername.place}</option>
 										</c:forEach>
@@ -135,9 +135,13 @@
 								</td>
 							</tr>
 						</table>
-
+						<table>
+							<tr> <td> &nbsp; </td> </tr>
+							<tr>
+								<td> ${MESSAGE} </td>
+							</tr>
+						</table>
 					</form>
-
 				</div>
 			</table>
 			<br/>

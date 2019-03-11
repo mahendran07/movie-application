@@ -37,11 +37,11 @@ public class DeleteTheaterScreen extends HttpServlet {
 		String theaterid=request.getParameter("theatername");
 		String screen=request.getParameter("screen");
 		theater.setId(Integer.parseInt(theaterid));
-//		TheaterScreen theaterScreen=new TheaterScreen();
-//		theaterScreen.setTheater(theater);
-//		theaterScreen.setScreen(screen);
 		TheaterScreenDAO theaterScreenDAO=new TheaterScreenDAO();
 		try {
+			if(theaterid.isEmpty()) {
+				
+			}
 			theaterScreenDAO.deleteTheaterScreen(theater.getId(),screen);
 			ArrayList<TheaterScreen> theaterscreenlist=new ArrayList<TheaterScreen>();
 			theaterscreenlist.addAll(theaterScreenDAO.findAll());
