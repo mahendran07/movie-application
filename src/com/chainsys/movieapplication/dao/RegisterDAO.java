@@ -58,6 +58,7 @@ public class RegisterDAO {
 			if(resultSet.next())
 			{
 				registration=new Register();
+				registration.setId(resultSet.getInt("id"));
 				registration.setName(resultSet.getString("name"));
 				registration.setEmail(resultSet.getString("email"));
 				registration.setPhonenumber(resultSet.getLong("phonenumber"));

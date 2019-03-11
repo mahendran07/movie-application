@@ -12,13 +12,17 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import javax.websocket.Session;
 
 import com.chainsys.movieapplication.dao.MovieBookDAO;
 import com.chainsys.movieapplication.dao.MovieDAO;
 import com.chainsys.movieapplication.dao.MovieTheaterDAO;
 import com.chainsys.movieapplication.dao.TheaterDAO;
+import com.chainsys.movieapplication.model.BookMovie;
 import com.chainsys.movieapplication.model.Movie;
 import com.chainsys.movieapplication.model.MovieInTheater;
+import com.chainsys.movieapplication.model.Register;
 import com.chainsys.movieapplication.model.Theater;
 import com.chainsys.movieapplication.model.TheaterScreen;
 
@@ -62,26 +66,35 @@ public class BookMovieServlet extends HttpServlet {
 				for (MovieInTheater movieInTheater2 : list) {
 					amount = movieInTheater2.getAmount();
 				}
-				MovieInTheater movieInTheater = new MovieInTheater();
+				BookMovie bookMovie=new BookMovie();
+				MovieInTheater movieInTheater=new MovieInTheater();
 				Movie movie = new Movie();
 				Theater theater = new Theater();
 				TheaterScreen theaterScreen = new TheaterScreen();
+				Register register2=new Register();
+				HttpSession session = request.getSession(false);
+				register2=(Register) session.getAttribute("NAME");
+				int id=register2.getId();
+				Register register=new Register();
+				register.setId(id);
+				bookMovie.setRegister(register);
 				movie.setId(movieid);
 				theater.setId(theaterid);
 				movieInTheater.setMovie(movie);
 				movieInTheater.setTheater(theater);
 				movieInTheater.setShow(show);
 				movieInTheater.setDate(date);
-				theaterScreen.setTotalTicket(seats);
-				movieInTheater.setTheaterscreen(theaterScreen);
+				bookMovie.setMovieInTheater(movieInTheater);
+				bookMovie.setSeats(seats);
+				bookMovie.setTheaterScreen(theaterScreen);
 				float totalamount = seats * amount;
-				movieInTheater.setAmount(totalamount);
+				bookMovie.setAmount(totalamount);
 				MovieBookDAO movieBookDAO = new MovieBookDAO();
 				try {
-					movieBookDAO.addMovieBook(movieInTheater);
+					movieBookDAO.addMovieBook(bookMovie);
 					request.setAttribute("MESSAGE", "Ticket Book is Success");
 					RequestDispatcher rd = request
-							.getRequestDispatcher("ViewBookingMovie.jsp");
+							.getRequestDispatcher("BookingMovie.jsp");
 					rd.forward(request, response);
 				} catch (Exception e) {
 					e.printStackTrace();

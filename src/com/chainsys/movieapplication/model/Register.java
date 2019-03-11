@@ -1,11 +1,18 @@
 package com.chainsys.movieapplication.model;
 
 public class Register {
+	private int id;
 	private String name;
 	private String email;
 	private Long phonenumber;
 	private String password;
 	private int status;
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 	public String getName() {
 		return name;
 	}

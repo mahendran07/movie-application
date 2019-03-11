@@ -3,14 +3,19 @@ package com.chainsys.movieapplication.model;
 import java.time.LocalDate;
 
 public class MovieInTheater {
+	private int id;
 	private Movie movie;
 	private Theater theater;
 	private String show;
 	private LocalDate date;
 	private TheaterScreen theaterscreen;
-	private Register register;
 	private float amount;
-	
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 	public Movie getMovie() {
 		return movie;
 	}
@@ -40,12 +45,6 @@ public class MovieInTheater {
 	}
 	public void setTheaterscreen(TheaterScreen theaterscreen) {
 		this.theaterscreen = theaterscreen;
-	}
-	public Register getRegister() {
-		return register;
-	}
-	public void setRegister(Register register) {
-		this.register = register;
 	}
 	public float getAmount() {
 		return amount;
