@@ -132,7 +132,7 @@
 		<tr>
 			<td>
 				<div align="center" style="width: 600px">
-					<form method="post" action="UpdateTheaterServlet">
+					<form method="post" action="MovieApplicationServlet">
 						<h2>Update Theater </h2>
 						<table>
 							<tr>
@@ -169,7 +169,8 @@
 							<tr>
 								<td></td>
 								<td>
-									<button style="width: 100px;" type="submit">Update</button>
+									<button style="width: 100px;" type="submit"
+									name="updatetheaterservlet" value="updatetheaterservlet">Update</button>
 								</td>
 							</tr>
 						</table>

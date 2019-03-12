@@ -36,7 +36,6 @@ public class GetUserServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String theaterName = request.getParameter("theater");
-		//System.out.println(theaterName);
 		Theater theater=new Theater();
 		TheaterScreen theaterScreen=new TheaterScreen();
 		TheaterScreenDAO theaterScreenDAO=new TheaterScreenDAO();

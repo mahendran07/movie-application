@@ -13,22 +13,27 @@ import com.chainsys.movieapplication.model.Theater;
 import com.chainsys.movieapplication.model.TheaterScreen;
 import com.chainsys.movieapplication.util.ConnectionUtil;
 
+/**
+ * @author mahe2111
+ *
+ */
 public class MovieTheaterDAO {
+	/** this method used to add movie in particular theater
+	 * @param movieintheater
+	 * @throws Exception
+	 */
 	public void addMovieTheater(MovieInTheater movieintheater) throws Exception {
 		try {
 			Connection connection = ConnectionUtil.getConnection();
-			String sql = "Insert into movieintheater(id,theaterid,movieid,show,showdate,screen_no,amount)values(seq_movietheater_id.NEXTVAL,?,?,?,?,?,?)";
+			String sql = "Insert into movieintheater(id,theaterid,movieid,show,showdate,amount,theaterscreenid)values(seq_movietheater_id.NEXTVAL,?,?,?,?,?,?)";
 			PreparedStatement preparedStatement = connection
 					.prepareStatement(sql);
 			preparedStatement.setInt(1, movieintheater.getTheater().getId());
 			preparedStatement.setInt(2, movieintheater.getMovie().getId());
 			preparedStatement.setString(3, movieintheater.getShow());
-			preparedStatement
-					.setDate(4, Date.valueOf(movieintheater.getDate()));
-			System.out.println(movieintheater.getTheaterscreen().getScreen());
-			preparedStatement.setString(5, movieintheater.getTheaterscreen()
-					.getScreen());
-			preparedStatement.setFloat(6, movieintheater.getAmount());
+			preparedStatement.setDate(4, Date.valueOf(movieintheater.getDate()));
+			preparedStatement.setFloat(5, movieintheater.getAmount());
+			preparedStatement.setInt(6, movieintheater.getTheaterscreen().getId());
 			preparedStatement.executeUpdate();
 			ConnectionUtil.close(connection, preparedStatement, null);
 		} catch (SQLException e) {
@@ -36,10 +41,14 @@ public class MovieTheaterDAO {
 		}
 	}
 
+	/**this method used to view movie with their theater 
+	 * @return
+	 * @throws SQLException
+	 */
 	public ArrayList<MovieInTheater> findAll() throws SQLException {
 		ArrayList<MovieInTheater> movietheaterlist = new ArrayList<MovieInTheater>();
 		Connection connection = ConnectionUtil.getConnection();
-		String sql = "select id,theaterid,movieid,show,showdate,screen_no,amount from movieintheater";
+		String sql = "select id,theaterid,movieid,show,showdate,amount,theaterscreenid from movieintheater";
 		PreparedStatement preparedStatement = connection.prepareStatement(sql);
 		ResultSet resultSet = preparedStatement.executeQuery();
 		while (resultSet.next()) {
@@ -69,6 +78,11 @@ public class MovieTheaterDAO {
 		return movietheaterlist;
 	}
 
+	/** this method used to find theater by using movie name
+	 * @param id
+	 * @return
+	 * @throws SQLException
+	 */
 	public ArrayList<MovieInTheater> findbyTheater(int id) throws SQLException {
 		ArrayList<MovieInTheater> movietheaterlist = new ArrayList<MovieInTheater>();
 		Connection connection = ConnectionUtil.getConnection();
@@ -101,6 +115,11 @@ public class MovieTheaterDAO {
 		return movietheaterlist;
 	}
 
+	/** this method used to find movie name by using theater name
+	 * @param id
+	 * @return
+	 * @throws SQLException
+	 */
 	public ArrayList<MovieInTheater> findbyMovie(int id) throws SQLException {
 		ArrayList<MovieInTheater> movietheaterlist = new ArrayList<MovieInTheater>();
 		Connection connection = ConnectionUtil.getConnection();
@@ -128,6 +147,12 @@ public class MovieTheaterDAO {
 		return movietheaterlist;
 	}
 
+	/** this method used to find by the show details of movie in theater
+	 * @param theaterid
+	 * @param movieid
+	 * @return
+	 * @throws SQLException
+	 */
 	public ArrayList<MovieInTheater> findbyshow(int theaterid, int movieid)
 			throws SQLException {
 		ArrayList<MovieInTheater> movietheaterlist = new ArrayList<MovieInTheater>();
@@ -161,6 +186,13 @@ public class MovieTheaterDAO {
 		return movietheaterlist;
 	}
 
+	/** this method is used to find the date in movie in theater
+	 * @param theaterid
+	 * @param movieid
+	 * @param show
+	 * @return
+	 * @throws SQLException
+	 */
 	public ArrayList<MovieInTheater> findbydate(int theaterid, int movieid,
 			String show) throws SQLException {
 		ArrayList<MovieInTheater> movietheaterlist = new ArrayList<MovieInTheater>();
@@ -195,6 +227,10 @@ public class MovieTheaterDAO {
 		return movietheaterlist;
 	}
 
+	/**this method is used to view movie in theater by the screen
+	 * @return
+	 * @throws SQLException
+	 */
 	public ArrayList<MovieInTheater> joinviewList() throws SQLException {
 		ArrayList<MovieInTheater> listview = new ArrayList<MovieInTheater>();
 		Connection connection = ConnectionUtil.getConnection();

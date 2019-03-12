@@ -110,7 +110,7 @@
 		<tr>
 			<td>
 				<div align="center" style="width: 600px">
-					<form method="post" action="DeleteTheaterServlet">
+					<form method="post" action="MovieApplicationServlet">
 
 						<h2>Delete Theater</h2>
 						<table>
@@ -131,7 +131,8 @@
 							<tr>
 								<td></td>
 								<td>
-									<button style="width: 100px;" type="submit">Delete</button>
+									<button style="width: 100px;" type="submit"
+									name="deletetheaterservlet" value="deletetheaterservlet">Delete</button>
 								</td>
 							</tr>
 						</table>

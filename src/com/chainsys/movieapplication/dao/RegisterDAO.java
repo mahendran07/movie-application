@@ -9,7 +9,15 @@ import java.util.ArrayList;
 import com.chainsys.movieapplication.model.Register;
 import com.chainsys.movieapplication.util.ConnectionUtil;
 
+/**
+ * @author mahe2111
+ *
+ */
 public class RegisterDAO {
+	/** this method used to add the details of user
+	 * @param register
+	 * @throws Exception
+	 */
 	public void addUser(Register register) throws Exception {
 		try {
 			Connection connection = ConnectionUtil.getConnection();
@@ -27,6 +35,10 @@ public class RegisterDAO {
 		}
 	}
 	
+	/** this method is used to change the password by user
+	 * @param register
+	 * @throws Exception
+	 */
 	public void changePassword(Register register)
 			throws Exception {
 		try {
@@ -44,6 +56,10 @@ public class RegisterDAO {
 		}
 	}
 
+	/** this method is used to check the login
+	 * @param register
+	 * @return
+	 */
 	public Register checkLogin(Register register) {
 		//int status=0;
 		Register registration = new Register();
@@ -72,6 +88,11 @@ public class RegisterDAO {
 		return registration;
 	}
 	
+	/** this method is used to find the details of particular user by email
+	 * @param Email
+	 * @return
+	 * @throws SQLException
+	 */
 	public Register findByEmail(String Email) throws SQLException
 	{
 		Register register=new Register();
@@ -91,6 +112,12 @@ public class RegisterDAO {
 		return register;
 	}
 	
+	/** this method is used to check email or password when login user
+	 * @param Email
+	 * @param password
+	 * @return
+	 * @throws SQLException
+	 */
 	public Boolean checkByEmailorPassword(String Email,String password) throws SQLException
 	{
 		Boolean isActive=false;
@@ -107,6 +134,12 @@ public class RegisterDAO {
 		return isActive;
 	}
 	
+	/** this method is used check both email and password
+	 * @param Email
+	 * @param password
+	 * @return
+	 * @throws SQLException
+	 */
 	public Boolean checkByEmailPassword(String Email,String password) throws SQLException
 	{
 		Boolean isActive=false;
@@ -123,6 +156,10 @@ public class RegisterDAO {
 		return isActive;
 	}
 	
+	/** this method is used to get their password when the user is forget the password
+	 * @param register
+	 * @return
+	 */
 	public Boolean checkForgetPassword(Register register)
 	{
 		Boolean isActive=false;

@@ -9,7 +9,15 @@ import java.util.ArrayList;
 import com.chainsys.movieapplication.model.Theater;
 import com.chainsys.movieapplication.util.ConnectionUtil;
 
+/**
+ * @author mahe2111
+ *
+ */
 public class TheaterDAO {
+	/** this method used to add theater details
+	 * @param theater
+	 * @throws Exception
+	 */
 	public void addTheater(Theater theater) throws Exception {
 		try {
 			Connection connection = ConnectionUtil.getConnection();
@@ -26,6 +34,10 @@ public class TheaterDAO {
 		}
 	}
 
+	/** this method used to view the theater details
+	 * @return
+	 * @throws SQLException
+	 */
 	public ArrayList<Theater> findAll() throws SQLException {
 		ArrayList<Theater> theaterList = new ArrayList<>();
 
@@ -46,6 +58,11 @@ public class TheaterDAO {
 		return theaterList;
 	}
 
+	/** this method used to delete particular theater details
+	 * @param name
+	 * @param place
+	 * @throws SQLException
+	 */
 	public void deleteTheater(String name,String place) throws SQLException {
 		Connection connection = ConnectionUtil.getConnection();
 		String sqldelete = "Delete from theaterdetail where name=? and place=?";
@@ -58,6 +75,10 @@ public class TheaterDAO {
 		ConnectionUtil.close(connection, preparedstatement, null);
 	}
 
+	/** this method used to update theater owner name
+	 * @param theater
+	 * @throws SQLException
+	 */
 	public void updateTheater(Theater theater) throws SQLException {
 		Connection connection = ConnectionUtil.getConnection();
 		String sql = "UPDATE theaterdetail set ownername=? where name=? and ownername=?";
@@ -70,6 +91,11 @@ public class TheaterDAO {
 		ConnectionUtil.close(connection, preparedstatement, null);
 	}
 
+	/** this method used to find the theater details in object
+	 * @param id
+	 * @return
+	 * @throws SQLException
+	 */
 	public Theater findById(int id) throws SQLException {
 		Theater theater = null;
 		Connection connection = ConnectionUtil.getConnection();
@@ -88,6 +114,11 @@ public class TheaterDAO {
 		return theater;
 	}
 	
+	/** this method used to find the theater details in list
+	 * @param id
+	 * @return
+	 * @throws SQLException
+	 */
 	public ArrayList<Theater> findByIdList(int id) throws SQLException {
 		ArrayList<Theater> list=new ArrayList<Theater>();
 		Theater theater = null;

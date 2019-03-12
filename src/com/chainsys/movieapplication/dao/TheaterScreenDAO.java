@@ -11,6 +11,10 @@ import com.chainsys.movieapplication.model.TheaterScreen;
 import com.chainsys.movieapplication.util.ConnectionUtil;
 
 public class TheaterScreenDAO {
+	/** this method used to add the screen and seats details of theater
+	 * @param theaterscreen
+	 * @throws Exception
+	 */
 	public void addScreen(TheaterScreen theaterscreen) throws Exception {
 		try {
 			Connection connection = ConnectionUtil.getConnection();
@@ -27,9 +31,12 @@ public class TheaterScreenDAO {
 		}
 	}
 
+	/** this method used to find all the details of theater(screen,seats)
+	 * @return
+	 * @throws SQLException
+	 */
 	public ArrayList<TheaterScreen> findAll() throws SQLException {
 		ArrayList<TheaterScreen> theaterscreenList = new ArrayList<>();
-
 		Connection connection = ConnectionUtil.getConnection();
 		String sql = "SELECT id,theaterid,screen,totalseats FROM theaterscreen";
 		PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -50,6 +57,11 @@ public class TheaterScreenDAO {
 	}
 	
 
+	/** this method used to delete particular theater screen
+	 * @param theaterid
+	 * @param screen
+	 * @throws SQLException
+	 */
 	public void deleteTheaterScreen(int theaterid,String screen) throws SQLException {
 		Connection connection = ConnectionUtil.getConnection();
 		String sqldelete = "Delete from theaterscreen where theaterid=? and screen=?";
@@ -62,6 +74,10 @@ public class TheaterScreenDAO {
 		ConnectionUtil.close(connection, preparedstatement, null);
 	}
 
+	/** this method used to update seats in a particular theater with in a screen
+	 * @param theaterscreen
+	 * @throws SQLException
+	 */
 	public void updateTheaterScreen(TheaterScreen theaterscreen) throws SQLException {
 		Connection connection = ConnectionUtil.getConnection();
 		String sql = "UPDATE theaterscreen set totalseats=? where theaterid=? and screen=?";
@@ -75,6 +91,11 @@ public class TheaterScreenDAO {
 
 	}
 
+	/** this method used to find the details of screen and seats of particular theater
+	 * @param id
+	 * @return
+	 * @throws SQLException
+	 */
 	public TheaterScreen findById(int id) throws SQLException {
 		TheaterScreen theaterScreen=new TheaterScreen();
 		Connection connection = ConnectionUtil.getConnection();
@@ -96,6 +117,11 @@ public class TheaterScreenDAO {
 		return theaterScreen;
 	}
 	
+	/** this method used to find the details of theater(screen,seats) in a list
+	 * @param id
+	 * @return
+	 * @throws SQLException
+	 */
 	public ArrayList<TheaterScreen> findByIdList(int id) throws SQLException {
 		ArrayList<TheaterScreen> list=new ArrayList<TheaterScreen>();
 		TheaterScreen theaterScreen=null;
@@ -118,6 +144,30 @@ public class TheaterScreenDAO {
 		System.out.println(list.size());
 		ConnectionUtil.close(connection, preparedStatement, null);
 		return list;
+	}
+	
+	/** this method used to find the screen details of the theater 
+	 * @param screen
+	 * @return
+	 * @throws SQLException
+	 */
+	public TheaterScreen findByScreen(String screen) throws SQLException {
+		TheaterScreen theaterScreen=new TheaterScreen();
+		Connection connection = ConnectionUtil.getConnection();
+		String sql = "select theaterid,screen,totalseats from theaterscreen ts join theaterdetail td on ts.theaterid=td.id and ts.SCREEN=?";
+		PreparedStatement preparedStatement = connection.prepareStatement(sql);
+		preparedStatement.setString(1, screen);
+		ResultSet resultset = preparedStatement.executeQuery();
+		if (resultset.next()) {
+			Theater theater=new Theater();
+			theaterScreen=new TheaterScreen();
+			theater.setId(resultset.getInt("theaterid"));
+			theaterScreen.setTheater(theater);
+			theaterScreen.setScreen(resultset.getString("screen"));
+			theaterScreen.setTotalTicket(resultset.getInt("totalseats"));
+		}
+		ConnectionUtil.close(connection, preparedStatement, null);
+		return theaterScreen;
 	}
 
 }

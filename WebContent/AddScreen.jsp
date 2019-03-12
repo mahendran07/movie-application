@@ -113,7 +113,7 @@
 		<tr>
 			<td>
 				<div align="center" style="width: 600px">
-					<form method="post" action="AddTheaterScreen">
+					<form method="post" action="MovieApplicationServlet">
 						<h2>Add Screen</h2>
 						<table>
 							<tr>
@@ -148,7 +148,8 @@
 							<tr>
 								<td></td>
 								<td>
-									<button style="width: 100px;" type="submit">Add</button>
+									<button style="width: 100px;" type="submit"
+									name="addscreenservlet" value="addscreenservlet">Add</button>
 								</td>
 							</tr>
 						</table>

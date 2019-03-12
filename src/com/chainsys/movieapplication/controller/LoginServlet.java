@@ -91,7 +91,7 @@ public class LoginServlet extends HttpServlet {
 				req.forward(request, response);
 			}
 		} catch (Exception ex) {
-			ex.getMessage();
+			request.setAttribute("MESSAGE", "Invalid Email");
 			RequestDispatcher req = request.getRequestDispatcher("Login.jsp");
 			req.forward(request, response);
 

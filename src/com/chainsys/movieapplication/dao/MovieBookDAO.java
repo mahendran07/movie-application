@@ -7,7 +7,16 @@ import java.sql.SQLException;
 import com.chainsys.movieapplication.model.BookMovie;
 import com.chainsys.movieapplication.util.ConnectionUtil;
 
+/**
+ * @author mahe2111
+ *
+ */
 public class MovieBookDAO {
+	
+	/** this method used to add movie book
+	 * @param bookMovie
+	 * @throws Exception
+	 */
 	public void addMovieBook(BookMovie bookMovie) throws Exception {
 		try {
 			Connection connection = ConnectionUtil.getConnection();

@@ -9,7 +9,15 @@ import java.util.ArrayList;
 import com.chainsys.movieapplication.model.Movie;
 import com.chainsys.movieapplication.util.ConnectionUtil;
 
+/**
+ * @author mahe2111
+ *
+ */
 public class MovieDAO {
+	/** this method used to add movie name
+	 * @param movie
+	 * @throws Exception
+	 */
 	public void addMovie(Movie movie) throws Exception {
 		try {
 			Connection connection = ConnectionUtil.getConnection();
@@ -24,6 +32,10 @@ public class MovieDAO {
 		}
 	}
 
+	/** this method used to view all movies
+	 * @return
+	 * @throws SQLException
+	 */
 	public ArrayList<Movie> findAll() throws SQLException {
 		ArrayList<Movie> movieList = new ArrayList<>();
 
@@ -42,6 +54,10 @@ public class MovieDAO {
 		return movieList;
 	}
 
+	/** this method used delete particular movie
+	 * @param name
+	 * @throws SQLException
+	 */
 	public void deleteMovie(String name) throws SQLException {
 		Connection connection = ConnectionUtil.getConnection();
 		String sqldelete = "Delete from moviedetail where name=?";
@@ -53,6 +69,11 @@ public class MovieDAO {
 		ConnectionUtil.close(connection, preparedstatement, null);
 	}
 
+	/** this method used to update a particular movie name
+	 * @param movie
+	 * @param movienew
+	 * @throws SQLException
+	 */
 	public void updateMovie(Movie movie,Movie movienew) throws SQLException {
 		Connection connection = ConnectionUtil.getConnection();
 		String sql = "UPDATE moviedetail set name=? where name=?";
@@ -65,6 +86,11 @@ public class MovieDAO {
 
 	}
 
+	/** this method used to find movie with their id
+	 * @param id
+	 * @return
+	 * @throws SQLException
+	 */
 	public Movie findById(int id) throws SQLException {
 		Movie movie = null;
 		Connection connection = ConnectionUtil.getConnection();
@@ -81,6 +107,11 @@ public class MovieDAO {
 		return movie;
 	}
 	
+	/** this method used to the particular movie name already exists or not
+	 * @param name
+	 * @return
+	 * @throws SQLException
+	 */
 	public Boolean findByName(String name) throws SQLException {
 		Boolean isBoolean=false;
 		Connection connection = ConnectionUtil.getConnection();
