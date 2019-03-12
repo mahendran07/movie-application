@@ -9,10 +9,6 @@ import java.util.ArrayList;
 import com.chainsys.movieapplication.model.Movie;
 import com.chainsys.movieapplication.util.ConnectionUtil;
 
-/**
- * @author mahe2111
- *
- */
 public class MovieDAO {
 	/** this method used to add movie name
 	 * @param movie
@@ -31,14 +27,12 @@ public class MovieDAO {
 			e.printStackTrace();
 		}
 	}
-
 	/** this method used to view all movies
 	 * @return
 	 * @throws SQLException
 	 */
 	public ArrayList<Movie> findAll() throws SQLException {
 		ArrayList<Movie> movieList = new ArrayList<>();
-
 		Connection connection = ConnectionUtil.getConnection();
 		String sql = "SELECT id,name FROM moviedetail order by id";
 		PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -53,7 +47,6 @@ public class MovieDAO {
 		ConnectionUtil.close(connection, preparedStatement, null);
 		return movieList;
 	}
-
 	/** this method used delete particular movie
 	 * @param name
 	 * @throws SQLException
@@ -68,7 +61,6 @@ public class MovieDAO {
 		System.out.println("Delete record sucessfully :" + row);
 		ConnectionUtil.close(connection, preparedstatement, null);
 	}
-
 	/** this method used to update a particular movie name
 	 * @param movie
 	 * @param movienew
@@ -83,9 +75,7 @@ public class MovieDAO {
 		int row = preparedstatement.executeUpdate();
 		System.out.println("Update :" + row);
 		ConnectionUtil.close(connection, preparedstatement, null);
-
 	}
-
 	/** this method used to find movie with their id
 	 * @param id
 	 * @return
@@ -106,7 +96,6 @@ public class MovieDAO {
 		ConnectionUtil.close(connection, preparedStatement, null);
 		return movie;
 	}
-	
 	/** this method used to the particular movie name already exists or not
 	 * @param name
 	 * @return
@@ -125,5 +114,4 @@ public class MovieDAO {
 		ConnectionUtil.close(connection, preparedStatement, null);
 		return isBoolean;
 	}
-
 }

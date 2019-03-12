@@ -135,7 +135,7 @@ button[type="submit"]:hover {
 	<br />
 	<br />
 	<br />
-	<form method="post" action="BookMovieServlet">
+	<form method="post" action="MovieApplicationServlet">
 		<table align="center">
 			<tr>
 				<td>&nbsp;</td>
@@ -192,7 +192,8 @@ button[type="submit"]:hover {
 		<table align="center">
 			<tr>
 				<td>
-					<button type="submit">Book</button>
+					<button type="submit"
+					name="savebookmovie" value="savebookmovie">Book</button>
 			</tr>
 			<tr>
 				<td>&nbsp;</td>

@@ -30,7 +30,6 @@ public class TheaterScreenDAO {
 			e.printStackTrace();
 		}
 	}
-
 	/** this method used to find all the details of theater(screen,seats)
 	 * @return
 	 * @throws SQLException
@@ -50,13 +49,10 @@ public class TheaterScreenDAO {
 			theaterscreen.setScreen(resultset.getString("screen"));
 			theaterscreen.setTotalTicket(resultset.getInt("totalseats"));
 			theaterscreenList.add(theaterscreen);
-			
 		}
 		ConnectionUtil.close(connection, preparedStatement, null);
 		return theaterscreenList;
 	}
-	
-
 	/** this method used to delete particular theater screen
 	 * @param theaterid
 	 * @param screen
@@ -73,7 +69,6 @@ public class TheaterScreenDAO {
 		System.out.println("Delete record sucessfully :" + row);
 		ConnectionUtil.close(connection, preparedstatement, null);
 	}
-
 	/** this method used to update seats in a particular theater with in a screen
 	 * @param theaterscreen
 	 * @throws SQLException
@@ -88,9 +83,7 @@ public class TheaterScreenDAO {
 		int row = preparedstatement.executeUpdate();
 		System.out.println("Update :" + row);
 		ConnectionUtil.close(connection, preparedstatement, null);
-
 	}
-
 	/** this method used to find the details of screen and seats of particular theater
 	 * @param id
 	 * @return
@@ -116,7 +109,6 @@ public class TheaterScreenDAO {
 		ConnectionUtil.close(connection, preparedStatement, null);
 		return theaterScreen;
 	}
-	
 	/** this method used to find the details of theater(screen,seats) in a list
 	 * @param id
 	 * @return
@@ -145,7 +137,6 @@ public class TheaterScreenDAO {
 		ConnectionUtil.close(connection, preparedStatement, null);
 		return list;
 	}
-	
 	/** this method used to find the screen details of the theater 
 	 * @param screen
 	 * @return
@@ -169,5 +160,4 @@ public class TheaterScreenDAO {
 		ConnectionUtil.close(connection, preparedStatement, null);
 		return theaterScreen;
 	}
-
 }

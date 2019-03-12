@@ -229,6 +229,12 @@
 								</td>
 							</tr>
 						</table>
+						<table>
+							<tr> <td> &nbsp; </td> </tr>
+							<tr>
+								<td> ${MESSAGE} </td>
+							</tr>
+						</table>
 					</form>
 				</div>
 			</td>

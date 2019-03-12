@@ -9,10 +9,6 @@ import java.util.ArrayList;
 import com.chainsys.movieapplication.model.Register;
 import com.chainsys.movieapplication.util.ConnectionUtil;
 
-/**
- * @author mahe2111
- *
- */
 public class RegisterDAO {
 	/** this method used to add the details of user
 	 * @param register
@@ -33,14 +29,12 @@ public class RegisterDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-	}
-	
+	}	
 	/** this method is used to change the password by user
 	 * @param register
 	 * @throws Exception
 	 */
-	public void changePassword(Register register)
-			throws Exception {
+	public void changePassword(Register register)throws Exception {
 		try {
 			Connection connection = ConnectionUtil.getConnection();
 			String sql = "UPDATE register SET password=? WHERE email=?";
@@ -55,13 +49,11 @@ public class RegisterDAO {
 			e.printStackTrace();
 		}
 	}
-
 	/** this method is used to check the login
 	 * @param register
 	 * @return
 	 */
 	public Register checkLogin(Register register) {
-		//int status=0;
 		Register registration = new Register();
 		try {
 			Connection connection = ConnectionUtil.getConnection();
@@ -87,7 +79,6 @@ public class RegisterDAO {
 		}
 		return registration;
 	}
-	
 	/** this method is used to find the details of particular user by email
 	 * @param Email
 	 * @return
@@ -110,8 +101,7 @@ public class RegisterDAO {
 			register.setPhonenumber(resultSet.getLong("phonenumber"));
 		}
 		return register;
-	}
-	
+	}	
 	/** this method is used to check email or password when login user
 	 * @param Email
 	 * @param password
@@ -132,8 +122,7 @@ public class RegisterDAO {
 			isActive=true;
 		}
 		return isActive;
-	}
-	
+	}	
 	/** this method is used check both email and password
 	 * @param Email
 	 * @param password
@@ -155,7 +144,6 @@ public class RegisterDAO {
 		}
 		return isActive;
 	}
-	
 	/** this method is used to get their password when the user is forget the password
 	 * @param register
 	 * @return
@@ -177,7 +165,6 @@ public class RegisterDAO {
 			}
 			ConnectionUtil.close(connection, preparedStatement, resultSet);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return isActive;

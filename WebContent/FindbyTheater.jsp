@@ -137,9 +137,9 @@ button[type="submit"]:hover {
 			<c:forEach var="theater" items="${THEATERLIST}">
 				<tr>
 					<td>${theater.theater.name}-${theater.theater.place}</td>
-					<td>${theater.show}-${theater.theaterscreen.screen}</td>
+					<td>${theater.show}-${theater.screen}</td>
 					<td>${theater.date}</td>
-					<td>${theater.theaterscreen.totalTicket}</td>
+					<td>${theater.theaterScreen.totalTicket}</td>
 					<td>${theater.amount}</td>
 				</tr>
 			</c:forEach>

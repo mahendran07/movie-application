@@ -140,8 +140,8 @@ button[type="submit"]:hover {
 					<td>${movie.movie.name}</td>
 					<td>${movie.show}</td>
 					<td>${movie.date}</td>
-					<td>${movie.theaterscreen.screen}</td>
-					<td>${movie.theaterscreen.totalTicket}</td>
+					<td>${movie.screen}</td>
+					<td>${movie.theaterScreen.totalTicket}</td>
 					<td>${movie.amount}</td>
 				</tr>
 			</c:forEach>

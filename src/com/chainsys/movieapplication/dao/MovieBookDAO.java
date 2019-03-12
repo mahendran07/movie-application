@@ -7,12 +7,7 @@ import java.sql.SQLException;
 import com.chainsys.movieapplication.model.BookMovie;
 import com.chainsys.movieapplication.util.ConnectionUtil;
 
-/**
- * @author mahe2111
- *
- */
-public class MovieBookDAO {
-	
+public class MovieBookDAO {	
 	/** this method used to add movie book
 	 * @param bookMovie
 	 * @throws Exception
@@ -27,12 +22,11 @@ public class MovieBookDAO {
 			preparedStatement.setInt(2, bookMovie.getMovieInTheater().getId());
 			preparedStatement.setInt(3, bookMovie.getSeats());
 			preparedStatement.setFloat(4, bookMovie.getAmount());
-			preparedStatement.setString(5, bookMovie.getMovieInTheater().getTheaterscreen().getScreen());
+			preparedStatement.setString(5, bookMovie.getMovieInTheater().getScreen());
 			preparedStatement.executeUpdate();
 			ConnectionUtil.close(connection, preparedStatement, null);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
-	
 }

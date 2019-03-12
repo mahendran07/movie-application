@@ -13,10 +13,6 @@ import com.chainsys.movieapplication.model.Theater;
 import com.chainsys.movieapplication.model.TheaterScreen;
 import com.chainsys.movieapplication.util.ConnectionUtil;
 
-/**
- * @author mahe2111
- *
- */
 public class MovieTheaterDAO {
 	/** this method used to add movie in particular theater
 	 * @param movieintheater
@@ -25,7 +21,7 @@ public class MovieTheaterDAO {
 	public void addMovieTheater(MovieInTheater movieintheater) throws Exception {
 		try {
 			Connection connection = ConnectionUtil.getConnection();
-			String sql = "Insert into movieintheater(id,theaterid,movieid,show,showdate,amount,theaterscreenid)values(seq_movietheater_id.NEXTVAL,?,?,?,?,?,?)";
+			String sql = "Insert into movieintheater(id,theaterid,movieid,show,showdate,amount,screen)values(seq_movietheater_id.NEXTVAL,?,?,?,?,?,?)";
 			PreparedStatement preparedStatement = connection
 					.prepareStatement(sql);
 			preparedStatement.setInt(1, movieintheater.getTheater().getId());
@@ -33,14 +29,13 @@ public class MovieTheaterDAO {
 			preparedStatement.setString(3, movieintheater.getShow());
 			preparedStatement.setDate(4, Date.valueOf(movieintheater.getDate()));
 			preparedStatement.setFloat(5, movieintheater.getAmount());
-			preparedStatement.setInt(6, movieintheater.getTheaterscreen().getId());
+			preparedStatement.setString(6, movieintheater.getScreen());
 			preparedStatement.executeUpdate();
 			ConnectionUtil.close(connection, preparedStatement, null);
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new Exception("Unable to Add");
 		}
 	}
-
 	/**this method used to view movie with their theater 
 	 * @return
 	 * @throws SQLException
@@ -48,36 +43,31 @@ public class MovieTheaterDAO {
 	public ArrayList<MovieInTheater> findAll() throws SQLException {
 		ArrayList<MovieInTheater> movietheaterlist = new ArrayList<MovieInTheater>();
 		Connection connection = ConnectionUtil.getConnection();
-		String sql = "select id,theaterid,movieid,show,showdate,amount,theaterscreenid from movieintheater";
+		String sql = "select td.name as theatername,md.name as moviename,mt.show as show,mt.showdate as showdate,ts.totalseats as seats,mt.screen as screen,mt.amount as amount from movieintheater mt"
+				+ " join theaterdetail td on td.id=theaterid"
+				+ " join moviedetail md on md.id=movieid"
+				+ " join theaterscreen ts on ts.SCREEN=mt.SCREEN";
 		PreparedStatement preparedStatement = connection.prepareStatement(sql);
 		ResultSet resultSet = preparedStatement.executeQuery();
 		while (resultSet.next()) {
 			MovieInTheater movieintheater = new MovieInTheater();
-			TheaterDAO theaterDAO = new TheaterDAO();
-			MovieDAO movieDAO = new MovieDAO();
-			TheaterScreenDAO theaterScreenDAO = new TheaterScreenDAO();
-			TheaterScreen theaterScreen = new TheaterScreen();
-			System.out.println(resultSet.getInt("theaterid"));
-			theaterScreen = theaterScreenDAO.findById(resultSet
-					.getInt("theaterid"));
-			System.out.println(resultSet.getInt("theaterid"));
-			Theater theater = theaterDAO
-					.findById(resultSet.getInt("theaterid"));
+			Theater theater=new Theater();
+			Movie movie=new Movie();
+			theater.setName(resultSet.getString("theatername"));
+			movie.setName(resultSet.getString("moviename"));
 			movieintheater.setTheater(theater);
-			Movie movie = movieDAO.findById(resultSet.getInt("movieid"));
 			movieintheater.setMovie(movie);
 			movieintheater.setShow(resultSet.getString("show"));
 			movieintheater.setDate(resultSet.getDate("showdate").toLocalDate());
-			System.out.println(resultSet.getInt("theaterid"));
-			theaterScreen = theaterScreenDAO.findById(resultSet
-					.getInt("theaterid"));
-			movieintheater.setTheaterscreen(theaterScreen);
+			TheaterScreen theaterScreen=new TheaterScreen();
+			theaterScreen.setTotalTicket(resultSet.getInt("seats"));
+			movieintheater.setTheaterScreen(theaterScreen);
+			movieintheater.setScreen(resultSet.getString("screen"));
 			movieintheater.setAmount(resultSet.getInt("amount"));
 			movietheaterlist.add(movieintheater);
 		}
 		return movietheaterlist;
 	}
-
 	/** this method used to find theater by using movie name
 	 * @param id
 	 * @return
@@ -86,10 +76,10 @@ public class MovieTheaterDAO {
 	public ArrayList<MovieInTheater> findbyTheater(int id) throws SQLException {
 		ArrayList<MovieInTheater> movietheaterlist = new ArrayList<MovieInTheater>();
 		Connection connection = ConnectionUtil.getConnection();
-		String sql = "select td.id as id,td.name as theatername,td.place as theaterplace,md.name as moviename,mt.show as shows,mt.showdate as showdate,ts.screen as screen,ts.totalseats as seats,mt.amount as amount from movieintheater mt"
+		String sql = "select td.id as id,td.name as theatername,td.place as theaterplace,md.name as moviename,mt.show as shows,mt.showdate as showdate,mt.screen as screen,ts.totalseats as seats,mt.amount as amount from movieintheater mt"
 				+ " join theaterdetail td on td.id=theaterid"
 				+ " join moviedetail md on md.id=movieid"
-				+ " join theaterscreen ts on ts.theaterid=mt.THEATERID where movieid=?";
+				+ " join theaterscreen ts on ts.theaterid=mt.THEATERID and ts.screen=mt.screen where movieid=?";
 		PreparedStatement preparedStatement = connection.prepareStatement(sql);
 		preparedStatement.setInt(1, id);
 		ResultSet resultSet = preparedStatement.executeQuery();
@@ -106,15 +96,14 @@ public class MovieTheaterDAO {
 			movieInTheater.setShow(resultSet.getString("shows"));
 			movieInTheater.setDate(resultSet.getDate("showdate").toLocalDate());
 			TheaterScreen theaterScreen = new TheaterScreen();
-			theaterScreen.setScreen(resultSet.getString("screen_no"));
 			theaterScreen.setTotalTicket(resultSet.getInt("seats"));
-			movieInTheater.setTheaterscreen(theaterScreen);
+			movieInTheater.setTheaterScreen(theaterScreen);
 			movieInTheater.setAmount(resultSet.getInt("amount"));
+			movieInTheater.setScreen(resultSet.getString("screen"));
 			movietheaterlist.add(movieInTheater);
 		}
 		return movietheaterlist;
 	}
-
 	/** this method used to find movie name by using theater name
 	 * @param id
 	 * @return
@@ -123,10 +112,10 @@ public class MovieTheaterDAO {
 	public ArrayList<MovieInTheater> findbyMovie(int id) throws SQLException {
 		ArrayList<MovieInTheater> movietheaterlist = new ArrayList<MovieInTheater>();
 		Connection connection = ConnectionUtil.getConnection();
-		String sql = "select md.id as id,md.name as moviename,mt.show as shows,mt.showdate as showdate,ts.screen as screen,ts.totalseats as seats,mt.amount as amount from movieintheater mt"
+		String sql = "select md.id as id,md.name as moviename,mt.show as shows,mt.showdate as showdate,mt.screen as screen,ts.totalseats as seats,mt.amount as amount from movieintheater mt"
 				+ " join theaterdetail td on td.id=theaterid"
 				+ " join moviedetail md on md.id=movieid"
-				+ " join theaterscreen ts on ts.theaterid=mt.THEATERID where theaterid=?";
+				+ " join theaterscreen ts on ts.theaterid=mt.THEATERID and ts.screen=mt.screen where theaterid=?";
 		PreparedStatement preparedStatement = connection.prepareStatement(sql);
 		preparedStatement.setInt(1, id);
 		ResultSet resultSet = preparedStatement.executeQuery();
@@ -138,15 +127,14 @@ public class MovieTheaterDAO {
 			movieintheater.setMovie(movie);
 			movieintheater.setShow(resultSet.getString("shows"));
 			movieintheater.setDate(resultSet.getDate("showdate").toLocalDate());
-			theaterScreen.setScreen(resultSet.getString("screen_no"));
 			theaterScreen.setTotalTicket(resultSet.getInt("seats"));
-			movieintheater.setTheaterscreen(theaterScreen);
 			movieintheater.setAmount(resultSet.getInt("amount"));
+			movieintheater.setScreen(resultSet.getString("screen"));
+			movieintheater.setTheaterScreen(theaterScreen);
 			movietheaterlist.add(movieintheater);
 		}
 		return movietheaterlist;
 	}
-
 	/** this method used to find by the show details of movie in theater
 	 * @param theaterid
 	 * @param movieid
@@ -157,10 +145,10 @@ public class MovieTheaterDAO {
 			throws SQLException {
 		ArrayList<MovieInTheater> movietheaterlist = new ArrayList<MovieInTheater>();
 		Connection connection = ConnectionUtil.getConnection();
-		String sql = "select td.id as id,td.name as theatername,td.place as theaterplace,md.name as moviename,mt.show as shows,mt.showdate as showdate,mt.screen_no as screen_no,ts.totalseats as seats,mt.amount as amount from movieintheater mt"
+		String sql = "select td.id as id,td.name as theatername,td.place as theaterplace,md.name as moviename,mt.show as shows,mt.showdate as showdate,mt.screen as screen,ts.totalseats as seats,mt.amount as amount from movieintheater mt"
 				+ " join theaterdetail td on td.id=theaterid"
 				+ " join moviedetail md on md.id=movieid"
-				+ " join theaterscreen ts on ts.theaterid=mt.THEATERID and ts.screen=mt.screen_no where theaterid=? and movieid=?";
+				+ " join theaterscreen ts on ts.theaterid=mt.THEATERID and ts.screen=mt.screen where theaterid=? and movieid=?";
 		PreparedStatement preparedStatement = connection.prepareStatement(sql);
 		preparedStatement.setInt(1, theaterid);
 		preparedStatement.setInt(2, movieid);
@@ -177,15 +165,13 @@ public class MovieTheaterDAO {
 			movieInTheater.setMovie(movie);
 			movieInTheater.setShow(resultSet.getString("shows"));
 			movieInTheater.setDate(resultSet.getDate("showdate").toLocalDate());
-			theaterScreen.setScreen(resultSet.getString("screen_no"));
 			theaterScreen.setTotalTicket(resultSet.getInt("seats"));
-			movieInTheater.setTheaterscreen(theaterScreen);
 			movieInTheater.setAmount(resultSet.getInt("amount"));
+			movieInTheater.setScreen(resultSet.getString("screen"));
 			movietheaterlist.add(movieInTheater);
 		}
 		return movietheaterlist;
 	}
-
 	/** this method is used to find the date in movie in theater
 	 * @param theaterid
 	 * @param movieid
@@ -197,10 +183,10 @@ public class MovieTheaterDAO {
 			String show) throws SQLException {
 		ArrayList<MovieInTheater> movietheaterlist = new ArrayList<MovieInTheater>();
 		Connection connection = ConnectionUtil.getConnection();
-		String sql = "select td.id as id,td.name as theatername,td.place as theaterplace,md.name as moviename,mt.show as shows,mt.showdate as showdate,mt.screen_no as screen_no,ts.totalseats as seats,mt.amount as amount from movieintheater mt"
+		String sql = "select td.id as id,td.name as theatername,td.place as theaterplace,md.name as moviename,mt.show as shows,mt.showdate as showdate,mt.screen as screen,ts.totalseats as seats,mt.amount as amount from movieintheater mt"
 				+ " join theaterdetail td on td.id=theaterid"
 				+ " join moviedetail md on md.id=movieid"
-				+ " join theaterscreen ts on ts.theaterid=mt.THEATERID where theaterid=? and movieid=? and show=?";
+				+ " join theaterscreen ts on ts.theaterid=mt.THEATERID and ts.screen=mt.screen where theaterid=? and movieid=? and show=?";
 		PreparedStatement preparedStatement = connection.prepareStatement(sql);
 		preparedStatement.setInt(1, theaterid);
 		preparedStatement.setInt(2, movieid);
@@ -218,15 +204,13 @@ public class MovieTheaterDAO {
 			movieInTheater.setShow(resultSet.getString("shows"));
 			movieInTheater.setDate(resultSet.getDate("showdate").toLocalDate());
 			TheaterScreen theaterScreen = new TheaterScreen();
-			theaterScreen.setScreen(resultSet.getString("screen_no"));
 			theaterScreen.setTotalTicket(resultSet.getInt("seats"));
-			movieInTheater.setTheaterscreen(theaterScreen);
 			movieInTheater.setAmount(resultSet.getInt("amount"));
+			movieInTheater.setScreen(resultSet.getString("screen"));
 			movietheaterlist.add(movieInTheater);
 		}
 		return movietheaterlist;
 	}
-
 	/**this method is used to view movie in theater by the screen
 	 * @return
 	 * @throws SQLException
@@ -234,10 +218,10 @@ public class MovieTheaterDAO {
 	public ArrayList<MovieInTheater> joinviewList() throws SQLException {
 		ArrayList<MovieInTheater> listview = new ArrayList<MovieInTheater>();
 		Connection connection = ConnectionUtil.getConnection();
-		String sql1 = "select td.name as theatername,td.place as theaterplace,md.name as moviename,mt.show as shows,mt.showdate as showdate,mt.screen_no as screen_no,ts.totalseats as seats,mt.amount as amount from movieintheater mt"
+		String sql1 = "select td.name as theatername,td.place as theaterplace,md.name as moviename,mt.show as shows,mt.showdate as showdate,mt.screen as screen,ts.totalseats as seats,mt.amount as amount from movieintheater mt"
 				+ " join theaterdetail td on td.id=theaterid"
 				+ " join moviedetail md on md.id=movieid"
-				+ " join theaterscreen ts on ts.theaterid=mt.THEATERID and ts.screen=mt.screen_no";
+				+ " join theaterscreen ts on ts.theaterid=mt.THEATERID and mt.screen=ts.screen";
 		PreparedStatement preparedStatement = connection.prepareStatement(sql1);
 		ResultSet resultSet = preparedStatement.executeQuery();
 		while (resultSet.next()) {
@@ -252,10 +236,10 @@ public class MovieTheaterDAO {
 			movieInTheater.setShow(resultSet.getString("shows"));
 			movieInTheater.setDate(resultSet.getDate("showdate").toLocalDate());
 			TheaterScreen theaterScreen = new TheaterScreen();
-			theaterScreen.setScreen(resultSet.getString("screen_no"));
-			theaterScreen.setTotalTicket(resultSet.getInt("seats"));
-			movieInTheater.setTheaterscreen(theaterScreen);
 			movieInTheater.setAmount(resultSet.getInt("amount"));
+			movieInTheater.setScreen(resultSet.getString("screen"));
+			theaterScreen.setTotalTicket(resultSet.getInt("seats"));
+			movieInTheater.setTheaterScreen(theaterScreen);
 			listview.add(movieInTheater);
 		}
 		return listview;

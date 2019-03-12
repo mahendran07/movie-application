@@ -9,10 +9,6 @@ import java.util.ArrayList;
 import com.chainsys.movieapplication.model.Theater;
 import com.chainsys.movieapplication.util.ConnectionUtil;
 
-/**
- * @author mahe2111
- *
- */
 public class TheaterDAO {
 	/** this method used to add theater details
 	 * @param theater
@@ -33,14 +29,12 @@ public class TheaterDAO {
 			e.printStackTrace();
 		}
 	}
-
 	/** this method used to view the theater details
 	 * @return
 	 * @throws SQLException
 	 */
 	public ArrayList<Theater> findAll() throws SQLException {
 		ArrayList<Theater> theaterList = new ArrayList<>();
-
 		Connection connection = ConnectionUtil.getConnection();
 		String sql = "SELECT id,name,place,ownername FROM theaterdetail";
 		PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -57,7 +51,6 @@ public class TheaterDAO {
 		ConnectionUtil.close(connection, preparedStatement, null);
 		return theaterList;
 	}
-
 	/** this method used to delete particular theater details
 	 * @param name
 	 * @param place
@@ -74,7 +67,6 @@ public class TheaterDAO {
 		System.out.println("Delete record sucessfully :" + row);
 		ConnectionUtil.close(connection, preparedstatement, null);
 	}
-
 	/** this method used to update theater owner name
 	 * @param theater
 	 * @throws SQLException
@@ -90,7 +82,6 @@ public class TheaterDAO {
 		System.out.println("Update :" + row);
 		ConnectionUtil.close(connection, preparedstatement, null);
 	}
-
 	/** this method used to find the theater details in object
 	 * @param id
 	 * @return
@@ -112,8 +103,7 @@ public class TheaterDAO {
 		}
 		ConnectionUtil.close(connection, preparedStatement, null);
 		return theater;
-	}
-	
+	}	
 	/** this method used to find the theater details in list
 	 * @param id
 	 * @return

@@ -8,7 +8,8 @@ public class MovieInTheater {
 	private Theater theater;
 	private String show;
 	private LocalDate date;
-	private TheaterScreen theaterscreen;
+	private TheaterScreen theaterScreen;
+	private String screen;
 	private float amount;
 	public int getId() {
 		return id;
@@ -40,11 +41,17 @@ public class MovieInTheater {
 	public void setDate(LocalDate date) {
 		this.date = date;
 	}
-	public TheaterScreen getTheaterscreen() {
-		return theaterscreen;
+	public TheaterScreen getTheaterScreen() {
+		return theaterScreen;
 	}
-	public void setTheaterscreen(TheaterScreen theaterscreen) {
-		this.theaterscreen = theaterscreen;
+	public void setTheaterScreen(TheaterScreen theaterScreen) {
+		this.theaterScreen = theaterScreen;
+	}
+	public String getScreen() {
+		return screen;
+	}
+	public void setScreen(String screen) {
+		this.screen = screen;
 	}
 	public float getAmount() {
 		return amount;
