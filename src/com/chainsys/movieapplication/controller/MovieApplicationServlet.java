@@ -2,6 +2,7 @@ package com.chainsys.movieapplication.controller;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,6 +19,7 @@ import com.chainsys.movieapplication.dao.MovieTheaterDAO;
 import com.chainsys.movieapplication.dao.TheaterDAO;
 import com.chainsys.movieapplication.dao.TheaterScreenDAO;
 import com.chainsys.movieapplication.model.Movie;
+import com.chainsys.movieapplication.model.MovieInTheater;
 import com.chainsys.movieapplication.model.Theater;
 import com.chainsys.movieapplication.model.TheaterScreen;
 
@@ -84,6 +86,21 @@ public class MovieApplicationServlet extends HttpServlet {
 		}
 		else if(request.getParameter("addscreenservlet")!=null) {
 			name=request.getParameter("addscreenservlet");
+		}
+		else if(request.getParameter("updatescreenservlet")!=null) {
+			name=request.getParameter("updatescreenservlet");
+		}
+		else if(request.getParameter("deletescreenservlet")!=null) {
+			name=request.getParameter("deletescreenservlet");
+		}
+		else if(request.getParameter("addmovieintheaterservlet")!=null) {
+			name=request.getParameter("addmovieintheaterservlet");
+		}
+		else if(request.getParameter("updatemovieintheaterservlet")!=null) {
+			name=request.getParameter("updatemovieintheaterservlet");
+		}
+		else if(request.getParameter("deletemovieintheaterservlet")!=null) {
+			name=request.getParameter("deletemovieintheaterservlet");
 		}
 		if (name.equals("updatemovie")) {
 			MovieDAO movieDAO = new MovieDAO();
@@ -568,6 +585,91 @@ public class MovieApplicationServlet extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+		}
+		else if(name.equals("updatescreenservlet")) {
+			Theater theater=new Theater();
+			String theaterid=request.getParameter("theatername");
+			String screen=request.getParameter("screen");
+			int total=Integer.parseInt(request.getParameter("total"));
+			theater.setId(Integer.parseInt(theaterid));
+			TheaterScreen theaterScreen=new TheaterScreen();
+			theaterScreen.setTheater(theater);
+			theaterScreen.setScreen(screen);
+			theaterScreen.setTotalTicket(total);
+			TheaterScreenDAO theaterScreenDAO=new TheaterScreenDAO();
+			try {
+				theaterScreenDAO.updateTheaterScreen(theaterScreen);
+				ArrayList<TheaterScreen> theaterscreenlist=new ArrayList<TheaterScreen>();
+				theaterscreenlist.addAll(theaterScreenDAO.findAll());
+				request.setAttribute("THEATERSCREEN", theaterscreenlist);
+				RequestDispatcher rd=request.getRequestDispatcher("viewTheaterScreen.jsp");
+				rd.forward(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		else if(name.equals("deletescreenservlet")) {
+			Theater theater=new Theater();
+			String theaterid=request.getParameter("theatername");
+			String screen=request.getParameter("screen");
+			theater.setId(Integer.parseInt(theaterid));
+			TheaterScreenDAO theaterScreenDAO=new TheaterScreenDAO();
+			try {
+				if(theaterid.isEmpty()) {
+					
+				}
+				theaterScreenDAO.deleteTheaterScreen(theater.getId(),screen);
+				ArrayList<TheaterScreen> theaterscreenlist=new ArrayList<TheaterScreen>();
+				theaterscreenlist.addAll(theaterScreenDAO.findAll());
+				request.setAttribute("THEATERSCREEN", theaterscreenlist);
+				RequestDispatcher rd=request.getRequestDispatcher("viewTheaterScreen.jsp");
+				rd.forward(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		else if(name.equals("addmovieintheaterservlet")) {
+			MovieInTheater movieintheater=new MovieInTheater();
+			Theater theater=new Theater();
+			Movie movie=new Movie();
+			TheaterScreen theaterScreen=new TheaterScreen();
+			TheaterScreenDAO theaterScreenDAO=new TheaterScreenDAO();
+			int theaterid=Integer.parseInt(request.getParameter("theatername"));
+			theater.setId(theaterid);
+			int movieid=Integer.parseInt(request.getParameter("moviename"));
+			movie.setId(movieid);
+			movieintheater.setTheater(theater);
+			movieintheater.setMovie(movie);
+			movieintheater.setShow(request.getParameter("show"));
+			LocalDate date=LocalDate.parse(request.getParameter("date"));
+			movieintheater.setDate(date);
+			try {
+				TheaterScreen theaterScreen2=theaterScreenDAO.findByScreen(request.getParameter("screen"));
+				theaterScreen.setId(theaterScreen2.getId());
+				movieintheater.setTheaterscreen(theaterScreen);
+				movieintheater.setAmount(Integer.parseInt(request.getParameter("amount")));
+				MovieTheaterDAO movieTheaterDAO=new MovieTheaterDAO();
+				try {
+						movieTheaterDAO.addMovieTheater(movieintheater);
+						ArrayList<MovieInTheater> viewlist=new ArrayList<MovieInTheater>();
+						viewlist.addAll(movieTheaterDAO.joinviewList());
+						request.setAttribute("MOVIEINTHEATER", viewlist);
+						RequestDispatcher rd=request.getRequestDispatcher("viewMovieinTheater.jsp");
+						rd.forward(request, response);
+				}
+				catch(Exception e)
+				{
+					e.printStackTrace();
+				}
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+		}
+		else if(name.equals("updatemovieintheaterservlet")) {
+			
+		}
+		else if(name.equals("deletemovieintheaterservlet")) {
+			
 		}
 	}
 }
