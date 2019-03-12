@@ -37,7 +37,7 @@ a
 </style>
 </head>
 <body bgcolor="grey">
-	<form method="post" action="ForgetPasswordServlet">
+	<form method="post" action="MovieApplicationServlet">
 		<table>
 			<tbody>
 				<tr align="center">
@@ -80,7 +80,8 @@ a
 				</tr> 
 				<tr>
 					<td><a href="Login.jsp">Back</a></td>
-					<td><button type="submit" style="width: 100px">Check</button>
+					<td><button type="submit" style="width: 100px"
+					name="forgetpasswordservlet" value="forgetpasswordservlet">Check</button>
 						</td>
 				</tr>
 				<tr>

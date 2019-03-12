@@ -108,7 +108,7 @@ button[type="submit"]:hover {
 	<br/>
 	<br/>
 	<br/>
-	<form method="post" action="ChangePasswordServlet">
+	<form method="post" action="MovieApplicationServlet">
 	
 		<table>
 			<tbody>
@@ -153,7 +153,8 @@ button[type="submit"]:hover {
 				</table>
 				<table align="center"> 
 				<tr>
-					<td><button type="submit" style="width: 100px">Update</button>
+					<td><button type="submit" style="width: 100px"
+					name="changepasswordservlet" value="changepasswordservlet">Update</button>
 						</td>
 				</tr>
 				<tr>

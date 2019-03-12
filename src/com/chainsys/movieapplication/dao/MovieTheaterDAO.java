@@ -86,10 +86,10 @@ public class MovieTheaterDAO {
 	public ArrayList<MovieInTheater> findbyTheater(int id) throws SQLException {
 		ArrayList<MovieInTheater> movietheaterlist = new ArrayList<MovieInTheater>();
 		Connection connection = ConnectionUtil.getConnection();
-		String sql = "select td.id as id,td.name as theatername,td.place as theaterplace,md.name as moviename,mt.show as shows,mt.showdate as showdate,mt.screen_no as screen_no,ts.totalseats as seats,mt.amount as amount from movieintheater mt"
+		String sql = "select td.id as id,td.name as theatername,td.place as theaterplace,md.name as moviename,mt.show as shows,mt.showdate as showdate,ts.screen as screen,ts.totalseats as seats,mt.amount as amount from movieintheater mt"
 				+ " join theaterdetail td on td.id=theaterid"
 				+ " join moviedetail md on md.id=movieid"
-				+ " join theaterscreen ts on ts.theaterid=mt.THEATERID and ts.screen=mt.screen_no where movieid=?";
+				+ " join theaterscreen ts on ts.theaterid=mt.THEATERID where movieid=?";
 		PreparedStatement preparedStatement = connection.prepareStatement(sql);
 		preparedStatement.setInt(1, id);
 		ResultSet resultSet = preparedStatement.executeQuery();
@@ -123,10 +123,10 @@ public class MovieTheaterDAO {
 	public ArrayList<MovieInTheater> findbyMovie(int id) throws SQLException {
 		ArrayList<MovieInTheater> movietheaterlist = new ArrayList<MovieInTheater>();
 		Connection connection = ConnectionUtil.getConnection();
-		String sql = "select md.id as id,md.name as moviename,mt.show as shows,mt.showdate as showdate,mt.screen_no as screen_no,ts.totalseats as seats,mt.amount as amount from movieintheater mt"
+		String sql = "select md.id as id,md.name as moviename,mt.show as shows,mt.showdate as showdate,ts.screen as screen,ts.totalseats as seats,mt.amount as amount from movieintheater mt"
 				+ " join theaterdetail td on td.id=theaterid"
 				+ " join moviedetail md on md.id=movieid"
-				+ " join theaterscreen ts on ts.theaterid=mt.THEATERID and ts.screen=mt.screen_no where theaterid=?";
+				+ " join theaterscreen ts on ts.theaterid=mt.THEATERID where theaterid=?";
 		PreparedStatement preparedStatement = connection.prepareStatement(sql);
 		preparedStatement.setInt(1, id);
 		ResultSet resultSet = preparedStatement.executeQuery();

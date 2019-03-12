@@ -100,7 +100,7 @@ button[type="submit"]:hover {
 	<br/>
 	<br/>
 	<br/>
-	<form method="post" action="ChooseTheaterServlet">
+	<form method="post" action="MovieApplicationServlet">
 		<h3> Choose Theater Name </h3>
 		<table align="center">
 			<tr> <td> &nbsp; </td> </tr>
@@ -118,7 +118,8 @@ button[type="submit"]:hover {
 		<br/>
 		<table align="center">
 			<tr>
-				<td> <button type="submit">Choose</button>
+				<td> <button type="submit"
+				name="findbymovieservlet" value="findbymovieservlet">Choose</button>
 			</tr>
 		</table>
 	

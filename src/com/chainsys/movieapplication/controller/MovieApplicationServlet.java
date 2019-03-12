@@ -16,10 +16,12 @@ import javax.servlet.http.HttpSession;
 
 import com.chainsys.movieapplication.dao.MovieDAO;
 import com.chainsys.movieapplication.dao.MovieTheaterDAO;
+import com.chainsys.movieapplication.dao.RegisterDAO;
 import com.chainsys.movieapplication.dao.TheaterDAO;
 import com.chainsys.movieapplication.dao.TheaterScreenDAO;
 import com.chainsys.movieapplication.model.Movie;
 import com.chainsys.movieapplication.model.MovieInTheater;
+import com.chainsys.movieapplication.model.Register;
 import com.chainsys.movieapplication.model.Theater;
 import com.chainsys.movieapplication.model.TheaterScreen;
 
@@ -101,6 +103,18 @@ public class MovieApplicationServlet extends HttpServlet {
 		}
 		else if(request.getParameter("deletemovieintheaterservlet")!=null) {
 			name=request.getParameter("deletemovieintheaterservlet");
+		}
+		else if(request.getParameter("forgetpasswordservlet")!=null) {
+			name=request.getParameter("forgetpasswordservlet");
+		}
+		else if(request.getParameter("changepasswordservlet")!=null) {
+			name=request.getParameter("changepasswordservlet");
+		}
+		else if(request.getParameter("findbymovieservlet")!=null) {
+			name=request.getParameter("findbymovieservlet");
+		}
+		else if(request.getParameter("findbytheaterservlet")!=null) {
+			name=request.getParameter("findbytheaterservlet");
 		}
 		if (name.equals("updatemovie")) {
 			MovieDAO movieDAO = new MovieDAO();
@@ -670,6 +684,124 @@ public class MovieApplicationServlet extends HttpServlet {
 		}
 		else if(name.equals("deletemovieintheaterservlet")) {
 			
+		}
+		else if(name.equals("forgetpasswordservlet")) {
+			String username=request.getParameter("username");
+			String email=request.getParameter("email");
+			Long phone=Long.parseLong(request.getParameter("phonenumber"));
+			Register register=new Register();
+			RegisterDAO registerDAO=new RegisterDAO();
+			register.setName(username);
+			register.setEmail(email);
+			register.setPhonenumber(phone);
+			Boolean isActive=registerDAO.checkForgetPassword(register);
+			if(isActive)
+			{
+				try {
+					Register register2=new Register();
+					register2=registerDAO.findByEmail(email);
+					String password="Your Password is "+register2.getPassword();
+					request.setAttribute("USERS", password);
+					RequestDispatcher rd=request.getRequestDispatcher("ForgetPassword.jsp");
+					rd.forward(request, response);
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			else
+			{
+				System.out.println("Failed");
+			}
+		}
+		else if(name.equals("changepasswordservlet")) {
+			Register register=new Register();
+			HttpSession session=request.getSession(false);
+			register=(Register) session.getAttribute("NAME");
+			String email=register.getEmail();
+			String password=register.getPassword();
+			String oldpassword=request.getParameter("oldpassword");
+			String newpassword=request.getParameter("newpassword");
+			String confirmnewpassword=request.getParameter("confirmnewpassword");
+			RegisterDAO regsiterDAO=new RegisterDAO();
+			if(password.equals(oldpassword))
+			{
+				if(newpassword.equals(confirmnewpassword))
+				{
+					register.setPassword(newpassword);
+					try {
+						regsiterDAO.changePassword(register);
+						String message="Your Password is Changed";
+						request.setAttribute("MESSAGE", message);
+						RequestDispatcher rd=request.getRequestDispatcher("ChangePassword.jsp");
+						rd.forward(request, response);
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+				else
+				{
+					String message="New and Confirm Password is Not equal";
+					request.setAttribute("MESSAGE", message);
+					RequestDispatcher rd=request.getRequestDispatcher("ChangePassword.jsp");
+					rd.forward(request, response);
+				}
+			}
+			else
+			{
+				String message="Your old Password is Wrong";
+				request.setAttribute("MESSAGE", message);
+				RequestDispatcher rd=request.getRequestDispatcher("ChangePassword.jsp");
+				rd.forward(request, response);
+			}
+		}
+		else if(name.equals("findbymovieservlet")) {
+			TheaterDAO theaterDAO = new TheaterDAO();
+			try {
+				ArrayList<Theater> theaterlist = new ArrayList<>();
+				theaterlist.addAll(theaterDAO.findAll());
+				request.setAttribute("THEATER", theaterlist);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			String names=request.getParameter("theatername");
+			int length=names.length();
+			int pos=names.indexOf('.');
+			int poss=names.indexOf('-');
+			String theaterid=(names.substring(0, pos));
+			String theatername = names.substring(pos+1, poss);
+			String place=names.substring(poss+1,length);
+			MovieTheaterDAO movieTheaterDAO=new MovieTheaterDAO();
+			ArrayList<MovieInTheater> listtheater=new ArrayList<MovieInTheater>();
+			try {
+				listtheater.addAll(movieTheaterDAO.findbyMovie(Integer.parseInt(theaterid)));
+				request.setAttribute("THEATERLIST", listtheater);
+				RequestDispatcher rd=request.getRequestDispatcher("FindbyMovie.jsp");
+				rd.forward(request, response);
+			} catch (NumberFormatException | SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		else if(name.equals("findbytheaterservlet")) {
+			MovieDAO movieDAO = new MovieDAO();
+			try {
+				ArrayList<Movie> movielist = new ArrayList<>();
+				movielist.addAll(movieDAO.findAll());
+				request.setAttribute("MOVIE", movielist);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			int movieid=Integer.parseInt(request.getParameter("moviename"));
+			MovieTheaterDAO movieTheaterDAO=new MovieTheaterDAO();
+			ArrayList<MovieInTheater> listtheater=new ArrayList<MovieInTheater>();
+			try {
+				listtheater.addAll(movieTheaterDAO.findbyTheater(movieid));
+				request.setAttribute("THEATERLIST", listtheater);
+				RequestDispatcher rd=request.getRequestDispatcher("FindbyTheater.jsp");
+				rd.forward(request, response);
+			} catch (NumberFormatException | SQLException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 }
