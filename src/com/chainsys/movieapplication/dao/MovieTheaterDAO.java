@@ -5,6 +5,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import com.chainsys.movieapplication.model.Movie;
@@ -141,17 +142,18 @@ public class MovieTheaterDAO {
 	 * @return
 	 * @throws SQLException
 	 */
-	public ArrayList<MovieInTheater> findbyshow(int theaterid, int movieid)
+	public ArrayList<MovieInTheater> findbyshow(int theaterid, int movieid,LocalDate date)
 			throws SQLException {
 		ArrayList<MovieInTheater> movietheaterlist = new ArrayList<MovieInTheater>();
 		Connection connection = ConnectionUtil.getConnection();
 		String sql = "select td.id as id,td.name as theatername,td.place as theaterplace,md.name as moviename,mt.show as shows,mt.showdate as showdate,mt.screen as screen,ts.totalseats as seats,mt.amount as amount from movieintheater mt"
 				+ " join theaterdetail td on td.id=theaterid"
 				+ " join moviedetail md on md.id=movieid"
-				+ " join theaterscreen ts on ts.theaterid=mt.THEATERID and ts.screen=mt.screen where theaterid=? and movieid=?";
+				+ " join theaterscreen ts on ts.theaterid=mt.THEATERID and ts.screen=mt.screen where theaterid=? and movieid=? and mt.showdate=?";
 		PreparedStatement preparedStatement = connection.prepareStatement(sql);
 		preparedStatement.setInt(1, theaterid);
 		preparedStatement.setInt(2, movieid);
+		preparedStatement.setDate(3, Date.valueOf(date));
 		ResultSet resultSet = preparedStatement.executeQuery();
 		while (resultSet.next()) {
 			Theater theater = new Theater();
@@ -168,6 +170,7 @@ public class MovieTheaterDAO {
 			theaterScreen.setTotalTicket(resultSet.getInt("seats"));
 			movieInTheater.setAmount(resultSet.getInt("amount"));
 			movieInTheater.setScreen(resultSet.getString("screen"));
+			movieInTheater.setTheaterScreen(theaterScreen);
 			movietheaterlist.add(movieInTheater);
 		}
 		return movietheaterlist;

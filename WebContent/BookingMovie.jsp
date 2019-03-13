@@ -38,38 +38,25 @@ button[type="submit"]:hover {
 <script src="https://code.jquery.com/jquery-1.10.2.js"
 	type="text/javascript"></script>
 <script type="text/javascript">
-	$(document)
-			.ready(
-					function() {
-						$('#theater')
-								.change(
-										function() {
-											$('#show').empty();
-											$
-													.ajax({
-														url : 'GetUserBookServlet',
-														data : {
-															movie : $('#movie')
-																	.val(),
-															theater : $(
-																	'#theater')
-																	.val()
-														},
-														success : function(
-																responseText) {
-															var answer = responseText
-																	.trim()
-																	.split(',');
-															for ( var item in answer) {
-																$('#show')
-																		.append(
-																				"<option value="+answer[item]+">"
-																						+ answer[item]);
-															}
-														}
-													});
-										});
-					});
+	$(document).ready(function() {
+		$('#date').change(function() {
+			$('#show').empty();
+			$.ajax({
+				url : 'GetUserBookServlet',
+				data : {
+					movie : $('#movie').val(),
+					theater : $('#theater').val(),
+					date : $('#date').val()
+				},
+				success : function(responseText) {
+				var answer = responseText.trim().split(',');
+				for ( var item in answer) {
+					$('#show').append("<option value="+answer[item]+">"+ answer[item]);
+				}
+			}
+		});
+	});
+});
 </script>
 </head>
 <body bgcolor="grey">
@@ -165,17 +152,18 @@ button[type="submit"]:hover {
 				<td>&nbsp;</td>
 			</tr>
 			<tr>
-				<td>show</td>
-				<td><select name="show" id="show">
-						<option value="-1">---Choose---</option>
-				</select></td>
+				<td>Date</td>
+				<td><input type="date" name="date" id="date"></td>
+				
 			</tr>
 			<tr>
 				<td>&nbsp;</td>
 			</tr>
 			<tr>
-				<td>Date</td>
-				<td><input type="date" name="date"></td>
+				<td>screen & show</td>
+				<td><select name="show" id="show">
+						<option value="-1">---Choose---</option>
+				</select></td>
 			</tr>
 			<tr>
 				<td>&nbsp;</td>
@@ -192,8 +180,7 @@ button[type="submit"]:hover {
 		<table align="center">
 			<tr>
 				<td>
-					<button type="submit"
-					name="savebookmovie" value="savebookmovie">Book</button>
+					<button type="submit" name="savebookmovie" value="savebookmovie">Book</button>
 			</tr>
 			<tr>
 				<td>&nbsp;</td>

@@ -2,6 +2,7 @@ package com.chainsys.movieapplication.controller;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -29,26 +30,27 @@ public class GetUserBookServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String movieid = request.getParameter("movie");
 		String theaterid=request.getParameter("theater");
+		LocalDate date=LocalDate.parse(request.getParameter("date"));
 		Movie movie=new Movie();
 		MovieInTheater movieInTheater=new MovieInTheater();
 		MovieTheaterDAO movieTheaterDAO=new MovieTheaterDAO();
-		TheaterDAO theaterDAO=new TheaterDAO();
 		Theater theater=new Theater();
 		movie.setId(Integer.parseInt(movieid));
 		theater.setId(Integer.parseInt(theaterid));
 		movieInTheater.setMovie(movie);
 		movieInTheater.setTheater(theater);
+		movieInTheater.setDate(date);
 		ArrayList<MovieInTheater> list=new ArrayList<MovieInTheater>();
 		StringBuilder stringBuilder=new StringBuilder();
 		try {
-			list.addAll(movieTheaterDAO.findbyshow(Integer.parseInt(theaterid),Integer.parseInt(movieid)));
+			list.addAll(movieTheaterDAO.findbyshow(Integer.parseInt(theaterid),Integer.parseInt(movieid),date));
 			System.out.println(list.size());
-			for(int i=0;i<list.size();i++) {
+			//for(int i=0;i<list.size();i++) {
 				for (MovieInTheater movieInTheater2 : list) {
-					stringBuilder.append(movieInTheater2.getShow());
+					stringBuilder.append(movieInTheater2.getScreen()+"-"+movieInTheater2.getShow());
 					stringBuilder.append(',');
 				}
-			}
+			//}
 			System.out.println(stringBuilder.toString());
 		} catch (SQLException e) {
 			throw new RuntimeException("Unable to choose Movie");
